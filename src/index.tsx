@@ -15,7 +15,8 @@ ReactDOM.render(
     <Routes>
       <Route path="/" element={<App />}>
         <Route path="/" element={<Main />}></Route>
-        <Route path="/pomo" element={<Pomos />}>
+        <Route path="/pomo">
+          <Route path="/pomo" element={<Pomos />}></Route>
           <Route path=":id" element={<Pomo />}></Route>
         </Route>
         <Route path="*" element={<NotFound />}></Route>

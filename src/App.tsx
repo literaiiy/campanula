@@ -12,7 +12,7 @@ function App() {
             <span className="teal">C</span>aM<span className="purple">P</span>An<span className="velvet">U</span>la
           </div>
         </Link>
-        <Link to="/pomo">Pomo</Link>
+        <Link to="/pomo">Pomodoro Templates</Link>
       </nav>
       <main>
         <Outlet></Outlet>

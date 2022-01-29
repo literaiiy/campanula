@@ -2,7 +2,11 @@ export default function Main() {
   return (
     <>
       <h1>Welcome to Campanula</h1>
-      <p>Lorem ipsum dolor sit amet</p>
+      <p>Lorem ipsum dolor sit amet. Dolor ipsum— sit amet sin bologa since 1951.</p>
+      <img src="./logo512.png" width='256' alt="Reac tlogo" />
+      <p>Vivamus sodales suscipit eros eget sollicitudin. Donec posuere lectus sed mi congue, non tristique magna dapibus. Nunc porta eros non nisl posuere luctus. Vivamus vel ligula a sem laoreet vehicula. Morbi scelerisque congue ligula, ut convallis dui molestie vel. Fusce justo sapien, volutpat sed diam fermentum, interdum finibus lorem. Pellentesque vitae congue magna. Aenean mollis sem libero, ac sollicitudin leo tristique a. Nunc posuere ex tristique scelerisque sagittis. Vestibulum non nisl ante. Suspendisse fermentum condimentum justo in euismod. Vestibulum cursus gravida orci nec facilisis. Vestibulum ultricies lorem nec nisi ullamcorper, nec tempus nibh interdum.</p>
+      <p>Aenean venenatis nisl ac lorem consectetur, sit amet dignissim tellus imperdiet. Proin consectetur diam congue pulvinar tristique. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Phasellus ultricies velit euismod urna malesuada, non molestie enim tempus. Donec euismod tincidunt mi, sit amet luctus tortor aliquam eget. Suspendisse maximus ornare metus a cursus. Proin pellentesque feugiat bibendum. Etiam nec velit ante. Curabitur ac urna est. In non erat lectus. Quisque pulvinar, quam in fringilla lacinia, ex augue imperdiet urna, nec sollicitudin velit diam ultrices dui.</p>
+      <p>Quisque faucibus turpis dui, eget tempus ex consequat ultrices. Nunc ac elit ante. Mauris ligula massa, ullamcorper vulputate vehicula ac, tristique ut ligula. Ut convallis faucibus suscipit. Nullam a justo ut sem pellentesque dapibus eget ac magna. Maecenas sem orci, consectetur sit amet dui sed, vulputate interdum purus. Donec blandit viverra sem, vitae lobortis metus maximus et. Duis volutpat magna non justo mattis varius. Sed maximus, purus vitae iaculis congue, massa mauris commodo risus, vitae scelerisque nisi nisi vitae ante. Nulla tempor consectetur convallis. Mauris et turpis eros. Phasellus tempor leo nisi, sit amet venenatis arcu iaculis vitae. Vivamus orci ante, volutpat a ipsum vel, facilisis fringilla sapien. Curabitur ullamcorper lorem metus, nec dictum nisl suscipit ut. Duis sit amet magna suscipit, vestibulum dolor sed, commodo nibh. Quisque euismod pellentesque sodales.</p>
     </>
   )
 }
