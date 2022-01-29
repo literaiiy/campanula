@@ -1,0 +1,76 @@
+// Font import
+
+@import url('https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@100;200;300;400;500;600;700;800;900&family=Fraunces:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Major+Mono+Display&display=swap');
+
+// Variables
+
+$black: #171717;
+$cream: #FBF5F3;
+$teal: #8DAA9D;
+$purple: #522B47;
+$velvet: #7B0828;
+
+// Default styles
+
+#root {
+  font-family: "Fraunces", serif;
+  color: #171717;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  background-color: $cream;
+  padding: 1rem;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+main {
+  flex: 1;
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  background-color: $cream;
+  padding: 1rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Azeret Mono", monospace;
+  font-weight: 400;
+}
+
+a, a:visited, a:hover, a:active {
+  color: inherit;
+}
+
+// Custom styles
+
+.campanula-logo {
+  font-size: 3rem;
+  font-family: "Major Mono Display", monospace;
+  font-weight: 400;
+}
+
+// Colors
+
+.cream {
+  color: $cream;
+}
+
+.teal {
+  color: $teal;
+}
+
+.purple {
+  color: $purple;
+}
+
+.velvet {
+  color: $velvet;
+}
