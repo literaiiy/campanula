@@ -1,12 +1,50 @@
 export default function Main() {
   return (
     <>
-      <h1>Welcome to Campanula</h1>
-      <p>Lorem ipsum dolor sit amet. Dolor ipsum— sit amet sin bologa since 1951.</p>
-      <img src="./logo512.png" width='256' alt="Reac tlogo" />
-      <p>Vivamus sodales suscipit eros eget sollicitudin. Donec posuere lectus sed mi congue, non tristique magna dapibus. Nunc porta eros non nisl posuere luctus. Vivamus vel ligula a sem laoreet vehicula. Morbi scelerisque congue ligula, ut convallis dui molestie vel. Fusce justo sapien, volutpat sed diam fermentum, interdum finibus lorem. Pellentesque vitae congue magna. Aenean mollis sem libero, ac sollicitudin leo tristique a. Nunc posuere ex tristique scelerisque sagittis. Vestibulum non nisl ante. Suspendisse fermentum condimentum justo in euismod. Vestibulum cursus gravida orci nec facilisis. Vestibulum ultricies lorem nec nisi ullamcorper, nec tempus nibh interdum.</p>
-      <p>Aenean venenatis nisl ac lorem consectetur, sit amet dignissim tellus imperdiet. Proin consectetur diam congue pulvinar tristique. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Phasellus ultricies velit euismod urna malesuada, non molestie enim tempus. Donec euismod tincidunt mi, sit amet luctus tortor aliquam eget. Suspendisse maximus ornare metus a cursus. Proin pellentesque feugiat bibendum. Etiam nec velit ante. Curabitur ac urna est. In non erat lectus. Quisque pulvinar, quam in fringilla lacinia, ex augue imperdiet urna, nec sollicitudin velit diam ultrices dui.</p>
-      <p>Quisque faucibus turpis dui, eget tempus ex consequat ultrices. Nunc ac elit ante. Mauris ligula massa, ullamcorper vulputate vehicula ac, tristique ut ligula. Ut convallis faucibus suscipit. Nullam a justo ut sem pellentesque dapibus eget ac magna. Maecenas sem orci, consectetur sit amet dui sed, vulputate interdum purus. Donec blandit viverra sem, vitae lobortis metus maximus et. Duis volutpat magna non justo mattis varius. Sed maximus, purus vitae iaculis congue, massa mauris commodo risus, vitae scelerisque nisi nisi vitae ante. Nulla tempor consectetur convallis. Mauris et turpis eros. Phasellus tempor leo nisi, sit amet venenatis arcu iaculis vitae. Vivamus orci ante, volutpat a ipsum vel, facilisis fringilla sapien. Curabitur ullamcorper lorem metus, nec dictum nisl suscipit ut. Duis sit amet magna suscipit, vestibulum dolor sed, commodo nibh. Quisque euismod pellentesque sodales.</p>
+      <section className='main-top'>
+        <div>
+          <h1 className='main-headline'>A completely <span className="gradient-customizable">customizable</span> pomodoro experience.</h1>
+          <h2 className='main-subheadline'>Welcome to Campanula.</h2>
+        </div>
+        <img className='main-tomato' src="tomate.png" alt="Tomato" />
+      </section>
+
+      <section className='description'>
+        <div>
+          <h2 className='main-header'>Revolutionize your productivity.</h2>
+          <p> Morbi aliquam vitae metus ac laoreet. Donec non iaculis enim. Sed ut ex magna. Phasellus nec neque sit amet nisl tristique dictum eget id enim. Maecenas ac accumsan nisl, sed molestie mauris. Fusce vestibulum, lacus quis lacinia hendrerit, sapien ipsum scelerisque quam, a laoreet sem nibh vel massa. Vestibulum venenatis ultrices consectetur. Praesent sagittis hendrerit quam id elementum. Vivamus at enim a purus commodo ultrices et nec nunc. Sed fringilla sapien nec iaculis pellentesque. </p>
+        </div>
+      </section>
+
+      {/* <section className='description'>
+        <div>
+          <h2>Customize from top to bottom.</h2>
+          <p>Pellentesque pharetra faucibus ligula, porttitor pharetra mi elementum nec. Integer posuere metus ut diam dignissim congue. Cras eu blandit diam, vitae gravida nibh. Proin ipsum risus, laoreet at ante in, blandit auctor ligula. Ut molestie sed urna non dignissim. Maecenas ornare pellentesque libero ut iaculis. Praesent cursus, metus in scelerisque faucibus, felis elit pellentesque mauris, in auctor velit sapien id libero. Nam rhoncus elit at urna vehicula ultricies.</p>
+          <p>Nulla et dignissim sapien. Donec in diam eget turpis maximus feugiat eget nec odio. Morbi aliquam vitae metus ac laoreet. Donec non iaculis enim. Sed ut ex magna. Phasellus nec neque sit amet nisl tristique dictum eget id enim. Maecenas ac accumsan nisl, sed molestie mauris. Fusce vestibulum, lacus quis lacinia hendrerit, sapien ipsum scelerisque quam, a laoreet sem nibh vel massa. Vestibulum venenatis ultrices consectetur. Praesent sagittis hendrerit quam id elementum. Vivamus at enim a purus commodo ultrices et nec nunc. Sed fringilla sapien nec iaculis pellentesque. Etiam condimentum eros fringilla metus iaculis tempor. Fusce blandit dignissim dui vel viverra. Suspendisse potenti.</p>
+        </div>
+      </section>
+      <section className='description bgpurple cream'>
+        <div>
+          <h2>Be productive on any device. Even share your productivity with a friend.</h2>
+          <p>It's not even funny how bad these shits are at programming and design. Please get a different job that does not include usage of a computer.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et dignissim sapien. Donec in diam eget turpis maximus feugiat eget nec odio. Morbi aliquam vitae metus ac laoreet. Donec non iaculis enim. Sed ut ex magna. Phasellus nec neque sit amet nisl tristique dictum eget id enim. Maecenas ac accumsan nisl, sed molestie mauris. Fusce vestibulum, lacus quis lacinia hendrerit, sapien ipsum scelerisque quam, a laoreet sem nibh vel massa. Vestibulum venenatis ultrices consectetur. Praesent sagittis hendrerit quam id elementum. Vivamus at enim a purus commodo ultrices et nec nunc. Sed fringilla sapien nec iaculis pellentesque. Etiam condimentum eros fringilla metus iaculis tempor. Fusce blandit dignissim dui vel viverra. Suspendisse potenti.</p>
+          <p>Maecenas ac accumsan nisl, sed molestie mauris. Fusce vestibulum, lacus quis lacinia hendrerit, sapien ipsum scelerisque quam, a laoreet sem nibh vel massa. Vestibulum venenatis ultrices consectetur. Praesent sagittis hendrerit quam id elementum. Vivamus at enim a purus commodo ultrices et nec nunc. Sed fringilla sapien nec iaculis pellentesque. Etiam condimentum eros fringilla metus iaculis tempor. Fusce blandit dignissim dui vel viverra. Suspendisse potenti.</p>
+        </div>
+      </section>
+      <section className='description'>
+        <div>
+          <h2>Intuitive and elegant interface.</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et dignissim sapien. Donec in diam eget turpis maximus feugiat eget nec odio. Morbi aliquam vitae metus ac laoreet. Donec non iaculis enim. Sed ut ex magna. Phasellus nec neque sit amet nisl tristique dictum eget id enim. Maecenas ac accumsan nisl, sed molestie mauris. Fusce vestibulum, lacus quis lacinia hendrerit, sapien ipsum scelerisque quam, a laoreet sem nibh vel massa. Vestibulum venenatis ultrices consectetur. Praesent sagittis hendrerit quam id elementum. Vivamus at enim a purus commodo ultrices et nec nunc. Sed fringilla sapien nec iaculis pellentesque. Etiam condimentum eros fringilla metus iaculis tempor. Fusce blandit dignissim dui vel viverra. Suspendisse potenti.</p>
+          <p>Maecenas ac accumsan nisl, sed molestie mauris. Fusce vestibulum, lacus quis lacinia hendrerit, sapien ipsum scelerisque quam, a laoreet sem nibh vel massa. Vestibulum venenatis ultrices consectetur. Praesent sagittis hendrerit quam id elementum. Vivamus at enim a purus commodo ultrices et nec nunc. Sed fringilla sapien nec iaculis pellentesque. Etiam condimentum eros fringilla metus iaculis tempor. Fusce blandit dignissim dui vel viverra. Suspendisse potenti.</p>
+        </div>
+      </section>
+      <section className='description bgvelvet cream'>
+        <div>
+          <h2>Choose from pre-made templates or create your own.</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et dignissim sapien. Donec in diam eget turpis maximus feugiat eget nec odio. Morbi aliquam vitae metus ac laoreet. Donec non iaculis enim. Sed ut ex magna. Phasellus nec neque sit amet nisl tristique dictum eget id enim. Maecenas ac accumsan nisl, sed molestie mauris. Fusce vestibulum, lacus quis lacinia hendrerit, sapien ipsum scelerisque quam, a laoreet sem nibh vel massa. Vestibulum venenatis ultrices consectetur. Praesent sagittis hendrerit quam id elementum. Vivamus at enim a purus commodo ultrices et nec nunc. Sed fringilla sapien nec iaculis pellentesque. Etiam condimentum eros fringilla metus iaculis tempor. Fusce blandit dignissim dui vel viverra. Suspendisse potenti.</p>
+          <p>Maecenas ac accumsan nisl, sed molestie mauris. Fusce vestibulum, lacus quis lacinia hendrerit, sapien ipsum scelerisque quam, a laoreet sem nibh vel massa. Vestibulum venenatis ultrices consectetur. Praesent sagittis hendrerit quam id elementum. Vivamus at enim a purus commodo ultrices et nec nunc. Sed fringilla sapien nec iaculis pellentesque. Etiam condimentum eros fringilla metus iaculis tempor. Fusce blandit dignissim dui vel viverra. Suspendisse potenti.</p>
+        </div>
+      </section> */}
     </>
   )
 }

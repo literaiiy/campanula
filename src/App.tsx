@@ -1,27 +1,19 @@
 import React from 'react';
 import './App.scss';
 import './normalize.min.scss';
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
+import Nav from './components/Nav';
+import Footer from './components/footer';
 
 function App() {
   return (
     <>
-      <nav>
-        <Link to="/">
-          <div className='campanula-logo'>
-            <span className="teal">C</span>aM<span className="purple">P</span>An<span className="velvet">U</span>la
-          </div>
-        </Link>
-        <Link to="/pomo">Pomodoro Templates</Link>
-      </nav>
+      <Nav />
       <main>
         <Outlet></Outlet>
       </main>
       <hr />
-      <footer>
-        <h2>Footer</h2>
-        <p>Footer</p>
-      </footer>
+      <Footer />
     </>
   );
 }
