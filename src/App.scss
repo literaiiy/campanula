@@ -3,6 +3,15 @@
   .campanula-logo {
     display: none;
   }
+  .main-headline {
+    text-align: center;
+  }
+  .main-subheadline {
+    text-align: center;
+  }
+  .main-header {
+    font-size: 1.75rem !important;
+  }
 }
 
 @media (min-width: 640px) {
@@ -31,6 +40,7 @@ $defTransition: 0.5s ease;
   flex-direction: column;
   min-height: 100vh;
   align-items: center;
+  justify-content: center;
 }
 
 nav {
@@ -57,10 +67,15 @@ main {
 
 footer {
   display: flex;
+  background-color: $black;
+  color: $cream;
   flex-direction: column;
   box-sizing: border-box;
   width: 100%;
   padding: 1rem;
+  & a:link {
+    color: $diarrhea;
+  }
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -77,7 +92,7 @@ a, a:visited, a:hover, a:active {
 }
 
 section {
-  padding: 1rem;
+  // padding: 1rem;
 }
 
 input {
@@ -86,32 +101,44 @@ input {
 
 // Custom styles
 
+.scale-object {
+  width: min(80rem, 95%);
+  justify-self: center;
+}
+
 .main-top {
   box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
+  display: grid;
   align-items: center;
+  justify-self: center;
+  justify-content: center;
   flex-wrap: nowrap;
   background-image: linear-gradient(to right, rgba(255,255,255,100) 30%, rgba(255,255,255,0));
+  & > * {
+    grid-column-start: 1;
+    grid-row-start: 1;
+  }
+}
+
+.main-lines {
+  width: min(95vw, 80rem);
 }
 
 .main-headline {
-  font-size: min(7rem, 10vw);
+  font-size: min(7rem, 12vw);
   font-weight: 400;
   max-width: 60rem;
 }
 
 .main-subheadline {
-  font-size: min(3.5rem, 5vw);
+  font-size: min(3.5rem, 6vw);
   font-weight: 100;
 }
 
 .main-tomato {
-  position: absolute;
-  justify-self: center;
-  align-self: center;
-  max-height: 500px;
-  max-width: 500px;
+  justify-self: end;
+  max-height: 50rem;
+  max-width: 50rem;
   width: 100vw;
   z-index: -3;
   right: 0;
@@ -141,10 +168,113 @@ input {
   line-height: 3rem;
 }
 
+.short-hr {
+  color: $diarrhea;
+  width: 2rem;
+  border-top: $diarrhea 0.25rem solid;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.long-hr {
+  color: $diarrhea;
+  width: min(42rem, 95vw);
+  border-top: $diarrhea 0.25rem solid;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
 .description {
+  justify-content: center;
   text-align: center;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  column-gap: 2rem;
+  // gap: 2rem;
+  & > .desc-text-revolutionize {
+    border-radius: 4rem 4rem 4rem 0;
+    width: min(51rem, 100vw);
+    background-color: $teal;
+    color: $cream;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+  & > .desc-image-revolutionize {
+    // max-width: 25rem;
+    // max-height: 25rem;
+    width: min(25rem, 100vw);
+    height: min(25rem, 100vw);
+  }
+  & > .desc-text-customize {
+    max-width: min(39rem, 100vw);
+    padding: 2rem;
+  }
+  & + .desc-customize-container {
+    column-gap: 12rem !important;
+  }
+  & > .desc-image-customize-container {
+    background-color: $teal;
+    width: min(25rem, 100vw);
+    height: min(25rem, 100vw);
+    border-radius: 0 10rem 4rem 4rem;
+    & > img {
+      width: min(35rem, 100vw);
+      height: min(35rem, 100vw);
+      filter: drop-shadow(0.5rem 0.5rem 0.5rem gray);
+    }
+  }
+  & > .desc-text-any-device {
+    align-self: center;
+    border-radius: 4rem;
+    box-shadow: 0px 0px 0.5rem lightgray;
+    width: min(48rem, 95vw);
+    box-sizing: border-box;
+    padding: 1rem ;
+    margin-bottom: 2rem;
+  }
+  & > .desc-text-any-device-image {
+    width: min(30rem, 100vw);
+    height: min(30rem, 100vw);
+    align-self: center;
+  }
+  & > .desc-text-intuitive {
+    width: min(48rem, 100vw);
+    background-color: $velvet;
+    border-radius: 4rem 4rem 0 4rem;
+    color: $cream;
+    box-sizing: border-box;
+    padding: 1rem;
+    // margin-left: 3rem;
+  }
+  & > .desc-text-intuitive-image {
+    width: min(30rem, 100vw);
+    height: min(30rem, 100vw);
+    align-self: center;
+  }
+  & > .desc-text-template {
+    background-color: #522B47;
+    border-radius: 4rem 4rem 0 0;
+    color: $cream;
+    box-sizing: border-box;
+    padding: 1rem;
+    width: 100%;
+  }
+  & > .desc-text-template-image {
+    width: min(35rem, 100vw);
+    margin: auto;
+  }
+}
+
+.desc-text-template-button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 1rem;
+  gap: 2rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .pomos-list {
@@ -219,19 +349,19 @@ input {
   color: $diarrhea;
 }
 
-.bgteal { background-color: $teal !important; }
-.bgpurple { background-color: $purple !important; }
-.bgvelvet { background-color: $velvet !important; }
+.bgteal { background-color: $teal; }
+.bgpurple { background-color: $purple; }
+.bgvelvet { background-color: $velvet; }
 
 .button {
+  color: $black !important;
   border: solid 2px $black;
-  line-height: 1.25rem;
-  height: 1.25rem;
+  line-height: 1.75rem;
   padding: 0.5rem;
   text-transform: uppercase;
   font-family: "Azeret Mono", monospace;
   transition: $defTransition;
-  background-color: transparent;
+  background-color: $cream;
   box-shadow: -0.25rem 0.25rem $teal;
   &:hover {
     box-shadow: -0.5rem 0.375rem $teal;
