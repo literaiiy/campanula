@@ -24,9 +24,9 @@
      inkscape:pagecheckerboard="0"
      showgrid="false"
      height="623.83575px"
-     inkscape:zoom="0.75620218"
-     inkscape:cx="257.20635"
-     inkscape:cy="160.67132"
+     inkscape:zoom="12.099235"
+     inkscape:cx="194.43378"
+     inkscape:cy="587.35119"
      inkscape:window-width="2560"
      inkscape:window-height="1017"
      inkscape:window-x="1912"
@@ -266,7 +266,8 @@
   <polygon
      points="161.457,557.533 144.057,557.533 144.057,603.005 155.846,603.005 "
      fill="#ffb6b6"
-     id="polygon96" />
+     id="polygon96"
+     style="fill:#ffccaa;fill-opacity:1" />
   <path
      d="m 245.55425,733.01228 18.8344,-1.12416 v 8.06948 l 17.90635,12.3668 a 5.0405,5.0405 0 0 1 -2.86417,9.18836 H 257.0078 l -3.86495,-7.98195 -1.50908,7.98195 h -8.45439 z"
      transform="translate(-105.34461,-138.08211)"
@@ -275,7 +276,8 @@
   <polygon
      points="227.677,557.533 210.278,557.533 210.278,603.005 222.067,603.005 "
      fill="#ffb6b6"
-     id="polygon100" />
+     id="polygon100"
+     style="fill:#ffccaa;fill-opacity:1" />
   <path
      d="m 311.775,733.01228 18.8344,-1.12416 v 8.06948 l 17.9064,12.3668 a 5.0405,5.0405 0 0 1 -2.86418,9.18836 h -22.42311 l -3.865,-7.98195 -1.50907,7.98195 h -8.45434 z"
      transform="translate(-105.34461,-138.08211)"
