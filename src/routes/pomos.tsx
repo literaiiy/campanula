@@ -1,9 +1,14 @@
 import { Link, Outlet } from 'react-router-dom';
 import PomoTemplate from '../components/PomoTemplate';
+import { Helmet } from 'react-helmet';
+import "../styles/pomos.scss"
 
 export default function Pomos() {
   return (
     <>
+      <Helmet>
+        <title>Pomodoro Templates - Campanula</title>
+      </Helmet>
       <section className='pomos-list'>
         <div className="pomos-list-desc">
           <h1>Easy, pre-made pomodoro timer templates.</h1>

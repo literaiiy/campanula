@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import "../styles/main.scss"
 
 export default function Main() {
   return (
@@ -73,7 +74,7 @@ export default function Main() {
             <p>Choose a pre-made template to get started quickly or start customizing your own pomodoro timer.</p>
             <div className='desc-text-template-button-container'>
               <Link className='button' to='/pomo'>Browse templates</Link>
-              <Link className='button' to='/'>Create a timer</Link>
+              <Link className='button' to='/pomo/default'>Create a timer</Link>
             </div>
           </div>
       </section> 
