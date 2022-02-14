@@ -1,0 +1,14 @@
+@use "utilities/utils" as u;
+
+.settings-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.settings-list-container {
+  display: flex;
+  flex-direction: row;
+}

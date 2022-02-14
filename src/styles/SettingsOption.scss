@@ -1,0 +1,18 @@
+@use "utilities/utils" as u;
+
+.option-container {
+  display: flex;
+  flex-direction: column;
+  width: 12rem;
+  & > label {
+    font-size: 0.875rem;
+    text-align: left;
+    padding-left: .5rem;
+  }
+  & > input, select {
+    box-sizing: border-box;
+    margin: 0.5rem;
+    border: 2px solid black;
+    max-height: 2rem;
+  }
+}

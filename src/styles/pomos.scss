@@ -1,13 +1,5 @@
 @use "utilities/utils" as u;
 
-.pomo-main {
-  width: min(95vw, 60rem);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  justify-self: center;
-}
-
 .pomos-list {
   display: flex;
   flex-direction: column;
@@ -31,7 +23,8 @@
 }
 
 .pomo-template {
-  width: min(30rem, 90vw);
+  max-width: min(30rem, 90vw);
+  width: 100%;
   border: 2px solid black;
   box-sizing: border-box;
   box-shadow: -0.5rem 0.5rem u.$black;
@@ -43,10 +36,4 @@
   &:hover {
     box-shadow: -1rem 0.75rem u.$black;
   }
-}
-
-.settings-list {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
 }

@@ -25,7 +25,7 @@ function App() {
         <link rel="manifest" href="/public/manifest.json" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@100;200;300;400;500;600;700;800;900&family=Fraunces:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Major+Mono+Display&family=Nunito:wght@400;600;700;800&family=Readex+Pro:wght@200;300;400;500;600;700&display=swap" rel="stylesheet" />  
+        <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@100;200;300;400;500;600;700;800;900&family=Fraunces:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Major+Mono+Display&family=Manrope:wght@200;300;400;500;600;700;800&family=Nunito:wght@800&family=Readex+Pro:wght@200;300;400;500;600;700&display=swap" rel="stylesheet"/>
       </Helmet>
       <Nav />
       <main>

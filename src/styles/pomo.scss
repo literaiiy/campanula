@@ -1,10 +1,9 @@
-@use "utilities/utils";
+@use "utilities/utils" as u;
 
-.timer {
-  background-color: u.$cream;
-  padding: 1rem;
-  margin: 1rem 0;
-  .time {
-    font-size: 5rem; 
-  }
+.pomo-main {
+  width: min(100vw, 40rem);
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  text-align: center;
 }

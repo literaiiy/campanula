@@ -1,0 +1,16 @@
+@use "utilities/utils" as u;
+
+.timer {
+  font-family: "Azeret Mono", monospace;
+  border: 2px solid u.$black;
+  padding: 1rem;
+  margin: 1rem 0;
+  box-shadow: -0.25rem 0.25rem u.$diarrhea;
+  transition: u.$defTransition;
+  &:hover {
+    box-shadow: -0.5rem 0.5rem u.$diarrhea;
+  }
+  .time {
+    font-size: 5rem; 
+  }
+}
