@@ -6,7 +6,7 @@ import "../../../styles/Timer.scss"
 export default function Timer() {
   return (
     <div className='timer'>
-      <SetCount pomodoros={3}/>
+      <SetCount pomodoros={46}/>
       <Countdown/>
       <StartPause/>
     </div>
