@@ -1,0 +1,12 @@
+@use "utilities/utils" as u;
+
+.share-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  // margin: 0.25rem 0.5rem 0.75rem 0.5rem;
+  border: 2px solid black;
+  margin: auto;
+  gap: 0.5rem;
+  padding: 0.25rem 1rem;
+}

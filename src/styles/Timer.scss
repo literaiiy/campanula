@@ -1,16 +1,20 @@
 @use "utilities/utils" as u;
 
 .timer {
+  display: flex;
+  flex-direction: column;
   font-family: "Azeret Mono", monospace;
   border: 2px solid u.$black;
   padding: 1rem;
   margin: 1rem 0;
   box-shadow: -0.25rem 0.25rem u.$diarrhea;
   transition: u.$defTransition;
+  gap: 0.5rem;
   &:hover {
     box-shadow: -0.5rem 0.5rem u.$diarrhea;
   }
   .time {
+    line-height: 4.5rem;
     font-size: 5rem; 
   }
 }

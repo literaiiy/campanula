@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
-import Timer from '../components/Timer';
-import Settings from '../components/Settings';
-import ShareMenu from '../components/ShareMenu';
+import Timer from '../components/pomo/timer/Timer';
+import Settings from '../components/pomo/Settings';
+import ShareMenu from '../components/pomo/ShareMenu';
 import { Helmet } from 'react-helmet';
 import "../styles/pomo.scss"
 
@@ -13,9 +13,10 @@ export default function Pomo() {
         <title>{params.id} - Campanula</title>
       </Helmet>
       <section className="pomo-main">
-        <div><b>Code</b>: {params.id}</div>
+        <div><b>Code</b>: <span className="monospace">{params.id}</span></div>
         <Timer />
         <Settings />
+        <hr className='short-hr'/>
         <ShareMenu />
       </section>
     </>

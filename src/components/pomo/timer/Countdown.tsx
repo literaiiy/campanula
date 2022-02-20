@@ -4,7 +4,6 @@ export default function Countdown() {
       <div className='time'>
           23:59
       </div>
-      <div>left of <b><em>work</em></b></div>
     </>
   )
 }

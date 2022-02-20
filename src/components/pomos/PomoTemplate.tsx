@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-interface PomoProps {
+interface Props {
   slug: string,
   name: string,
   sets: number,
@@ -12,7 +12,7 @@ interface PomoProps {
 const TEAL_CUTOFF = 3.5;
 const PURPLE_CUTOFF = 5;
 
-export default function PomoTemplate(props: PomoProps) {
+export default function PomoTemplate(props: Props) {
   let colorScheme = determineColor()
   return (
     <li className={`pomo-template bg${colorScheme.bgColor} ${colorScheme.color}`}>

@@ -1,5 +1,5 @@
 import SettingsOption from "./SettingsOption"
-import '../styles/Settings.scss'
+import '../../styles/Settings.scss'
 
 export default function Settings() {
   return (

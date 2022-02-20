@@ -1,5 +1,5 @@
 import { Link, Outlet } from 'react-router-dom';
-import PomoTemplate from '../components/PomoTemplate';
+import PomoTemplate from '../components/pomos/PomoTemplate';
 import { Helmet } from 'react-helmet';
 import "../styles/pomos.scss"
 

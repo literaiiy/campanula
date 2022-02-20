@@ -1,0 +1,11 @@
+@use "utilities/utils" as u;
+
+.set-progress {
+
+}
+
+.set-progress-circles {
+  display: inline-flex;
+  flex-direction: row;
+  gap: 0.75rem;
+}

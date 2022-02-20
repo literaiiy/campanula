@@ -1,0 +1,11 @@
+@use "utilities/utils" as u;
+
+button.start-pause {
+  margin: auto;
+  padding: 0.5rem;
+  display: flex;
+  width: 2rem;
+  height: 2rem;
+  justify-content: center;
+  align-items: center;
+}

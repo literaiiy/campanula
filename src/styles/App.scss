@@ -28,7 +28,7 @@
 // Default styles
 
 #root {
-  font-family: "Readex Pro", sans-serif;
+  font-family: "Readex Pro", "system-ui";
   color: #171717;
   display: flex;
   flex-direction: column;
@@ -70,8 +70,8 @@ footer {
   box-sizing: border-box;
   width: 100%;
   padding: 1rem;
-  & a:link {
-    color: u.$diarrhea;
+  & a {
+    color: #cfb96f !important;
   }
 }
 
@@ -84,7 +84,7 @@ h2.main-header {
   font-size: 2.5rem; 
 }
 
-a, a:visited, a:hover, a:active {
+a, a:link, a:visited, a:hover, a:active {
   color: inherit;
 }
 
@@ -211,6 +211,10 @@ input {
 
 .diarrhea {
   color: u.$diarrhea;
+}
+
+.monospace {
+  font-family: "Azeret Mono", monospace;
 }
 
 .bgteal { background-color: u.$teal; }
