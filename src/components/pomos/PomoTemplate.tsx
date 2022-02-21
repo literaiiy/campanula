@@ -19,7 +19,7 @@ export default function PomoTemplate(props: Props) {
       <Link to={props.slug}>
         <div className='internals'>
           <h2>{props.name}</h2>
-          <div><b>{props.sets} </b>sets</div>
+          <div><b>{props.sets} </b>{props.sets > 1 ? "pomodoros" : "pomodoro"}</div>
           <div><b>{props.work} min</b> work</div>
           <div><b>{props.break} min</b> break</div>
           <div><b>{props.longBreak} min</b> long break </div>

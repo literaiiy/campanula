@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 export default function Footer() {
   return (
     <footer>
@@ -8,7 +10,10 @@ export default function Footer() {
         {" "}<a href="https://reactjs.org/">React</a>, 
         and <a href="https://nodejs.org/en/">Node</a>.
         Powered by <a href="https://vercel.com/">Vercel</a>.
-        </p>
+      </p>
+      <p>
+        <Link to="/privacy">Privacy Policy</Link>
+      </p>
     </footer>
   )
 }

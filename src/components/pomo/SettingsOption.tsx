@@ -1,7 +1,6 @@
 import { useState } from "react";
 import "../../styles/SettingsOption.scss"
 import { themeFonts } from "../../lib/constants"
-import { format } from "path/posix";
 
 interface Props {
   readonly type: "hms" | "integer" | "color" | "font";
@@ -89,13 +88,9 @@ function formatHMS(v: string) {
   const length = HMS.length;
 
   if (length < 3) { return HMS; }
-
   if (length < 4) { return `${HMS.slice(0,1)}:${HMS.slice(1,)}` }
-
   if (length < 5) { return `${HMS.slice(0,2)}:${HMS.slice(2,)}` }
-
   if (length < 6) { return `${HMS.slice(0,1)}:${HMS.slice(1,3)}:${HMS.slice(3,6)}` }
-
   return `${HMS.slice(0,2)}:${HMS.slice(2,4)}:${HMS.slice(4,7)}`
 }
 
