@@ -1,0 +1,20 @@
+@use "utilities/utils" as u;
+
+.privacy-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  .privacy-div {
+    max-width: min(95vw, 80rem);
+    & h2 {
+      margin: 1rem 0.5rem 0.25rem 0.5rem;
+    }
+    & p {
+      margin: 0rem 0.5rem 1rem 0.5rem;
+    }
+  }
+  & a {
+    color: u.$diarrhea !important;
+  }
+}

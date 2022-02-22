@@ -1,0 +1,35 @@
+@use "utilities/utils" as u;
+
+.campanula-logo {
+  font-size: 3rem;
+  transition: u.$longerTransition;
+  font-family: "Major Mono Display", monospace;
+  font-weight: 400;
+  color: u.$black;
+  line-height: 3rem;
+  & .black {
+    color: inherit;
+    transition: inherit;
+  }
+  & .teal, .purple, .velvet {
+    transition: inherit;
+  }
+}
+
+.campanula-logo:hover {
+  & .black {
+    color: u.$diarrhea;
+    transition: inherit;
+  }
+  & .teal, .purple, .velvet {
+    color: u.$black;
+    transition: inherit;
+  }
+}
+
+.campanula-logo-mobile {
+  font-size: 3rem;
+  font-family: "Major Mono Display", monospace;
+  font-weight: 400;
+  line-height: 3rem;
+}

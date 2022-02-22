@@ -8,6 +8,7 @@ import Pomos from "./routes/pomos";
 import Pomo from "./routes/pomo";
 import NotFound from "./routes/404";
 import Main from "./routes/main";
+import Privacy from './routes/privacy';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -20,6 +21,7 @@ ReactDOM.render(
           <Route path=":id" element={<Pomo />}></Route>
         </Route>
         <Route path="*" element={<NotFound />}></Route>
+        <Route path="/privacy" element={<Privacy />}></Route>
       </Route>
     </Routes>
     </BrowserRouter>

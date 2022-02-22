@@ -33,7 +33,7 @@ export default function Main() {
           </div>
           <div className='desc-text-customize'>
             <h2 className='main-header'>Customize to your heart's content.</h2>
-            <p>Change everything about your pomodoro timer to make it your own. Set work, break, long break, and pomodoro lengths to suit your needs.</p>
+            <p>Change everything about your pomodoro timer. Set work, break, long break, and pomodoro lengths to suit your needs. Even change the color of the text, the font, and the color of the background to make your timer really your own.</p>
           </div>
         </div>
       </section>
@@ -45,9 +45,9 @@ export default function Main() {
           <div className='desc-text-any-device'>
             <h2 className='main-header'>Be productive on any device.<br />
               Even share your productivity with a friend.</h2>
-              <p>As a web app, Campanula can be used on any device with a browser and internet connection without the worry of having to download an app. Each pomodoro timer has its own custom URL that can be opened on another device or shared with other people.</p>
+              <p>As a web app, Campanula can be used on any device with a browser and internet connection without the worry of having to download an app. Each pomodoro timer has its own custom link that can be opened on another device or shared with other people.</p>
           </div>
-          <img className='desc-text-any-device-image' src="any_device.svg" alt="" />
+          <img className='desc-text-any-device-image' src="share.svg" alt="" />
         </div>
       </section>
 
@@ -58,7 +58,7 @@ export default function Main() {
             <img className='desc-text-intuitive-image' src="intuitive.svg" alt="" />
             <div className='desc-text-intuitive'>
               <h2 className='main-header'>Enjoy an intuitive and elegant interface.</h2>
-              <p>Campanula has an easy-to-use but slick user interface that allows anyone to use it.</p>
+              <p>Campanula has an easy-to-use but slick user interface that makes it easy for anyone to use. Just open a pre-made template or start with a fresh timer to get started. Customize anything you want by just changing some colors or some numbers.</p>
             </div>
           </div>
         </div>
