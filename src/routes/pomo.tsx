@@ -30,7 +30,7 @@ export default function Pomo() {
         <title>{params.id} - Campanula</title>
       </Helmet>
       <section className="pomo-main">
-        <div><b>Code</b>: <span className="monospace">* {params.id} *, {JSON.stringify(options)}</span></div>
+        <div><b>Code</b>: <span className="monospace">* {params.id} *, <div style={{wordBreak: "break-all"}}>{JSON.stringify(options)}</div></span></div>
         <Timer conf={options}/>
         <Settings onUpdate={setOptionsHandler} />
         <hr className='short-hr'/>
@@ -39,21 +39,3 @@ export default function Pomo() {
     </>
   )
 }
-
-// Reads URL parameter and returns configuration object
-// function verifyParams(param: ISettingsObj) {
-//   let settingsObj = {
-//     work: 25,
-//     break: 5,
-//     long_break: 15,
-//     pomodoros: 4,
-//     bg_color: "#FFFFFF",
-//     text_color: "#000000",
-//     font: "Readex Pro"
-//   } 
-//   try {
-    
-//   } catch {
-//     return null;
-//   }
-// } 

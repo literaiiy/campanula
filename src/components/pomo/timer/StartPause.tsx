@@ -1,11 +1,22 @@
 import "../../../styles/StartPause.scss"
+import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPlay } from '@fortawesome/free-solid-svg-icons'
+import { faPlay, faPause } from '@fortawesome/free-solid-svg-icons'
 
-export default function StartPause() {
+interface Props {
+  readonly onUpdate: Function; 
+  playing: boolean;
+}
+
+export default function StartPause(props: Props) {
+  
+  const handleUpdate = () => {
+    props.onUpdate(!props.playing);
+  } 
+
   return (
-    <button className="start-pause button">
-      <FontAwesomeIcon icon={faPlay} />
+    <button onClick={handleUpdate} className="start-pause button">
+      <FontAwesomeIcon icon={props.playing ? faPlay : faPause} />
     </button>
   )
 }

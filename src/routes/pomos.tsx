@@ -15,12 +15,12 @@ export default function Pomos() {
           <p>Select from some of the templates below.</p>
         </div>
         <ul className='template-list'>
-          <PomoTemplate slug="default" name='🍅 Default' sets={4} work={25} break={5} longBreak={15}/>
-          <PomoTemplate slug="hard-worker" name='👷 Hard Worker' sets={4} work={60} break={10} longBreak={30}/>
-          <PomoTemplate slug="lenient" name='😴 Lenient' sets={4} work={30} break={10} longBreak={20}/>
-          <PomoTemplate slug="3-hour-special" name='🕒 The 3-hour Special' sets={5} work={30} break={6} longBreak={15}/>
-          <PomoTemplate slug="workhorse" name='🐴 The Workhorse' sets={3} work={35} break={5} longBreak={15}/>
-          <PomoTemplate slug="5217" name='📻 52 / 17' sets={1} work={52} break={17} longBreak={17}/>
+          <PomoTemplate slug="default" name='🍅 Default' sets={4} work={1500} break={300} longBreak={900}/>
+          <PomoTemplate slug="hard-worker" name='👷 Hard Worker' sets={4} work={3600} break={600} longBreak={1800}/>
+          <PomoTemplate slug="lenient" name='😴 Lenient' sets={4} work={1800} break={600} longBreak={1200}/>
+          <PomoTemplate slug="3-hour-special" name='🕒 The 3-hour Special' sets={5} work={1800} break={360} longBreak={900}/>
+          <PomoTemplate slug="workhorse" name='🐴 The Workhorse' sets={3} work={2100} break={300} longBreak={900}/>
+          <PomoTemplate slug="5217" name='📻 52 / 17' sets={1} work={3120} break={1020} longBreak={1020}/>
         </ul>
         <Outlet />
       </section>

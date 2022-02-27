@@ -10,12 +10,17 @@ interface Props {
 }
 
 export default function Timer(props: Props) {
+  const [playing, changePlaying] = useState(false)
+
+  const updateYeah = () => {
+    changePlaying(!playing);
+  }
 
   return (
     <div className='timer'>
       <SetCount pomodoros={props.conf.pomodoros}/>
       <Countdown workTime={props.conf.work} breakTime={props.conf.break}/>
-      <StartPause/>
+      <StartPause onUpdate={updateYeah} playing={!playing}/>
     </div>
   )
 }

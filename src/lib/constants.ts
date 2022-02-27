@@ -9,9 +9,9 @@ export interface ISettingsObj {
 }
 
 export const defaultOptions: ISettingsObj = {
-  work: 25,
-  break: 5,
-  long_break: 15,
+  work: 1500,
+  break: 300,
+  long_break: 900,
   pomodoros: 4,
   bg_color: "#FFFFFF",
   text_color: "#000000",

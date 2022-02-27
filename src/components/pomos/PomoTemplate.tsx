@@ -20,9 +20,9 @@ export default function PomoTemplate(props: Props) {
         <div className='internals'>
           <h2>{props.name}</h2>
           <div><b>{props.sets} </b>{props.sets > 1 ? "pomodoros" : "pomodoro"}</div>
-          <div><b>{props.work} min</b> work</div>
-          <div><b>{props.break} min</b> break</div>
-          <div><b>{props.longBreak} min</b> long break </div>
+          <div><b>{props.work / 60} min</b> work</div>
+          <div><b>{props.break / 60} min</b> break</div>
+          <div><b>{props.longBreak / 60} min</b> long break </div>
         </div>
       </Link>
     </li>
