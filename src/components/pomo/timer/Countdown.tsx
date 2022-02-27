@@ -1,8 +1,18 @@
-export default function Countdown() {
+import { useState } from "react";
+import { secToHMS } from "../../../lib/funcs";
+
+interface Props {
+  workTime: number;
+  breakTime: number;
+}
+
+export default function Countdown(props: Props) {
+  const [cdTime, setCdTime] = useState(props.workTime);
+
   return (
     <>
       <div className='time'>
-          23:59
+        {secToHMS(props.workTime, true)}
       </div>
     </>
   )

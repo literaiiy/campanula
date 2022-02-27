@@ -1,8 +1,15 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "../../styles/SettingsOption.scss"
 import { themeFonts } from "../../lib/constants"
+import { forceHMSFormat, formatHMS, hmsToSec } from "../../lib/funcs"
 
+
+interface onUpdateArgs {
+  
+  // fn: (opt: string, value: string | number) => {s: string, n: number};
+}
 interface Props {
+  readonly onUpdate: Function;
   readonly type: "hms" | "integer" | "color" | "font";
   readonly id: string;
   readonly label?: string;
@@ -13,25 +20,42 @@ export default function SettingsOption(props: Props) {
   const [HMSInputValue, setHMSInputValue] = useState("");
   const [pomoInputValue, setPomoInputValue] = useState('');
 
-  function handleHMSInput(e: React.ChangeEvent<HTMLInputElement>) {
+  // Handle change in the work/break/long break inputs
+  const handleHMSOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formattedHMS = formatHMS(e.target.value);
     setHMSInputValue(formattedHMS);
   }
-  
-  function handlePomoInput(e: React.ChangeEvent<HTMLInputElement>) {
+
+  const handleHMSOnBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formattedHMS = forceHMSFormat(e.target.value);
+    setHMSInputValue(formattedHMS);
+    console.log(e)
+    props.onUpdate(e.target.name, hmsToSec(formattedHMS))
+  }
+
+  // Handle change in pomodoro input
+  const handlePomoInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const MAX = 30;
     const MIN = 1;
     console.log(e.target.value)
 
     const formattedPomo = formatPomoCount(e.target.value, MIN, MAX)
     setPomoInputValue(formattedPomo)
+    console.log(e)
   }
 
+  const handleIntOnBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e)
+    props.onUpdate(e.target.name, e.target.valueAsNumber)
+  }
+
+  // Create input
   let input = <input type='text' name={props.id} placeholder={props.ph}/>
   switch (props.type) {
     case "hms":
       input = <input 
-        onChange={(e) => handleHMSInput(e)} 
+        onChange={(e) => handleHMSOnChange(e)} 
+        onBlur={(e) => handleHMSOnBlur(e)}
         value={HMSInputValue} 
         className="teal-shadow" 
         type="tel" 
@@ -42,9 +66,11 @@ export default function SettingsOption(props: Props) {
       break;
     case "integer":
       input = <input
+        onChange={(e) => handlePomoInput(e)}
+        onBlur={(e) => handleIntOnBlur(e)}
         className="purple-shadow"
         type="number"
-        onChange={(e) => handlePomoInput(e)}
+        
         value={pomoInputValue}
         name={props.id}
         placeholder={props.ph}
@@ -73,25 +99,13 @@ export default function SettingsOption(props: Props) {
     </select>
     break;
   }
+
   return (
     <li id={props.id + "-container"} className='option-container'>
       <label htmlFor={props.id}>{props.label}</label>
       {input}
     </li>
   )
-}
-
-function formatHMS(v: string) {
-  if (!v) return v;
-
-  const HMS = v.replace(/[^\d]/g, "")
-  const length = HMS.length;
-
-  if (length < 3) { return HMS; }
-  if (length < 4) { return `${HMS.slice(0,1)}:${HMS.slice(1,)}` }
-  if (length < 5) { return `${HMS.slice(0,2)}:${HMS.slice(2,)}` }
-  if (length < 6) { return `${HMS.slice(0,1)}:${HMS.slice(1,3)}:${HMS.slice(3,6)}` }
-  return `${HMS.slice(0,2)}:${HMS.slice(2,4)}:${HMS.slice(4,7)}`
 }
 
 function formatPomoCount(v: string, MIN: number, MAX: number) {
