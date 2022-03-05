@@ -19,7 +19,7 @@ export default function Timer(props: Props) {
   return (
     <div className='timer'>
       <SetCount pomodoros={props.conf.pomodoros}/>
-      <Countdown workTime={props.conf.work} breakTime={props.conf.break}/>
+      <Countdown currentlyPlaying={playing} workTime={props.conf.work} breakTime={props.conf.break}/>
       <StartPause onUpdate={updateYeah} playing={!playing}/>
     </div>
   )
