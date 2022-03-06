@@ -2,25 +2,127 @@ import SetCount from "./SetCount"
 import Countdown from "./Countdown"
 import StartPause from "./StartPause"
 import "../../../styles/Timer.scss"
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import type { ISettingsObj } from '../../../lib/constants.js'
-
+import { TParts } from "../../../lib/constants"
+import ding from "../../../lib/ding.mp3"
 interface Props {
   conf: ISettingsObj;
 }
 
 export default function Timer(props: Props) {
+  console.log("%c Timer.tsx has rerendered", "color:red; font-weight: 900")
+
   const [playing, changePlaying] = useState(false)
+  const [set, setSet] = useState<number>(1)
+  const [part, setPart] = useState<TParts>("work")
+  const [cdTime, setCdTime] = useState<number>(props.conf.work);
+  const prevCdTime = usePrevious(props.conf.work);
+
+  // console.log({
+  //   prevCdTime: prevCdTime,
+  //   workTime: props.conf.work, 
+  //   breakTime: props.conf.break, 
+  //   longBreakTime: props.conf.longBreak,
+  // })
+
+  // When the timer hits zero
+  //useEffect(() => {
+    if (cdTime === 0) {
+      setCdTime(props.conf[getNextPart()]);
+      setPart(getNextPart());
+      setSet(getNextSet());
+      changePlaying(!playing)
+      console.log("shitterton")
+      new Audio(ding).play()
+    }
+  //})
+
+  // If the work length input is changed, reset timer
+  useEffect(() => {
+    if (prevCdTime !== props.conf.work) {
+      setCdTime(props.conf.work)
+    }
+  }, [prevCdTime, props.conf.work])
+  
+  // The actual countdown
+  useEffect(() => {
+    let interval: NodeJS.Timer;
+
+    if (!cdTime) return;
+
+    if (playing) {
+      interval = setInterval(() => {
+        setCdTime(cdTime - 1)
+      }, 1000)
+    }
+
+    return () => clearInterval(interval)
+  }, [cdTime, playing])
+
+
+  //
 
   const updateYeah = () => {
     changePlaying(!playing);
   }
 
+  // const timerZeroHandler = () => {
+  // }
+
   return (
     <div className='timer'>
-      <SetCount pomodoros={props.conf.pomodoros}/>
-      <Countdown currentlyPlaying={playing} workTime={props.conf.work} breakTime={props.conf.break}/>
+      <div>{part}</div>
+      <SetCount currentSet={set} currentPart={part} pomodoros={props.conf.pomodoros}/>
+      <Countdown
+        cdTime={cdTime}
+      />
       <StartPause onUpdate={updateYeah} playing={!playing}/>
     </div>
   )
+
+  // Helper functions
+  function getNextPart() {
+    if (part === "work") { return "break"}
+    if (set === props.conf.pomodoros && part === "break") { return "longBreak" }
+    return "work"
+
+    // if (getNextSet() === 1) {
+    //   if (part === "break") {
+    //     return "longBreak";
+    //   } else if (part === "work") {
+    //     return "break";
+    //   }
+    //   return "work"
+    // }
+    // if (part === "work") {
+    //   return "break"
+    // }
+    // return "work"
+  }
+
+  // Returns the next set that should be incremented to
+  function getNextSet() {
+    if (part === "longBreak") { return 1 }
+    if (part === "work") { return set }
+    return set % props.conf.pomodoros + 1
+
+  //   if (part === 'longBreak') { return 1 }
+  //   if (part === 'break' && set === props.conf.pomodoros) {
+  //     return set
+  //   }
+  //   if (part === 'break') {
+  //     return (set % props.conf.pomodoros) + 1;
+  //   }
+  //   return set;
+  }
+}
+
+// usePrevious hook
+function usePrevious(value: any) {
+  const ref = useRef();
+  useEffect(() => {
+    ref.current = value;
+  })
+  return ref.current
 }

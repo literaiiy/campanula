@@ -29,7 +29,6 @@ export default function SettingsOption(props: Props) {
   const handleHMSOnBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formattedHMS = forceHMSFormat(e.target.value);
     setHMSInputValue(formattedHMS);
-    console.log(e)
     props.onUpdate(e.target.name, hmsToSec(formattedHMS))
   }
 
@@ -37,15 +36,12 @@ export default function SettingsOption(props: Props) {
   const handlePomoInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const MAX = 30;
     const MIN = 1;
-    console.log(e.target.value)
 
     const formattedPomo = formatPomoCount(e.target.value, MIN, MAX)
     setPomoInputValue(formattedPomo)
-    console.log(e)
   }
 
   const handleIntOnBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e)
     props.onUpdate(e.target.name, e.target.valueAsNumber)
   }
 
