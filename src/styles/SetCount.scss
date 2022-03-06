@@ -6,6 +6,7 @@
 
 .set-progress-circles {
   display: inline-flex;
+  justify-content: center;
   flex-wrap: wrap;
   flex-direction: row;
   gap: 0.25rem 0.75rem;

@@ -14,8 +14,9 @@ export const minToSec = (m: number) => {
 
 // Convert an positive integer amount of seconds to the HH:MM:SS format
 // Maxes out at 99:59:59 (359999 sec)
-export const secToHMS = (sec: number, removeHourPadding: boolean) => {
-  sec = Math.min(sec, 359999)
+// Minimizes at 00:00:01 (1 sec)
+export const secToHMS = (sec: number, removeHourPadding: boolean): string => {
+  sec = Math.max(Math.min(sec, 359999), 1)
 
   const h = Math.floor(sec/3600);
   const m = Math.floor((sec - h * 3600)/60);

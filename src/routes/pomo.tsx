@@ -6,19 +6,16 @@ import { Helmet } from 'react-helmet';
 import "../styles/pomo.scss"
 import { useState } from 'react';
 import { defaultOptions } from "../lib/constants";
-import type { ISettingsObj } from '../lib/constants.js';
 
 export default function Pomo() {
   const params = useParams();
   const [options, setOptions] = useState(defaultOptions);
-  // const [settingsJustBeenChanged, setSJBC] = useState(false);
   
-  const setOptionsHandler = (property: string, value: string | number) => {
+  const setOptionsHandler = (property: string, value: string | number): void => {
     setOptions({
       ...options,
       [property]: value,
     })
-    // setSJBC(true)
   }
 
   return (
@@ -29,7 +26,7 @@ export default function Pomo() {
       <section className="pomo-main">
         <div><b>Code</b>: <span className="monospace">* {params.id} *, <div style={{wordBreak: "break-all"}}>{JSON.stringify(options)}</div></span></div>
         <Timer conf={options} />
-        <Settings onUpdate={setOptionsHandler} />
+        <Settings onUpdate={setOptionsHandler} defaultOptions={options}/>
         <hr className='short-hr'/>
         <ShareMenu />
       </section>

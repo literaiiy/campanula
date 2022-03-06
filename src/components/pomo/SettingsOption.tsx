@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import "../../styles/SettingsOption.scss"
 import { themeFonts } from "../../lib/constants"
-import { forceHMSFormat, formatHMS, hmsToSec } from "../../lib/funcs"
+import { forceHMSFormat, formatHMS, hmsToSec, secToHMS } from "../../lib/funcs"
 interface Props {
   readonly onUpdate: Function;
   readonly type: "hms" | "integer" | "color" | "font";
   readonly id: string;
   readonly label?: string;
-  readonly ph? : string;
+  readonly ph? : any;
 }
 
 export default function SettingsOption(props: Props): JSX.Element {
+  console.log(props.ph)
+
   const [HMSInputValue, setHMSInputValue] = useState("");
   const [pomoInputValue, setPomoInputValue] = useState('');
 
@@ -40,18 +42,17 @@ export default function SettingsOption(props: Props): JSX.Element {
   }
 
   // Create input
-  let input = <input type='text' name={props.id} placeholder={props.ph}/>
+  let input = <input type='text' name={props.id} value={props.ph}/>
   switch (props.type) {
     case "hms":
       input = <input 
         onChange={(e) => handleHMSOnChange(e)} 
         onBlur={(e) => handleHMSOnBlur(e)}
-        value={HMSInputValue} 
+        value={HMSInputValue || secToHMS(props.ph, true)} 
         className="teal-shadow" 
         type="tel" 
         name={props.id} 
         maxLength={8} 
-        placeholder={props.ph}
       />;
       break;
     case "integer":
@@ -60,17 +61,15 @@ export default function SettingsOption(props: Props): JSX.Element {
         onBlur={(e) => handleIntOnBlur(e)}
         className="purple-shadow"
         type="number"
-        
-        value={pomoInputValue}
+        value={pomoInputValue || +props.ph}
         name={props.id}
-        placeholder={props.ph}
       />;
       break;
     case "color":
       input = <input 
         type="color" 
         name={props.id} 
-        placeholder={props.ph}
+        value={props.ph}
       />
       break;
     case "font":
@@ -85,7 +84,7 @@ export default function SettingsOption(props: Props): JSX.Element {
     input = <select 
       className="velvet-shadow" 
       name={props.id} 
-      placeholder={props.ph}>{array}
+      value={props.ph}>{array}
     </select>
     break;
   }
