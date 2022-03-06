@@ -19,24 +19,29 @@ export default function Timer(props: Props) {
   const [cdTime, setCdTime] = useState<number>(props.conf.work);
   const prevCdTime = usePrevious(props.conf.work);
 
-  // console.log({
-  //   prevCdTime: prevCdTime,
-  //   workTime: props.conf.work, 
-  //   breakTime: props.conf.break, 
-  //   longBreakTime: props.conf.longBreak,
-  // })
+  // Returns the next part that should be incremented to
+  const getNextPart = (): TParts => {
+    if (part === "work") { return "break"}
+    if (set === props.conf.pomodoros && part === "break") { return "longBreak" }
+    return "work"
+  }
 
-  // When the timer hits zero
-  //useEffect(() => {
-    if (cdTime === 0) {
-      setCdTime(props.conf[getNextPart()]);
-      setPart(getNextPart());
-      setSet(getNextSet());
-      changePlaying(!playing)
-      console.log("shitterton")
-      new Audio(ding).play()
-    }
-  //})
+  // Returns the next set that should be incremented to
+  const getNextSet = (): number => {
+    if (part === "longBreak") { return 1 }
+    if (part === "work") { return set }
+    return set % props.conf.pomodoros + 1
+  }
+
+  // Execute when the timer hits zero
+  if (cdTime === 0) {
+    setCdTime(props.conf[getNextPart()]);
+    setPart(getNextPart());
+    setSet(getNextSet());
+    changePlaying(!playing)
+    console.log("shitterton")
+    new Audio(ding).play()
+  }
 
   // If the work length input is changed, reset timer
   useEffect(() => {
@@ -60,62 +65,18 @@ export default function Timer(props: Props) {
     return () => clearInterval(interval)
   }, [cdTime, playing])
 
-
-  //
-
-  const updateYeah = () => {
+  const updateYeah = (): void => {
     changePlaying(!playing);
   }
-
-  // const timerZeroHandler = () => {
-  // }
 
   return (
     <div className='timer'>
       <div>{part}</div>
       <SetCount currentSet={set} currentPart={part} pomodoros={props.conf.pomodoros}/>
-      <Countdown
-        cdTime={cdTime}
-      />
+      <Countdown cdTime={cdTime}/>
       <StartPause onUpdate={updateYeah} playing={!playing}/>
     </div>
   )
-
-  // Helper functions
-  function getNextPart() {
-    if (part === "work") { return "break"}
-    if (set === props.conf.pomodoros && part === "break") { return "longBreak" }
-    return "work"
-
-    // if (getNextSet() === 1) {
-    //   if (part === "break") {
-    //     return "longBreak";
-    //   } else if (part === "work") {
-    //     return "break";
-    //   }
-    //   return "work"
-    // }
-    // if (part === "work") {
-    //   return "break"
-    // }
-    // return "work"
-  }
-
-  // Returns the next set that should be incremented to
-  function getNextSet() {
-    if (part === "longBreak") { return 1 }
-    if (part === "work") { return set }
-    return set % props.conf.pomodoros + 1
-
-  //   if (part === 'longBreak') { return 1 }
-  //   if (part === 'break' && set === props.conf.pomodoros) {
-  //     return set
-  //   }
-  //   if (part === 'break') {
-  //     return (set % props.conf.pomodoros) + 1;
-  //   }
-  //   return set;
-  }
 }
 
 // usePrevious hook

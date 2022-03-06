@@ -1,13 +1,12 @@
 import SettingsOption from "./SettingsOption"
 import '../../styles/Settings.scss'
-import { useState } from "react";
 
 interface Props {
   readonly onUpdate: Function;
 }
 
-export default function Settings(props: Props) {
-  const liftState = (opt: string, value: string | number) => {
+export default function Settings(props: Props): JSX.Element {
+  const liftState = (opt: string, value: string | number): void => {
     props.onUpdate(opt, value)
   }
   

@@ -8,7 +8,7 @@ interface Props {
   readonly currentPart: TParts;
 }
 
-export default function SetCount(props: Props) {
+export default function SetCount(props: Props): JSX.Element {
   let circles: JSX.Element[] = [];
   if (props.currentPart != "longBreak") {
     for (let x = 0; x < props.currentSet - 1; x++) {

@@ -6,7 +6,7 @@ interface Props {
   fill: "empty" | "half" | "full";
 }
 
-export default function SetCountCircle(props: Props) {
+export default function SetCountCircle(props: Props): JSX.Element {
 
   return (
     <span><FontAwesomeIcon icon={
@@ -15,6 +15,7 @@ export default function SetCountCircle(props: Props) {
         props.fill === "half" ? 
           half : 
           empty
-    } /></span>
+    } />
+    </span>
   )
 }

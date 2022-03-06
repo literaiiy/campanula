@@ -12,7 +12,7 @@ interface Props {
 const TEAL_CUTOFF = 3.5;
 const PURPLE_CUTOFF = 5;
 
-export default function PomoTemplate(props: Props) {
+export default function PomoTemplate(props: Props): JSX.Element {
   let colorScheme = determineColor()
   return (
     <li className={`pomo-template bg${colorScheme.bgColor} ${colorScheme.color}`}>

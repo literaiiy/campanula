@@ -1,14 +1,10 @@
 import { useEffect, useState, useRef } from "react";
 import { secToHMS } from "../../../lib/funcs";
 interface Props {
-  //currentlyPlaying: boolean;
   cdTime: number;
-  // workTime: number;
-  // breakTime: number;
-  // longBreakTime: number;
 }
 
-export default function Countdown(props: Props) {
+export default function Countdown(props: Props): JSX.Element {
   return (
     <>
       <div className='time'>

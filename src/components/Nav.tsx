@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import "../styles/Nav.scss"
 
-export default function Nav() {
+export default function Nav(): JSX.Element {
   return (
     <nav>
       <Link to="/">

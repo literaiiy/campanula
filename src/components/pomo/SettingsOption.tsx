@@ -2,12 +2,6 @@ import React, { useState } from "react";
 import "../../styles/SettingsOption.scss"
 import { themeFonts } from "../../lib/constants"
 import { forceHMSFormat, formatHMS, hmsToSec } from "../../lib/funcs"
-
-
-interface onUpdateArgs {
-  
-  // fn: (opt: string, value: string | number) => {s: string, n: number};
-}
 interface Props {
   readonly onUpdate: Function;
   readonly type: "hms" | "integer" | "color" | "font";
@@ -16,7 +10,7 @@ interface Props {
   readonly ph? : string;
 }
 
-export default function SettingsOption(props: Props) {
+export default function SettingsOption(props: Props): JSX.Element {
   const [HMSInputValue, setHMSInputValue] = useState("");
   const [pomoInputValue, setPomoInputValue] = useState('');
 

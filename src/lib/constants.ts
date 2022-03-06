@@ -13,8 +13,6 @@ export interface ISettingsObj {
 export type TParts = "work" | "break" | "longBreak";
 
 
-
-
 export const defaultOptions: ISettingsObj = {
   work: 1500,
   break: 300,
@@ -25,7 +23,7 @@ export const defaultOptions: ISettingsObj = {
   font: "Readex Pro",
 }
 
-export const themeFonts = [
+export const themeFonts: Array<string> = [
   'Readex Pro',
   'Manrope',
   'Open Sans',
