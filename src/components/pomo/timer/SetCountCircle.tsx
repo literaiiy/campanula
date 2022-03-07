@@ -1,6 +1,7 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCircle as full, faCircleHalfStroke as half } from '@fortawesome/free-solid-svg-icons'
-import { faCircle as empty } from '@fortawesome/free-regular-svg-icons'
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+// import { faCircle as full, faCircleHalfStroke as half } from '@fortawesome/free-solid-svg-icons'
+// import { faCircle as empty } from '@fortawesome/free-regular-svg-icons'
+import { CircleFill, CircleHalf, Circle } from 'react-bootstrap-icons'
 
 interface Props {
   fill: "empty" | "half" | "full";
@@ -9,13 +10,13 @@ interface Props {
 export default function SetCountCircle(props: Props): JSX.Element {
 
   return (
-    <span><FontAwesomeIcon icon={
+    <span>{
       props.fill === "full" ? 
-        full : 
+        <CircleFill /> : 
         props.fill === "half" ? 
-          half : 
-          empty
-    } />
+          <CircleHalf /> : 
+          <Circle />
+    }
     </span>
   )
 }

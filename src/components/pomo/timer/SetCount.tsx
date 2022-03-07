@@ -10,25 +10,25 @@ interface Props {
 
 export default function SetCount(props: Props): JSX.Element {
   let circles: JSX.Element[] = [];
-  if (props.currentPart != "longBreak") {
+  if (props.currentPart !== "longBreak") {
     for (let x = 0; x < props.currentSet - 1; x++) {
       circles.push(
-        <SetCountCircle key={circles.length++} fill="full"/>
+        <SetCountCircle key={circles.length+1} fill="full"/>
       )
     }
     if (props.currentPart === "break"){
       circles.push(
-        <SetCountCircle key={circles.length++} fill={"half"} />
+        <SetCountCircle key={circles.length+1} fill={"half"} />
       )
       for (let x = 0; x < props.pomodoros - props.currentSet; x++) {
         circles.push(
-          <SetCountCircle key={circles.length++}fill="empty"/>
+          <SetCountCircle key={circles.length+1}fill="empty"/>
         )
       }
     } else {
       for (let x = 0; x < props.pomodoros + 1 - props.currentSet; x++) {
         circles.push(
-          <SetCountCircle key={circles.length++} fill="empty"/>
+          <SetCountCircle key={circles.length+1} fill="empty"/>
         )
       }
     }

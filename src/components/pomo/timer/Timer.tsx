@@ -17,7 +17,9 @@ export default function Timer(props: Props) {
   const [set, setSet] = useState<number>(1)
   const [part, setPart] = useState<TParts>("work")
   const [cdTime, setCdTime] = useState<number>(props.conf.work);
-  const prevCdTime = usePrevious(props.conf.work);
+  const prevWTime = usePrevious(props.conf.work);
+  const prevBTime = usePrevious(props.conf.break);
+  const prevLBTime = usePrevious(props.conf.longBreak);
 
   // Returns the next part that should be incremented to
   const getNextPart = (): TParts => {
@@ -33,6 +35,16 @@ export default function Timer(props: Props) {
     return set % props.conf.pomodoros + 1
   }
 
+  const updateYeah = (): void => {
+    changePlaying(!playing);
+  }
+
+  if (set > props.conf.pomodoros) {
+    console.log("overflow handle")
+    setSet(0);
+    setPart("longBreak");
+  }
+
   // Execute when the timer hits zero
   if (cdTime === 0) {
     setCdTime(props.conf[getNextPart()]);
@@ -45,10 +57,30 @@ export default function Timer(props: Props) {
 
   // If the work length input is changed, reset timer
   useEffect(() => {
-    if (prevCdTime !== props.conf.work) {
+    console.log(prevWTime)
+    console.log(props.conf.work)
+    if (prevWTime !== props.conf.work && part === "work") {
       setCdTime(props.conf.work)
     }
-  }, [prevCdTime, props.conf.work])
+    if (prevBTime !== props.conf.break && part === "break") {
+      setCdTime(props.conf.break)
+    }
+    if (prevLBTime !== props.conf.longBreak && part === "longBreak") {
+      setCdTime(props.conf.longBreak)
+    }
+  }, [prevWTime, prevBTime, prevLBTime, props.conf.work, props.conf.break, props.conf.longBreak])
+
+  // useEffect(() => {
+  //   if (prevBTime !== props.conf.break) {
+  //     setCdTime(props.conf.break)
+  //   }
+  // }, [prevBTime, props.conf.break])
+
+  // useEffect(() => {
+  //   if (prevLBTime !== props.conf.longBreak) {
+  //     setCdTime(props.conf.longBreak)
+  //   }
+  // }, [prevLBTime, props.conf.longBreak])
   
   // The actual countdown
   useEffect(() => {
@@ -64,10 +96,6 @@ export default function Timer(props: Props) {
 
     return () => clearInterval(interval)
   }, [cdTime, playing])
-
-  const updateYeah = (): void => {
-    changePlaying(!playing);
-  }
 
   return (
     <div className='timer'>

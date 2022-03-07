@@ -1,5 +1,7 @@
-import SettingsOption from "./SettingsOption"
 import '../../styles/Settings.scss'
+import { defaultOptions } from "../../lib/constants"
+import { secToHMS } from "../../lib/funcs"
+import { SetOpHMS, SetOpColor, SetOpInteger, SetOpText } from "./SettingsOption"
 
 interface Props {
   readonly onUpdate: Function;
@@ -8,7 +10,6 @@ interface Props {
 
 export default function Settings(props: Props): JSX.Element {
   console.log("%c Settings.tsx has rerendered", "color:navy; font-weight: 900")
-  console.log(props.defaultOptions)
 
   const liftState = (opt: string, value: string | number): void => {
     props.onUpdate(opt, value)
@@ -16,13 +17,13 @@ export default function Settings(props: Props): JSX.Element {
   
   return (
     <ul className="settings-list">
-      <SettingsOption onUpdate={liftState} type="hms" id="work" label="Work length" ph={props.defaultOptions.work}/>
-      <SettingsOption onUpdate={liftState} type="hms" id="break" label="Break length" ph={props.defaultOptions.break}/>
-      <SettingsOption onUpdate={liftState} type="hms" id="longBreak" label="Long break length" ph={props.defaultOptions.longBreak}/>
-      <SettingsOption onUpdate={liftState} type="integer" id="pomodoros" label="Pomodoros" ph={props.defaultOptions.pomodoros}/>
-      <SettingsOption onUpdate={liftState} type="color" id="bg_color" label="Background color" ph={props.defaultOptions.bg_color}/>
-      <SettingsOption onUpdate={liftState} type="color" id="text_color" label="Text color" ph={props.defaultOptions.text_color}/>
-      <SettingsOption onUpdate={liftState} type="font" id="font" label="Font" ph={props.defaultOptions.font}/>
+      <SetOpHMS onUpdate={liftState} id="work" label="Work length" val={props.defaultOptions.work} def={secToHMS(defaultOptions.work, true)}/>
+      <SetOpHMS onUpdate={liftState} id="break" label="Break length" val={props.defaultOptions.break} def={secToHMS(defaultOptions.break, true)}/>
+      <SetOpHMS onUpdate={liftState} id="longBreak" label="Long break length" val={props.defaultOptions.longBreak} def={secToHMS(defaultOptions.longBreak, true)}/>
+      <SetOpInteger onUpdate={liftState} id="pomodoros" label="Pomodoros" val={props.defaultOptions.pomodoros} def={"" + defaultOptions.pomodoros}/>
+      <SetOpColor onUpdate={liftState} id="bg_color" label="Background color" val={props.defaultOptions.bg_color} def={"" + defaultOptions.bg_color}/>
+      <SetOpColor onUpdate={liftState} id="text_color" label="Text color" val={props.defaultOptions.text_color} def={"" + defaultOptions.text_color}/>
+      <SetOpText onUpdate={liftState} id="font" label="Font" val={props.defaultOptions.font} def={"" + defaultOptions.font}/>
     </ul>
   )
 }

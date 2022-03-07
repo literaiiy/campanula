@@ -1,101 +1,154 @@
-import React, { useState } from "react";
+import React, { useEffect, useState,  } from "react";
 import "../../styles/SettingsOption.scss"
 import { themeFonts } from "../../lib/constants"
 import { forceHMSFormat, formatHMS, hmsToSec, secToHMS } from "../../lib/funcs"
 interface Props {
   readonly onUpdate: Function;
-  readonly type: "hms" | "integer" | "color" | "font";
   readonly id: string;
   readonly label?: string;
-  readonly ph? : any;
+  readonly val?: any;
+  readonly def: string;
 }
 
-export default function SettingsOption(props: Props): JSX.Element {
-  console.log(props.ph)
+interface GenericProps {
+  readonly content: JSX.Element;
+  readonly id: string;
+  readonly label?: string;
+  readonly val?: any;
+}
 
-  const [HMSInputValue, setHMSInputValue] = useState("");
-  const [pomoInputValue, setPomoInputValue] = useState('');
+export default function SettingsOption(props: GenericProps) {
+  return (
+    <li id={props.id + "-container"} className='option-container'>
+      <label htmlFor={props.id}>{props.label}</label>
+      {props.content}
+    </li>
+  )
+}
+
+export function SetOpHMS(props: Props): JSX.Element {
+  const [HMSInputValue, setHMSInputValue] = useState(props.def);
 
   // Handle change in the work/break/long break inputs
-  const handleHMSOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formattedHMS = formatHMS(e.target.value);
     setHMSInputValue(formattedHMS);
   }
 
-  const handleHMSOnBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formattedHMS = forceHMSFormat(e.target.value);
     setHMSInputValue(formattedHMS);
     props.onUpdate(e.target.name, hmsToSec(formattedHMS))
   }
 
-  // Handle change in pomodoro input
-  const handlePomoInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const MAX = 30;
-    const MIN = 1;
-
-    const formattedPomo = formatPomoCount(e.target.value, MIN, MAX)
-    setPomoInputValue(formattedPomo)
-  }
-
-  const handleIntOnBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
-    props.onUpdate(e.target.name, e.target.valueAsNumber)
-  }
-
-  // Create input
-  let input = <input type='text' name={props.id} value={props.ph}/>
-  switch (props.type) {
-    case "hms":
-      input = <input 
-        onChange={(e) => handleHMSOnChange(e)} 
-        onBlur={(e) => handleHMSOnBlur(e)}
-        value={HMSInputValue || secToHMS(props.ph, true)} 
+  return (
+    <SettingsOption 
+      content={<input 
+        onChange={(e) => handleChange(e)} 
+        onBlur={(e) => handleBlur(e)}
+        value={HMSInputValue} 
         className="teal-shadow" 
         type="tel" 
         name={props.id} 
-        maxLength={8} 
-      />;
-      break;
-    case "integer":
-      input = <input
-        onChange={(e) => handlePomoInput(e)}
-        onBlur={(e) => handleIntOnBlur(e)}
-        className="purple-shadow"
-        type="number"
-        value={pomoInputValue || +props.ph}
-        name={props.id}
-      />;
-      break;
-    case "color":
-      input = <input 
-        type="color" 
-        name={props.id} 
-        value={props.ph}
-      />
-      break;
-    case "font":
-      let array = []
-      for (let x of themeFonts) {
-        array.push(<option 
-          key={toKebabCase(x)} 
-          className={"font-" + toKebabCase(x)} 
-          value={toKebabCase(x)}>{x}
-        </option>)
-    }
-    input = <select 
-      className="velvet-shadow" 
-      name={props.id} 
-      value={props.ph}>{array}
-    </select>
-    break;
+        maxLength={8}
+        placeholder={props.def}
+      />}
+      id={props.id}
+      label={props.label}
+      val={props.val}
+    />
+  )
+}
+
+export function SetOpInteger(props: Props): JSX.Element {
+  const [intInputValue, setIntInputValue] = useState(props.def);
+
+  // Handle change in pomodoro input
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const MAX = 30;
+    const MIN = 1;
+    const formattedPomo = formatPomoCount(e.target.value, MIN, MAX)
+    setIntInputValue(formattedPomo)
+  }
+
+  const handleBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
+    props.onUpdate(e.target.name, e.target.valueAsNumber || 4)
   }
 
   return (
-    <li id={props.id + "-container"} className='option-container'>
-      <label htmlFor={props.id}>{props.label}</label>
-      {input}
-    </li>
+    <SettingsOption 
+      content={<input
+        onChange={(e) => handleChange(e)}
+        onBlur={(e) => handleBlur(e)}
+        className="purple-shadow"
+        type="number"
+        value={intInputValue}
+        placeholder={props.def}
+        name={props.id}
+      />}
+      id={props.id}
+      label={props.label}
+      val={props.val}
+    />
   )
 }
+
+export function SetOpColor(props: Props): JSX.Element {
+  const [color, setColor] = useState(props.def)
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setColor(e.target.value)
+    props.onUpdate(e.target.name, e.target.value)
+  }
+
+  return (
+    <SettingsOption 
+      content={<input 
+        type="color" 
+        name={props.id} 
+        value={color}
+        placeholder={props.def}
+        onChange={handleChange}
+      />}
+      id={props.id}
+      label={props.label}
+      val={props.val}
+    />
+  )
+}
+
+export function SetOpText(props: Props): JSX.Element {
+  const [font, setFont] = useState(props.def)
+
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {
+    setFont(e.target.value)
+    props.onUpdate(e.target.name, e.target.value)
+  }
+
+  let array = []
+  for (let x of themeFonts) {
+    array.push(<option 
+      key={toKebabCase(x)} 
+      className={"font-" + toKebabCase(x)} 
+      value={x}>{x}
+    </option>)
+  }
+
+  return (
+    <SettingsOption content={<select 
+        className="velvet-shadow" 
+        name={props.id} 
+        value={font}
+        onChange={handleChange}
+        placeholder={props.def}>{array}
+      </select>}
+      id={props.id}
+      label={props.label}
+      val={props.val}
+    />
+  )
+}
+
 
 function formatPomoCount(v: string, MIN: number, MAX: number) {
   if (!v) return v;
