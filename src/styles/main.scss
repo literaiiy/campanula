@@ -156,7 +156,7 @@
       padding: 2rem 0;
       & > .desc-text-intuitive {
         flex: 1 1 25rem;
-        width: min(48rem, 100vw);
+        max-width: min(48rem, 95vw);
         color: u.$cream;
         box-sizing: border-box;
       }

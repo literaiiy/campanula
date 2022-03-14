@@ -19,7 +19,7 @@ export const defaultOptions: ISettingsObj = {
   longBreak: 900,
   pomodoros: 4,
   bg_color: "#FFFFFF",
-  text_color: "#000000",
+  text_color: "#1c1c20",
   font: "Readex Pro",
 }
 

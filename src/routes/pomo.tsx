@@ -6,6 +6,7 @@ import { Helmet } from 'react-helmet';
 import "../styles/pomo.scss"
 import { useState } from 'react';
 import { defaultOptions } from "../lib/constants";
+import { cAdjust } from '../lib/funcs';
 
 export default function Pomo() {
   const params = useParams();
@@ -22,6 +23,31 @@ export default function Pomo() {
     <>
       <Helmet>
         <title>{params.id} - Campanula</title>
+        <style>{`
+          :root {
+            --bg: ${options.bg_color};
+            --bg2: ${cAdjust(options.bg_color, -7)};
+            --bg3: ${cAdjust(options.bg_color, -15)};
+            --acc: ${options.text_color};
+          }
+          .campanula-logo * {
+            ${options.text_color !== "#1c1c20" || options.bg_color !== "#FFFFFF" ? `color: var(--acc) !important` : ''}
+          }
+          main, nav {
+            background-color: var(--bg);
+          }
+          main *, .button, hr {
+            color: var(--acc) !important;
+            border-color: var(--acc) !important;
+          }
+          button, .button, input, select, .timer, hr {
+            background-color: var(--bg2) !important;
+            ${options.bg_color !== "#FFFFFF" ? `box-shadow: -0.25rem 0.25rem var(--bg3) !important;` : ``}
+          }
+          timer > div {
+            background-color: transparent !important;
+          }
+        `}</style>
       </Helmet>
       <section className="pomo-main">
         <div><b>Code</b>: <span className="monospace">* {params.id} *, <div style={{wordBreak: "break-all"}}>{JSON.stringify(options)}</div></span></div>

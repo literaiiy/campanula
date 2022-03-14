@@ -2,11 +2,11 @@
 
 .campanula-logo {
   font-size: 3rem;
-  transition: u.$longerTransition;
   font-family: "Major Mono Display", monospace;
   font-weight: 400;
   color: u.$black;
   line-height: 3rem;
+  transition: u.$defTransitionColor;
   & .black {
     color: inherit;
     transition: inherit;

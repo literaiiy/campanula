@@ -49,3 +49,30 @@ export const formatHMS = (v: string) => {
   if (length < 6) { return `${HMS.slice(0,1)}:${HMS.slice(1,3)}:${HMS.slice(3,6)}` }
   return `${HMS.slice(0,2)}:${HMS.slice(2,4)}:${HMS.slice(4,7)}`
 }
+
+// Darken a hex-formatted color string
+export const cAdjust = (color: string, percent: number): string => {
+  let hex = color;
+
+  // strip the leading # if it's there
+  hex = hex.replace(/^\s*#|\s*$/g, "");
+
+  // convert 3 char codes --> 6, e.g. `E0F` --> `EE00FF`
+  if (hex.length === 3) {
+      hex = hex.replace(/(.)/g, "$1$1");
+  }
+
+  let r = parseInt(hex.substr(0, 2), 16);
+  let g = parseInt(hex.substr(2, 2), 16);
+  let b = parseInt(hex.substr(4, 2), 16);
+
+  const calculatedPercent = (100 + percent) / 100;
+
+  r = Math.round(Math.min(255, Math.max(0, r * calculatedPercent)));
+  g = Math.round(Math.min(255, Math.max(0, g * calculatedPercent)));
+  b = Math.round(Math.min(255, Math.max(0, b * calculatedPercent)));
+
+  return `#${r.toString(16).toUpperCase()}${g.toString(16).toUpperCase()}${b
+      .toString(16)
+      .toUpperCase()}`;
+}
