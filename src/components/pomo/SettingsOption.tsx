@@ -105,6 +105,7 @@ export function SetOpColor(props: Props): JSX.Element {
     <SettingsOption 
       content={<input 
         type="color" 
+        className="velvet-shadow"
         name={props.id} 
         value={color}
         placeholder={props.def}
