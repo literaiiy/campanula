@@ -26,11 +26,14 @@ export default function Pomo() {
         <style>{`
           :root {
             --bg: ${options.bg_color};
-            --bg2: ${cAdjust(options.bg_color, -7)};
+            --bg2: ${cAdjust(options.bg_color, -5)};
             --bg3: ${cAdjust(options.bg_color, -15)};
             --acc: ${options.text_color};
           }
           .campanula-logo * {
+            ${options.text_color !== "#1c1c20" || options.bg_color !== "#FFFFFF" ? `color: var(--acc) !important` : ''}
+          }
+          .campanula-logo-mobile * {
             ${options.text_color !== "#1c1c20" || options.bg_color !== "#FFFFFF" ? `color: var(--acc) !important` : ''}
           }
           main, nav {
@@ -38,7 +41,7 @@ export default function Pomo() {
           }
           main *, .button, hr {
             color: var(--acc) !important;
-            border-color: var(--acc) !important;
+            ${options.text_color !== "#1c1c20" || options.bg_color !== "#FFFFFF" ? `border-color: var(--acc) !important` : ''};
           }
           button, .button, input, select, .timer, hr {
             background-color: var(--bg2) !important;
