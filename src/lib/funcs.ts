@@ -76,3 +76,8 @@ export const cAdjust = (color: string, percent: number): string => {
       .toString(16)
       .toUpperCase()}`;
 }
+
+export const convertToCSSSafe = (str: string): string => {
+  if (str === "System UI") { return "system-ui"}
+  return str
+}

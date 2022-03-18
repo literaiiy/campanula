@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet';
 import "../styles/pomo.scss"
 import { useState } from 'react';
 import { defaultOptions } from "../lib/constants";
-import { cAdjust } from '../lib/funcs';
+import { cAdjust, convertToCSSSafe } from '../lib/funcs';
 
 export default function Pomo() {
   const params = useParams();
@@ -38,9 +38,11 @@ export default function Pomo() {
           }
           main, nav {
             background-color: var(--bg);
+            font-family: "${convertToCSSSafe(options.font)}" !important;
           }
-          main *, .button, hr {
+          main *:not(option), .button, hr {
             color: var(--acc) !important;
+            font-family: inherit !important;
             ${options.text_color !== "#1c1c20" || options.bg_color !== "#FFFFFF" ? `border-color: var(--acc) !important` : ''};
           }
           button, .button, input, select, .timer, hr {

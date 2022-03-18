@@ -4,7 +4,6 @@ import "../styles/main.scss"
 export default function Main() {
   return (
     <>
-
       <section className='main-top'>
         <div className='main-lines'>
           <h1 className='main-headline'>A completely <span className="gradient-customizable">customizable</span> pomodoro experience.</h1>
