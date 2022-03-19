@@ -11,7 +11,7 @@ export default function Pomos() {
       </Helmet>
       <section className='pomos-list'>
         <div className="pomos-list-desc">
-          <h1>Easy, pre-made pomodoro timer templates.</h1>
+          <h1 className='pomos-header'>Easy, pre-made pomodoro timer templates.</h1>
         </div>
         <ul className='template-list'>
           <PomoTemplate slug="default" name='🍅 Default' sets={4} work={1500} break={300} longBreak={900}/>
