@@ -2,6 +2,24 @@ import { Helmet } from "react-helmet"
 import "../styles/privacy.scss"
 
 export default function Privacy() {
+
+  async function handleDBClick() {
+    console.log("DB testing...")
+ 
+    await fetch("http://localhost:5000/record/add", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ "crap":" 5" }),
+    })
+    .catch(error => {
+      console.error(error);
+      return;
+    });
+    console.log("this may have worked")
+  }
+
   return (
     <>
       <Helmet>
@@ -27,6 +45,8 @@ export default function Privacy() {
           <p>If you have any further inquiries regarding this privacy policy, contact us via the form located at <a href="https://literaiiy.me">literaiiy.me</a>.</p>
         </div>
       </section>
+
+      <button style={{width: "12rem", height:"6rem", alignSelf:"center", margin:"1rem"}} onClick={handleDBClick}>DB test</button>
     </>
   )
 }
