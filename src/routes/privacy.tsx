@@ -1,17 +1,19 @@
 import { Helmet } from "react-helmet"
 import "../styles/privacy.scss"
-import { rawConfigToOptions, rawConfigToCode, optionsToRawConfig, postPair } from "../lib/funcs";
+import { queryDB, postPair } from "../lib/funcs";
 
 export default function Privacy() {
 
   async function handleDBClick() {
     console.log("DB testing...")
 
-    const rawponse = await rawConfigToCode("bruh");
+    const suckIt = prompt("Query")
+
+    const rawponse = await queryDB("" + suckIt);
     
     if (!rawponse.ok) { return }
 
-    console.log(rawponse.body)
+    console.log(rawponse)
 
     console.log("this may have worked")
   }

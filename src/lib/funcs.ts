@@ -109,27 +109,27 @@ export const rawConfigToOptions = (rawConfig: string): ISettingsObj => {
 
 // Queries database to see if the raw config already exists in the database
 // Returns an object with status and body if request succeeded
-export const rawConfigToCode = async (rawConfig: string): Promise<IDBResObj> => {
+// export const rawConfigToCode = async (rawConfig: string): Promise<IDBResObj> => {
 
-  const response = await fetch(`${DB_BASEURL}/pomodb/${rawConfig}`, { 
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
+//   const response = await fetch(`${DB_BASEURL}/pomodb/${rawConfig}`, { 
+//     method: "GET",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//   })
 
-  const res = await response.json()
+//   const res = await response.json()
 
-  return {
-    "ok": response.ok,
-    "body": response.ok ? res : null 
-  }
-}
+//   return {
+//     "ok": response.ok,
+//     "body": response.ok ? res : null 
+//   }
+// }
 
 // Queries database to see if the raw config already exists in the database
 // Returns an object with status and body if request succeeded
-export const codeToRawConfig = async (code: string): Promise<IDBResObj> => {
-  const response = await fetch(`${DB_BASEURL}/pomodb/${code}`, { 
+export const queryDB = async (str: string): Promise<IDBResObj> => {
+  const response = await fetch(`${DB_BASEURL}/pomodb/${str}`, { 
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -145,13 +145,17 @@ export const codeToRawConfig = async (code: string): Promise<IDBResObj> => {
 }
 
 export const postPair = async (code: string, rawConfig: string) => {
-  await fetch(`${DB_BASEURL}/pomodb/add`, {
+  const response = await fetch(`${DB_BASEURL}/pomodb/add`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify([rawConfig, code])
   })
+
+  const res = await response.json();
+
+  console.log(res)
 }
 
 // Helper method: queries the database to check if RC already exists
