@@ -1,17 +1,20 @@
 import { Helmet } from "react-helmet"
 import "../styles/privacy.scss"
+import { rawConfigToOptions, optionsToRawConfig } from "../lib/funcs";
 
 export default function Privacy() {
 
   async function handleDBClick() {
     console.log("DB testing...")
  
-    await fetch("http://localhost:5000/record/add", {
-      method: "POST",
+    await fetch("http://localhost:5000/pomodb/add", {
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ "crap":" 5" }),
+      body: JSON.stringify({
+
+      }),
     })
     .catch(error => {
       console.error(error);
@@ -26,7 +29,7 @@ export default function Privacy() {
         <title>Privacy Policy - Campanula</title>
       </Helmet>
       <section className='privacy-main'>
-        <div className="privacy-div"> 
+        <div className="privacy-div">
           <h1>Privacy Policy</h1>
           <p>Last updated February 21, 2022</p>
           <p>Welcome to Campanula's privacy policy. Outlined in this document are the policies and procedures that this website ("Campanula") follows on the disclosure of the user's ("your") personal information while using the Campanula service.</p>

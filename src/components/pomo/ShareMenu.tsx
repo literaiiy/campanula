@@ -1,25 +1,36 @@
 import { ShareFill } from "react-bootstrap-icons"
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import copy from 'copy-to-clipboard'
 import { Slide, ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import "../../styles/ShareMenu.scss"
+import { ISettingsObj } from "../../lib/constants";
+import { preProcessFile } from "typescript";
+import { usePrevious } from '../../lib/constants'
 
-export default function ShareMenu(): JSX.Element {
+interface Props {
+  rawConfig: string;
+}
 
-  const [codeChanged, setCodeChanged] = useState(false);
+export default function ShareMenu(props: Props): JSX.Element {
+  
+  console.log("%c ShareMenu.tsx has rerendered", "color:goldenrod; font-weight: 900")
+  let prevRawConfig: string | undefined = usePrevious(props.rawConfig)
+  console.log(prevRawConfig);
+  console.log(props.rawConfig)
+  
 
-  const handleShare = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-
-    // Dev testing only
-    setCodeChanged(true)
+  const handleShare = () => {
+    if (prevRawConfig !== props.rawConfig) {
+      console.log("Database has been queried")
+      prevRawConfig = props.rawConfig
+    }
     if (navigator.share) {
-      if (codeChanged) {
         navigator
           .share({
             title: "Campanula",
             text: "Share this pomodoro timer!",
-            url: "https://example.com"
+            url: `https://example.com/${props.rawConfig}` 
           })
           .then(() => {
             console.log("shared")
@@ -27,9 +38,6 @@ export default function ShareMenu(): JSX.Element {
           .catch((e) => {
             console.error(e);
           })
-      } else {
-        
-      }
     } else {
       copy('https://example.com')
       toast("Link copied!", {

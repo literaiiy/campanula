@@ -1,3 +1,5 @@
+import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
+import { ISettingsObj, themeFonts, DB_BASEURL } from "./constants";
 
 // Converts a string in the HH:MM:SS format to an integer amount of seconds
 export const hmsToSec = (str: string) => {
@@ -28,13 +30,11 @@ export const secToHMS = (sec: number, removeHourPadding: boolean): string => {
   return `${(''+h).padStart(2, "0")}:${(''+m).padStart(2, "0")}:${(''+s).padStart(2, "0")}`
 }
 
-
 // Forces the HH:MM:SS format on a specified string
 // Also sanitizes input, reducing out-of-bounds numbers into the maximum specified time limit 
 export const forceHMSFormat = (str: string) => {
   return secToHMS(hmsToSec(str.padStart(8, "00:00:00")), false);
 }
-
 
 // Format a numeric string into the HH:MM:SS format
 export const formatHMS = (v: string) => {
@@ -77,11 +77,113 @@ export const cAdjust = (color: string, percent: number): string => {
       .toUpperCase()}`;
 }
 
+// Convert to a CSS-safe font name
 export const convertToCSSSafe = (str: string): string => {
   if (str === "System UI") { return "system-ui"}
   return str
 }
 
-export const fetchWCode = (code: string) => {
+// Convert options object to raw config string
+export const optionsToRawConfig = (options: ISettingsObj): string => {
+  return (
+    ("" + options.work).padStart(6, "0") + 
+    ("" + options.break).padStart(6, "0") + 
+    ("" + options.longBreak).padStart(6, "0") + 
+    options.pomodoros.toString(32) +
+    options.bg_color.slice(1) +
+    options.text_color.slice(1) +
+    (themeFonts.indexOf(options.font) || 0 ).toString(32)
+  )
+}
+
+// Convert raw config string to options object
+export const rawConfigToOptions = (rawConfig: string): ISettingsObj => {
+  return {
+    work: +rawConfig.slice(0, 6),
+    break: +rawConfig.slice(6, 12),
+    longBreak: +rawConfig.slice(12, 18),
+    pomodoros: parseInt(rawConfig.slice(18, 19), 32),
+    bg_color: "#" + rawConfig.slice(19, 25),
+    text_color: "#" + rawConfig.slice(25, 31),
+    font: themeFonts[parseInt(rawConfig.slice(31), 32)],
+  }
+}
+
+// Queries database to see if the raw config already exists in the database
+// If no, it creates a new document
+// If yes, it returns an existing document
+export const rawConfigToCode = async (rawConfig: string) => {
+  let data;
+
+  await fetch (`${DB_BASEURL}/pomo/${rawConfig}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+  .then(res => res.json())
+  .then(res => data = res)
+  .catch(e => { console.error(e); return false;})
+
+  if (data) return data;
+
+  await fetch(`${DB_BASEURL}/pomo/${rawConfig}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({"rawConfig": rawConfig})
+  })
+
+}
+
+export const codeToRawConfig = async (code: string)  => {
+  let data;
+
+  await fetch (`${DB_BASEURL}/pomo/${code}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+  .then(res => res.json())
+  .then(res => data = res)
+  .catch(e => { console.error(e); return false;})
+
+  if (data) return data;
+
+  await fetch(`${DB_BASEURL}/pomo/${code}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({"code": code})
+  })
   
 }
+
+// Helper method: queries the database to check if RC already exists
+// Returns RC if found
+const queryDBforRC = async (code: string) => {
+
+}
+
+// Helper method: queries the database to check if code already exists
+// Returns code if found
+const queryDBforCode = async (rawConfig: string) => {
+  await fetch (`${DB_BASEURL}/pomo/${rawConfig}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+  .then(res => {
+    return res;
+  })
+  .catch(e => { console.error(e); return;})
+}
+
+// Generates a 4-digit code
+// const generateCode = (): string => {
+
+// }

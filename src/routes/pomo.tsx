@@ -6,11 +6,18 @@ import { Helmet } from 'react-helmet';
 import "../styles/pomo.scss"
 import { useState } from 'react';
 import { defaultOptions } from "../lib/constants";
-import { cAdjust, convertToCSSSafe } from '../lib/funcs';
+import { cAdjust, convertToCSSSafe, optionsToRawConfig } from '../lib/funcs';
+import { usePrevious } from '../lib/constants';
+import { ISettingsObj } from '../lib/constants';
 
 export default function Pomo() {
   const params = useParams();
   const [options, setOptions] = useState(defaultOptions);
+  // const prc = usePrevious(options);
+  // const rcChanged = optionsToRawConfig(prc || options) !== optionsToRawConfig(options)
+  // console.log(prc)
+  // console.log(options)
+  // console.log(rcChanged)
   
   const setOptionsHandler = (property: string, value: string | number): void => {
     setOptions({
@@ -59,7 +66,7 @@ export default function Pomo() {
         <Timer conf={options} />
         <Settings onUpdate={setOptionsHandler} defaultOptions={options}/>
         <hr className='short-hr'/>
-        <ShareMenu />
+        <ShareMenu rawConfig={optionsToRawConfig(options)}/>
       </section>
     </>
   )

@@ -1,4 +1,4 @@
-
+import { useRef, useEffect } from 'react';
 
 export interface ISettingsObj {
   work: number;
@@ -47,3 +47,13 @@ export const themeFonts: Array<string> = [
   'Courier New',
   'Lucida Sans Typewriter'
 ]
+
+export const DB_BASEURL = "http://localhost:5000"
+
+export function usePrevious(value: any) {
+  const ref = useRef();
+  useEffect(() => {
+    ref.current = value;
+  })
+  return ref.current
+}

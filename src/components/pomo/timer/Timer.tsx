@@ -40,7 +40,6 @@ export default function Timer(props: Props) {
   }
 
   if (set > props.conf.pomodoros) {
-    console.log("overflow handle")
     setSet(0);
     setPart("longBreak");
   }
@@ -51,14 +50,11 @@ export default function Timer(props: Props) {
     setPart(getNextPart());
     setSet(getNextSet());
     changePlaying(!playing)
-    console.log("shitterton")
     new Audio(ding).play()
   }
 
   // If the work length input is changed, reset timer
   useEffect(() => {
-    console.log(prevWTime)
-    console.log(props.conf.work)
     if (prevWTime !== props.conf.work && part === "work") {
       setCdTime(props.conf.work)
     }
@@ -69,18 +65,6 @@ export default function Timer(props: Props) {
       setCdTime(props.conf.longBreak)
     }
   }, [prevWTime, prevBTime, prevLBTime, props.conf.work, props.conf.break, props.conf.longBreak])
-
-  // useEffect(() => {
-  //   if (prevBTime !== props.conf.break) {
-  //     setCdTime(props.conf.break)
-  //   }
-  // }, [prevBTime, props.conf.break])
-
-  // useEffect(() => {
-  //   if (prevLBTime !== props.conf.longBreak) {
-  //     setCdTime(props.conf.longBreak)
-  //   }
-  // }, [prevLBTime, props.conf.longBreak])
   
   // The actual countdown
   useEffect(() => {
