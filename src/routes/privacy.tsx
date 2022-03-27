@@ -1,28 +1,26 @@
 import { Helmet } from "react-helmet"
 import "../styles/privacy.scss"
-import { rawConfigToOptions, optionsToRawConfig } from "../lib/funcs";
+import { rawConfigToOptions, rawConfigToCode, optionsToRawConfig, postPair } from "../lib/funcs";
 
 export default function Privacy() {
 
   async function handleDBClick() {
     console.log("DB testing...")
- 
-    await fetch("http://localhost:5000/pomodb/add", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
 
-      }),
-    })
-    .catch(error => {
-      console.error(error);
-      return;
-    });
+    const rawponse = await rawConfigToCode("bruh");
+    
+    if (!rawponse.ok) { return }
+
+    console.log(rawponse.body)
+
     console.log("this may have worked")
   }
 
+  const handleDBClick2 = async () => {
+    console.log('DB POST testing')
+
+    postPair("Shut the ", "up")
+  }
   return (
     <>
       <Helmet>
@@ -50,6 +48,8 @@ export default function Privacy() {
       </section>
 
       <button style={{width: "12rem", height:"6rem", alignSelf:"center", margin:"1rem"}} onClick={handleDBClick}>DB test</button>
+      <button style={{width: "12rem", height:"6rem", alignSelf:"center", margin:"1rem"}} onClick={handleDBClick2}>DB test 2</button>
+
     </>
   )
 }

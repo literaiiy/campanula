@@ -1,8 +1,7 @@
-import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
-import { ISettingsObj, themeFonts, DB_BASEURL } from "./constants";
+import { ISettingsObj, IDBResObj, themeFonts, DB_BASEURL } from "./constants";
 
 // Converts a string in the HH:MM:SS format to an integer amount of seconds
-export const hmsToSec = (str: string) => {
+export const hmsToSec = (str: string): number => {
   const h = +str.slice(0, 2);
   const m = +str.slice(3, 5);
   const s = +str.slice(6,  );
@@ -10,13 +9,12 @@ export const hmsToSec = (str: string) => {
 }
 
 // Converts minutes to seconds
-export const minToSec = (m: number) => {
+export const minToSec = (m: number): number => {
   return m * 60;
 }
 
 // Convert an positive integer amount of seconds to the HH:MM:SS format
-// Maxes out at 99:59:59 (359999 sec)
-// Minimizes at 00:00:01 (1 sec)
+// Maxes out at 99:59:59 (359999 sec) & minimizes at 00:00:01 (1 sec)
 export const secToHMS = (sec: number, removeHourPadding: boolean): string => {
   sec = Math.max(Math.min(sec, 359999), 1)
 
@@ -32,12 +30,12 @@ export const secToHMS = (sec: number, removeHourPadding: boolean): string => {
 
 // Forces the HH:MM:SS format on a specified string
 // Also sanitizes input, reducing out-of-bounds numbers into the maximum specified time limit 
-export const forceHMSFormat = (str: string) => {
+export const forceHMSFormat = (str: string): string => {
   return secToHMS(hmsToSec(str.padStart(8, "00:00:00")), false);
 }
 
 // Format a numeric string into the HH:MM:SS format
-export const formatHMS = (v: string) => {
+export const formatHMS = (v: string): string => {
   if (!v) return v;
 
   const HMS = v.replace(/[^\d]/g, "")
@@ -62,9 +60,9 @@ export const cAdjust = (color: string, percent: number): string => {
       hex = hex.replace(/(.)/g, "$1$1");
   }
 
-  let r = parseInt(hex.substr(0, 2), 16);
-  let g = parseInt(hex.substr(2, 2), 16);
-  let b = parseInt(hex.substr(4, 2), 16);
+  let r = parseInt(hex.slice(0, 2), 16);
+  let g = parseInt(hex.slice(2, 4), 16);
+  let b = parseInt(hex.slice(4, 6), 16);
 
   const calculatedPercent = (100 + percent) / 100;
 
@@ -110,78 +108,72 @@ export const rawConfigToOptions = (rawConfig: string): ISettingsObj => {
 }
 
 // Queries database to see if the raw config already exists in the database
-// If no, it creates a new document
-// If yes, it returns an existing document
-export const rawConfigToCode = async (rawConfig: string) => {
-  let data;
+// Returns an object with status and body if request succeeded
+export const rawConfigToCode = async (rawConfig: string): Promise<IDBResObj> => {
 
-  await fetch (`${DB_BASEURL}/pomo/${rawConfig}`, {
+  const response = await fetch(`${DB_BASEURL}/pomodb/${rawConfig}`, { 
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
   })
-  .then(res => res.json())
-  .then(res => data = res)
-  .catch(e => { console.error(e); return false;})
 
-  if (data) return data;
+  const res = await response.json()
 
-  await fetch(`${DB_BASEURL}/pomo/${rawConfig}`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({"rawConfig": rawConfig})
-  })
-
+  return {
+    "ok": response.ok,
+    "body": response.ok ? res : null 
+  }
 }
 
-export const codeToRawConfig = async (code: string)  => {
-  let data;
-
-  await fetch (`${DB_BASEURL}/pomo/${code}`, {
+// Queries database to see if the raw config already exists in the database
+// Returns an object with status and body if request succeeded
+export const codeToRawConfig = async (code: string): Promise<IDBResObj> => {
+  const response = await fetch(`${DB_BASEURL}/pomodb/${code}`, { 
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
   })
-  .then(res => res.json())
-  .then(res => data = res)
-  .catch(e => { console.error(e); return false;})
 
-  if (data) return data;
+  const res = await response.json()
 
-  await fetch(`${DB_BASEURL}/pomo/${code}`, {
+  return {
+    "ok": response.ok,
+    "body": response.ok ? res : null 
+  }
+}
+
+export const postPair = async (code: string, rawConfig: string) => {
+  await fetch(`${DB_BASEURL}/pomodb/add`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({"code": code})
+    body: JSON.stringify([rawConfig, code])
   })
-  
 }
 
 // Helper method: queries the database to check if RC already exists
 // Returns RC if found
-const queryDBforRC = async (code: string) => {
+// const queryDBforRC = async (code: string) => {
 
-}
+// }
 
 // Helper method: queries the database to check if code already exists
 // Returns code if found
-const queryDBforCode = async (rawConfig: string) => {
-  await fetch (`${DB_BASEURL}/pomo/${rawConfig}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-  .then(res => {
-    return res;
-  })
-  .catch(e => { console.error(e); return;})
-}
+// const queryDBforCode = async (rawConfig: string) => {
+//   await fetch (`${DB_BASEURL}/pomo/${rawConfig}`, {
+//     method: "GET",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//   })
+//   .then(res => {
+//     return res;
+//   })
+//   .catch(e => { console.error(e); return;})
+// }
 
 // Generates a 4-digit code
 // const generateCode = (): string => {

@@ -18,7 +18,6 @@ export default function ShareMenu(props: Props): JSX.Element {
   let prevRawConfig: string | undefined = usePrevious(props.rawConfig)
   console.log(prevRawConfig);
   console.log(props.rawConfig)
-  
 
   const handleShare = () => {
     if (prevRawConfig !== props.rawConfig) {

@@ -10,6 +10,11 @@ export interface ISettingsObj {
   font: string;
 }
 
+export interface IDBResObj {
+  ok: boolean;
+  body: Object;
+}
+
 export type TParts = "work" | "break" | "longBreak";
 
 
