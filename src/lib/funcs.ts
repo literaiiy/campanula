@@ -137,6 +137,7 @@ export const queryDB = async (str: string): Promise<IDBResObj> => {
   })
 
   const res = await response.json()
+  console.log()
 
   return {
     "ok": response.ok,
@@ -145,17 +146,23 @@ export const queryDB = async (str: string): Promise<IDBResObj> => {
 }
 
 export const postPair = async (code: string, rawConfig: string) => {
+  let restonse: any; 
   const response = await fetch(`${DB_BASEURL}/pomodb/add`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify([rawConfig, code])
+  }).then((res) => {
+    console.log("POST request completed")
+    restonse = res.json()
+  }).catch(() => {
+    console.error("POST request did not complete")
   })
 
-  const res = await response.json();
+  // const res = await response.json();
 
-  console.log(res)
+  console.log(restonse)
 }
 
 // Helper method: queries the database to check if RC already exists

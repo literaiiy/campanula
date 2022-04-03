@@ -6,23 +6,41 @@ export default function Privacy() {
 
   async function handleDBClick() {
     console.log("DB testing...")
-
     const suckIt = prompt("Query")
-
     const rawponse = await queryDB("" + suckIt);
-    
     if (!rawponse.ok) { return }
-
     console.log(rawponse)
-
     console.log("this may have worked")
   }
 
   const handleDBClick2 = async () => {
+
+    function makeid(length: number) {
+      var result           = '';
+      var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      var charactersLength = characters.length;
+      for ( var i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      }
+      return result;
+    }
+
     console.log('DB POST testing')
 
-    postPair("Shut the ", "up")
+    // postPair("cokd", "0015000003000009004FFFFFF1c1c200")
+    // postPair("dokd", "1015000003000009004FFFFFF1c1c200")
+    // postPair("eokd", "2015000003000009004FFFFFF1c1c200")
+    // postPair("fokd", "3015000003000009004FFFFFF1c1c200")
+    await postPair(makeid(4), makeid(32))
   }
+
+  // const handleDBClick3 = async() => {
+  //   const b = prompt("shuddp") || 5
+  //   for (let x = 0; x < +b; x++) {
+  //     postPair()
+  //   }
+  // }
+
   return (
     <>
       <Helmet>
@@ -51,6 +69,7 @@ export default function Privacy() {
 
       <button style={{width: "12rem", height:"6rem", alignSelf:"center", margin:"1rem"}} onClick={handleDBClick}>DB test</button>
       <button style={{width: "12rem", height:"6rem", alignSelf:"center", margin:"1rem"}} onClick={handleDBClick2}>DB test 2</button>
+      {/* <button style={{backgroundColor: "red", width: "12rem", height:"6rem", alignSelf:"center", margin:"1rem"}} onClick={handleDBClick3}>Flood</button> */}
 
     </>
   )
