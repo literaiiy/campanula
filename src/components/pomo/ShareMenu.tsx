@@ -1,12 +1,11 @@
 import { ShareFill } from "react-bootstrap-icons"
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import copy from 'copy-to-clipboard'
 import { Slide, ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import "../../styles/ShareMenu.scss"
-import { ISettingsObj } from "../../lib/constants";
-import { preProcessFile } from "typescript";
 import { usePrevious } from '../../lib/constants'
+import { qDBCtoR, qDBRtoC } from '../../lib/funcs'
 
 interface Props {
   rawConfig: string;
@@ -16,29 +15,39 @@ export default function ShareMenu(props: Props): JSX.Element {
   
   console.log("%c ShareMenu.tsx has rerendered", "color:goldenrod; font-weight: 900")
   let prevRawConfig: string | undefined = usePrevious(props.rawConfig)
+  const [code, setCode] = useState("default")
   console.log(prevRawConfig);
   console.log(props.rawConfig)
 
-  const handleShare = () => {
+  const handleShare = async () => {
+    console.log(prevRawConfig, props.rawConfig)
     if (prevRawConfig !== props.rawConfig) {
-      console.log("Database has been queried")
+      console.warn("Querying database...")
+      const res = await qDBRtoC(props.rawConfig)
+      console.log(res)
       prevRawConfig = props.rawConfig
+
     }
+    share(code)
+  }
+
+  const share = (code?: string): void => {
+    const sharable = "" + code
     if (navigator.share) {
-        navigator
-          .share({
-            title: "Campanula",
-            text: "Share this pomodoro timer!",
-            url: `https://example.com/${props.rawConfig}` 
-          })
-          .then(() => {
-            console.log("shared")
-          })
-          .catch((e) => {
-            console.error(e);
-          })
+      navigator
+        .share({
+          title: "Campanula: a completely customizable pomodoro experience",
+          text: `Try this pomodoro timer! - ${sharable}`,
+          url: sharable
+        })
+        .then(() => {
+          console.log("shared")
+        })
+        .catch((e) => {
+          console.error(e);
+        })
     } else {
-      copy('https://example.com')
+      copy(sharable)
       toast("Link copied!", {
         autoClose: 1500,
         hideProgressBar: true,

@@ -1,3 +1,5 @@
+// import { queryDB } from "../../lib/funcs.ts"
+
 const { response } = require("express");
 const express = require("express");
 const app = express.Router();
@@ -10,21 +12,12 @@ app.route("/pomodb/:str").get(async (req, res) => {
   let db_connect = dbo.getDb();
   console.log(`request parameters: ${JSON.stringify(req.params)}`)
   console.log(`is raw config?: ${isRc(req.params.str)}`)
-  if (isRc === null) { return; }
   const START_TIME = Date.now();
-  // db_connect.collection("pomos").findOne(
-  //   {
-  //     [rcOrCode(req.params.str)]: req.params.str
-  //   },
-  //   (err, result) => {
-  //     if (err) throw err;
-  //     console.log(`${Date.now() - START_TIME}ms response time`)
-  //     res.json(result);
-  //     // db_connect.collection("pomos").explain()
-  //   }
-  // )
+
+  let rez;
+
   try {
-    const rez = await db_connect.collection("pomos").aggregate([
+    rez = await db_connect.collection("pomos").aggregate([
       {
         '$search': {
           'index': 'indecks',
@@ -36,17 +29,25 @@ app.route("/pomodb/:str").get(async (req, res) => {
           }
         }
       }
-    ]).toArray();
+    ]).toArray()
+    // ^ remove the toArray if possible
     console.log(`${Date.now() - START_TIME}ms response time`)
+    console.log(rez)
     // console.log(rez[0][isRc(req.params.str) ? "code" : "rawConfig"])
     res.json({
       response: rez[0][isRc(req.params.str) ? "code" : "rawConfig"],
-      isRc: !isRc(req.params.str)
+      isRc: !isRc(req.params.str),
     })
   } catch (e) {
     console.log("------ ERROR ------")
     console.error(e);
-    response.status(500).send({message: e.message})
+    if (isRc(req.params.str)) {
+      console.log('balls')
+      res.json({
+        response: req.params.str,
+        isRc: null,
+      })
+    }
   }
 });
 
@@ -66,7 +67,6 @@ app.route("/pomodb/add").post((req, response) => {
   );
 });
 
-// Determines whether the specified string is a raw config or code
 const isRc = (str) => {
   if (str.length === 32) {
     return true;

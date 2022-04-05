@@ -12,8 +12,14 @@ export interface ISettingsObj {
 
 export interface IDBResObj {
   ok: boolean;
-  body: Object;
+  body: {
+    response: string;
+    isRc: boolean | null;
+    // code: string;
+  };
 }
+
+export type TResClass = "code" | "rawConfig" | "dne" | "error" | null
 
 export type TParts = "work" | "break" | "longBreak";
 

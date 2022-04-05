@@ -1,4 +1,5 @@
-import { ISettingsObj, IDBResObj, themeFonts, DB_BASEURL } from "./constants";
+import { isConstructorDeclaration, validateLocaleAndSetLanguage } from "typescript";
+import { ISettingsObj, IDBResObj, TResClass, themeFonts, DB_BASEURL } from "./constants";
 
 // Converts a string in the HH:MM:SS format to an integer amount of seconds
 export const hmsToSec = (str: string): number => {
@@ -107,28 +108,78 @@ export const rawConfigToOptions = (rawConfig: string): ISettingsObj => {
   }
 }
 
-// Queries database to see if the raw config already exists in the database
+// Queries database
 // Returns an object with status and body if request succeeded
-// export const rawConfigToCode = async (rawConfig: string): Promise<IDBResObj> => {
+// export const queryDB = async (str: string): Promise<IDBResObj> => {
+//   let res;
+//   let response: IDBResObj = {
+//     ok: false,
+//     body: {
+//       response: "",
+//       isRc: null,
+//     }
+//   };
 
-//   const response = await fetch(`${DB_BASEURL}/pomodb/${rawConfig}`, { 
-//     method: "GET",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//   })
-
-//   const res = await response.json()
-
-//   return {
-//     "ok": response.ok,
-//     "body": response.ok ? res : null 
+//   try {
+//     res = await getQuery(str)
+//     console.log("YES")
+//     const validCode = generateCode(4)
+//     await postPair(validCode, res.response)
+//     return res;
+//   } catch (e) {
+//     // if (res.createNewCode) {
+//     //   console.log("YES2")
+//     //   const validCode = await generateValidCode()
+//     //   await postPair(validCode, res.response)
+//     // }
+//     return {
+//       ok: false,
+//       body: {
+//         response: "ERROR: Code doesn't exist",
+//         isRc: null,
+//       }
+//     }
 //   }
+//   console.log(response)
+//   return response;
 // }
 
-// Queries database to see if the raw config already exists in the database
-// Returns an object with status and body if request succeeded
-export const queryDB = async (str: string): Promise<IDBResObj> => {
+// Returns code from raw config. Checks for existing pairs, then uses that if exists 
+// or creates a new pair if it doesn't. Returns null if the POST request fails
+export const qDBRtoC = async (rc: string): Promise<string | null> => {
+  let res;
+  try {
+    res = await getQuery(rc)
+    console.log("figg")
+    console.log(res)
+    if (res.isRc === null) { throw new Error("Not an error, just need to post new code") }
+    return res.response;
+  } catch(e) {
+    console.error(e)
+    const validCode = generateCode(4)
+    try {
+      await postPair(validCode, rc)
+      return validCode;
+    } catch (e) {
+      console.error(e)
+    }
+    return null;
+  }
+}
+
+// Returns raw config from code. Returns null if no code exists.
+export const qDBCtoR = async (code: string): Promise<IDBResObj | null> => {
+  try {
+    const res = await getQuery(code)
+    console.log("queried database (code to raw config)")
+    return res[0].rawConfig
+  } catch (e) {
+    return null;
+  }
+}
+
+// Makes the actual GET request
+export const getQuery = async(str: string) => {
   const response = await fetch(`${DB_BASEURL}/pomodb/${str}`, { 
     method: "GET",
     headers: {
@@ -137,56 +188,67 @@ export const queryDB = async (str: string): Promise<IDBResObj> => {
   })
 
   const res = await response.json()
-  console.log()
 
-  return {
-    "ok": response.ok,
-    "body": response.ok ? res : null 
-  }
+  console.log(res)
+
+  return res;
+
+  // return {
+  //   "ok": res.ok,
+  //   "body": res.ok ? res.body : null
+  // }
 }
 
+// POSTs a code/raw config pair to the DB
 export const postPair = async (code: string, rawConfig: string) => {
   let restonse: any; 
+  console.log("postPair has been reached")
   const response = await fetch(`${DB_BASEURL}/pomodb/add`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify([rawConfig, code])
-  }).then((res) => {
-    console.log("POST request completed")
-    restonse = res.json()
-  }).catch(() => {
-    console.error("POST request did not complete")
   })
 
   // const res = await response.json();
-
-  console.log(restonse)
 }
 
-// Helper method: queries the database to check if RC already exists
-// Returns RC if found
-// const queryDBforRC = async (code: string) => {
-
+// Determines whether the specified string is a raw config or code
+// const classifyResponse = (str: string): TResClass => {
+//   if (str.length === 32) {
+//     return "rawConfig";
+//   } else if (str.length === 4) {
+//     return "code";
+//   } else if (str.slice(0, 5) === "ERROR") {
+//     return "error";
+//   }
+//   return null;
 // }
 
-// Helper method: queries the database to check if code already exists
-// Returns code if found
-// const queryDBforCode = async (rawConfig: string) => {
-//   await fetch (`${DB_BASEURL}/pomo/${rawConfig}`, {
-//     method: "GET",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//   })
-//   .then(res => {
-//     return res;
-//   })
-//   .catch(e => { console.error(e); return;})
+// Generates a VALID 4-digit code
+// export const generateValidCode = async (): Promise<string> => {
+//   let code = "default";
+//   while (1) {
+//     code = generateCode(4)
+//     console.log("Verifying code...")
+//     // const res = await queryDB(code);
+//     console.log("DB query completed.")
+//     //if (res.body.isRc === null) {
+//       console.log("Valid code has been found & verified.")
+//     //  break;
+//     //}
+//   }
+//   return code;
 // }
 
-// Generates a 4-digit code
-// const generateCode = (): string => {
 
-// }
+//: generates a 4-digit code
+export const generateCode = (len: number): string => {
+  let result = '';
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-~';
+  for (let i = 0; i < len; i++) {
+    result += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return result;
+}
