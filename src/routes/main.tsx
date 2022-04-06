@@ -44,7 +44,7 @@ export default function Main() {
           <div className='desc-text-any-device'>
             <h2 className='main-header'>Be productive on any device.<br />
               Even share your productivity with a friend.</h2>
-              <p>As a web app, Campanula can be used on any device with a browser and internet connection without the worry of having to download an app. Each pomodoro timer has its own custom link that can be opened on another device or shared with other people.</p>
+              <p>As a web app, Campanula can be used on any device with a browser and internet connection without the need to download an app. Each pomodoro timer has its own custom link that can be opened on any other device or shared with other people.</p>
           </div>
           <img className='desc-text-any-device-image' src="share.svg" alt="" />
         </div>
@@ -54,10 +54,10 @@ export default function Main() {
         <img className='full-width-svg' src="velvet-svg-top.svg" alt="" />
         <div className="intuitive">
           <div className="subcontainer">
-            <img className='desc-text-intuitive-image' src="intuitive.svg" alt="" />
+            <img className='desc-text-intuitive-image' src="intuitive-2.svg" alt="" />
             <div className='desc-text-intuitive'>
               <h2 className='main-header'>Enjoy an intuitive and elegant interface.</h2>
-              <p>Campanula has an easy-to-use but slick user interface that makes it easy for anyone to use. Just open a pre-made template or start with a fresh timer to get started. Customize anything you want by just changing some colors or some numbers.</p>
+              <p>Campanula has an easy-to-use but slick user interface that makes it easy for anyone to use. Just open a pre-made template or start with a fresh timer to get started— no sign-up is required! Customize anything you want about your timer just by changing some colors or numbers.</p>
             </div>
           </div>
         </div>
