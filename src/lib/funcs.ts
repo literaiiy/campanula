@@ -1,5 +1,5 @@
 import { isConstructorDeclaration, validateLocaleAndSetLanguage } from "typescript";
-import { ISettingsObj, IDBResObj, TResClass, themeFonts, DB_BASEURL } from "./constants";
+import { ISettingsObj, IDBResObj, TResClass, themeFonts, DB_BASEURL, defaultOptions } from "./constants";
 
 // Converts a string in the HH:MM:SS format to an integer amount of seconds
 export const hmsToSec = (str: string): number => {
@@ -96,7 +96,8 @@ export const optionsToRawConfig = (options: ISettingsObj): string => {
 }
 
 // Convert raw config string to options object
-export const rawConfigToOptions = (rawConfig: string): ISettingsObj => {
+export const rawConfigToOptions = (rawConfig: string | null): ISettingsObj => {
+  if (rawConfig === null) { return defaultOptions; }
   return {
     work: +rawConfig.slice(0, 6),
     break: +rawConfig.slice(6, 12),

@@ -27,7 +27,7 @@ export default function Pomo() {
       if (params.id) {
       let rc = await qDBCtoR(params.id)
       console.log(rc)
-      setOptions(rawConfigToOptions("" + rc))
+      setOptions(rawConfigToOptions(rc))
     }}
 
     fn()
