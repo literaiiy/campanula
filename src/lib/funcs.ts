@@ -108,49 +108,12 @@ export const rawConfigToOptions = (rawConfig: string): ISettingsObj => {
   }
 }
 
-// Queries database
-// Returns an object with status and body if request succeeded
-// export const queryDB = async (str: string): Promise<IDBResObj> => {
-//   let res;
-//   let response: IDBResObj = {
-//     ok: false,
-//     body: {
-//       response: "",
-//       isRc: null,
-//     }
-//   };
-
-//   try {
-//     res = await getQuery(str)
-//     console.log("YES")
-//     const validCode = generateCode(4)
-//     await postPair(validCode, res.response)
-//     return res;
-//   } catch (e) {
-//     // if (res.createNewCode) {
-//     //   console.log("YES2")
-//     //   const validCode = await generateValidCode()
-//     //   await postPair(validCode, res.response)
-//     // }
-//     return {
-//       ok: false,
-//       body: {
-//         response: "ERROR: Code doesn't exist",
-//         isRc: null,
-//       }
-//     }
-//   }
-//   console.log(response)
-//   return response;
-// }
-
 // Returns code from raw config. Checks for existing pairs, then uses that if exists 
 // or creates a new pair if it doesn't. Returns null if the POST request fails
 export const qDBRtoC = async (rc: string): Promise<string | null> => {
   let res;
   try {
     res = await getQuery(rc)
-    console.log("figg")
     console.log(res)
     if (res.isRc === null) { throw new Error("Not an error, just need to post new code") }
     return res.response;
@@ -168,12 +131,13 @@ export const qDBRtoC = async (rc: string): Promise<string | null> => {
 }
 
 // Returns raw config from code. Returns null if no code exists.
-export const qDBCtoR = async (code: string): Promise<IDBResObj | null> => {
+export const qDBCtoR = async (code: string): Promise<string | null> => {
   try {
     const res = await getQuery(code)
     console.log("queried database (code to raw config)")
-    return res[0].rawConfig
+    return res.response
   } catch (e) {
+    console.error(e)
     return null;
   }
 }

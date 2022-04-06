@@ -1,23 +1,19 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Timer from '../components/pomo/timer/Timer';
 import Settings from '../components/pomo/Settings';
 import ShareMenu from '../components/pomo/ShareMenu';
 import { Helmet } from 'react-helmet';
 import "../styles/pomo.scss"
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { defaultOptions } from "../lib/constants";
-import { cAdjust, convertToCSSSafe, optionsToRawConfig } from '../lib/funcs';
+import { cAdjust, convertToCSSSafe, optionsToRawConfig, qDBCtoR, rawConfigToOptions } from '../lib/funcs';
 import { usePrevious } from '../lib/constants';
 import { ISettingsObj } from '../lib/constants';
 
 export default function Pomo() {
   const params = useParams();
+  let navigate = useNavigate();
   const [options, setOptions] = useState(defaultOptions);
-  // const prc = usePrevious(options);
-  // const rcChanged = optionsToRawConfig(prc || options) !== optionsToRawConfig(options)
-  // console.log(prc)
-  // console.log(options)
-  // console.log(rcChanged)
   
   const setOptionsHandler = (property: string, value: string | number): void => {
     setOptions({
@@ -25,6 +21,18 @@ export default function Pomo() {
       [property]: value,
     })
   }
+
+  useEffect(() => {
+    async function fn() {
+      if (params.id) {
+      let rc = await qDBCtoR(params.id)
+      console.log(rc)
+      setOptions(rawConfigToOptions("" + rc))
+    }}
+
+    fn()
+  }, [])
+
 
   return (
     <>
@@ -62,7 +70,7 @@ export default function Pomo() {
         `}</style>
       </Helmet>
       <section className="pomo-main">
-        <div><b>Code</b>: <span className="monospace">* {params.id} *, <div style={{wordBreak: "break-all"}}>{JSON.stringify(options)}</div></span></div>
+         {/*<div><b>Code</b>: <span className="monospace">{params.id}, <div style={{wordBreak: "break-all"}}>{JSON.stringify(options)}</div></span></div> */} 
         <Timer conf={options} />
         <Settings onUpdate={setOptionsHandler} defaultOptions={options}/>
         <hr className='short-hr'/>
