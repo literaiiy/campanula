@@ -6,20 +6,48 @@
   "nodes": [
     {
       "translation": [
-		0,0,0
+        0,
+        0,
+        0
       ],
       "scale": [
-        210,210,210
-
+        1,
+        1,
+        1
       ],
       "rotation": [
-		0.5,0.5,0.5,0.5
+        0,
+        -1.1102230246251565e-16,
+        0.7071067811865475,
+        0.7071067811865476
+      ],
+      "name": "tomato - baked",
+      "children": [
+        1
+      ]
+    },
+    {
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        210,
+        210,
+        210
+      ],
+      "rotation": [
+        0.5,
+        0.5,
+        0.5,
+        0.5
       ],
       "name": "Sphere.016",
       "children": [
-        1,
         2,
-        3
+        3,
+        4
       ]
     },
     {
@@ -59,7 +87,7 @@
         0,
         1
       ],
-      "name": "Sphere.016",
+      "name": "Sphere.016 1",
       "mesh": 1
     },
     {
@@ -84,9 +112,9 @@
     },
     {
       "translation": [
-        -0.012037319068425248,
-        0.33094522734679255,
-        -0.06075722336792799
+        3.6976788399099063,
+        4.79935463770119,
+        -9.78898830828119
       ],
       "scale": [
         1,
@@ -94,10 +122,10 @@
         1
       ],
       "rotation": [
-        -0.008444749873231905,
-        -0.7792125220127076,
-        -0.6266149176214743,
-        0.010501273846886927
+        0.02659874917276306,
+        -0.9732218395911434,
+        -0.1706421591483196,
+        -0.151700398834264
       ],
       "name": "Camera",
       "camera": 0
@@ -112,8 +140,8 @@
           0.0006381828421670219,
           1
         ],
-        "metallicFactor": 0.16,
-       "roughnessFactor": 0.2
+        "metallicFactor": 0.68,
+        "roughnessFactor": 0.9
       },
       "name": "Xena",
       "emissiveFactor": [
@@ -129,11 +157,11 @@
       "pbrMetallicRoughness": {
         "baseColorFactor": [
           1,
-          0.017936433339950233,
-          0.017936433339950233,
+          0.017936433339950226,
+          0.017936433339950226,
           1
         ],
-        "metallicFactor": 0.2,
+        "metallicFactor": 0.68,
         "roughnessFactor": 0.9
       },
       "name": "1texture.012",
@@ -149,13 +177,13 @@
     {
       "pbrMetallicRoughness": {
         "baseColorFactor": [
-          0.39929329990267437,
-          0.14497212559723088,
-          0.020951131914781092,
+          0.012663720031582098,
+          0.3111804990579844,
+          0.0006381828421670219,
           1
         ],
-        "metallicFactor": 0.59,
-        "roughnessFactor": 0.41
+        "metallicFactor": 0.68,
+        "roughnessFactor": 0.9
       },
       "name": "1texture.011",
       "emissiveFactor": [
@@ -217,14 +245,14 @@
       "bufferView": 0,
       "byteOffset": 0,
       "componentType": 5125,
-      "count": 162,
+      "count": 261,
       "type": "SCALAR"
     },
     {
       "bufferView": 1,
       "byteOffset": 0,
       "componentType": 5126,
-      "count": 118,
+      "count": 197,
       "max": [
         0.007062301505357027,
         0.00846441276371479,
@@ -241,32 +269,32 @@
       "bufferView": 2,
       "byteOffset": 0,
       "componentType": 5126,
-      "count": 118,
+      "count": 197,
       "type": "VEC3"
     },
     {
       "bufferView": 3,
       "byteOffset": 0,
       "componentType": 5126,
-      "count": 118,
+      "count": 197,
       "type": "VEC2"
     },
     {
       "bufferView": 4,
       "byteOffset": 0,
       "componentType": 5125,
-      "count": 702,
+      "count": 591,
       "type": "SCALAR"
     },
     {
       "bufferView": 5,
       "byteOffset": 0,
       "componentType": 5126,
-      "count": 502,
+      "count": 421,
       "max": [
         0.009848075918853283,
         0.009848077781498432,
-        0.007774974685162306
+        0.007374259643256664
       ],
       "min": [
         -0.009848074987530708,
@@ -279,14 +307,14 @@
       "bufferView": 6,
       "byteOffset": 0,
       "componentType": 5126,
-      "count": 502,
+      "count": 421,
       "type": "VEC3"
     },
     {
       "bufferView": 7,
       "byteOffset": 0,
       "componentType": 5126,
-      "count": 502,
+      "count": 421,
       "type": "VEC2"
     },
     {
@@ -332,72 +360,72 @@
     {
       "buffer": 0,
       "byteOffset": 0,
-      "byteLength": 648,
+      "byteLength": 1044,
       "target": 34963
     },
     {
       "buffer": 0,
-      "byteOffset": 648,
-      "byteLength": 1416,
+      "byteOffset": 1044,
+      "byteLength": 2364,
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteOffset": 2064,
-      "byteLength": 1416,
+      "byteOffset": 3408,
+      "byteLength": 2364,
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteOffset": 3480,
-      "byteLength": 944,
+      "byteOffset": 5772,
+      "byteLength": 1576,
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteOffset": 4424,
-      "byteLength": 2808,
+      "byteOffset": 7348,
+      "byteLength": 2364,
       "target": 34963
     },
     {
       "buffer": 0,
-      "byteOffset": 7232,
-      "byteLength": 6024,
+      "byteOffset": 9712,
+      "byteLength": 5052,
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteOffset": 13256,
-      "byteLength": 6024,
+      "byteOffset": 14764,
+      "byteLength": 5052,
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteOffset": 19280,
-      "byteLength": 4016,
+      "byteOffset": 19816,
+      "byteLength": 3368,
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteOffset": 23296,
+      "byteOffset": 23184,
       "byteLength": 528,
       "target": 34963
     },
     {
       "buffer": 0,
-      "byteOffset": 23824,
+      "byteOffset": 23712,
       "byteLength": 960,
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteOffset": 24784,
+      "byteOffset": 24672,
       "byteLength": 960,
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteOffset": 25744,
+      "byteOffset": 25632,
       "byteLength": 640,
       "target": 34962
     }
@@ -407,13 +435,13 @@
       "name": "Camera",
       "type": "perspective",
       "extras": {
-        "targetDistance": 0.22393254014485917
+        "targetDistance": 7.19788574511266
       },
       "perspective": {
-        "aspectRatio": 2.454761904761905,
+        "aspectRatio": 1.8023809523809524,
         "yfov": 0.6108652381980153,
-        "zfar": 28.472283753880035,
-        "znear": 0.010668864506885268
+        "zfar": 293.50900921520264,
+        "znear": 0.03159281651698968
       }
     }
   ],
@@ -422,7 +450,7 @@
     {
       "nodes": [
         0,
-        4
+        5
       ],
       "name": "Project Name"
     }
@@ -432,7 +460,7 @@
   ],
   "buffers": [
     {
-      "byteLength": 26384,
+      "byteLength": 26272,
       "uri": "ProjectName.bin"
     }
   ]

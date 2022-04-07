@@ -27,7 +27,14 @@ export default function SettingsOption(props: GenericProps) {
 }
 
 export function SetOpHMS(props: Props): JSX.Element {
-  const [HMSInputValue, setHMSInputValue] = useState(props.def);
+  console.log(secToHMS(props.val, true))
+  const [HMSInputValue, setHMSInputValue] = useState(secToHMS(props.val, true) || props.def);
+
+  useEffect(() => {
+    console.log(HMSInputValue)
+    console.log(secToHMS(props.val, true))
+    setHMSInputValue(secToHMS(props.val, true))
+  }, [props.val])
 
   // Handle change in the work/break/long break inputs
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,13 +62,13 @@ export function SetOpHMS(props: Props): JSX.Element {
       />}
       id={props.id}
       label={props.label}
-      val={props.val}
+      // val={props.val}
     />
   )
 }
 
 export function SetOpInteger(props: Props): JSX.Element {
-  const [intInputValue, setIntInputValue] = useState(props.def);
+  const [intInputValue, setIntInputValue] = useState(props.val || props.def);
 
   // Handle change in pomodoro input
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -94,7 +101,7 @@ export function SetOpInteger(props: Props): JSX.Element {
 }
 
 export function SetOpColor(props: Props): JSX.Element {
-  const [color, setColor] = useState(props.def)
+  const [color, setColor] = useState(props.val || props.def)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setColor(e.target.value)
@@ -119,7 +126,7 @@ export function SetOpColor(props: Props): JSX.Element {
 }
 
 export function SetOpText(props: Props): JSX.Element {
-  const [font, setFont] = useState(props.def)
+  const [font, setFont] = useState(props.val || props.def)
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {
     setFont(e.target.value)

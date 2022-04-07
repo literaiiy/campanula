@@ -25,8 +25,11 @@ export default function ShareMenu(props: Props): JSX.Element {
       console.warn("Querying database...")
       const res = await qDBRtoC(props.rawConfig)
       console.log(res)
+      
+      console.log("c")
+      // prevRawConfig = props.rawConfig
+      console.log("b")
       setCode(res || "default")
-      prevRawConfig = props.rawConfig
     }
     console.log("About to share")
     share(code)

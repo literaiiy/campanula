@@ -14,7 +14,7 @@ export default function ThreeJSTomato() {
 
   })
 
-  const tomato = useLoader(GLTFLoader, "/tomato.gltf")
+  const tomato = useLoader(GLTFLoader, "/tomato/tomato.gltf")
   return (
     <mesh ref={mesh}>
       <primitive object={tomato.scene} />

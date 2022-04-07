@@ -19,6 +19,8 @@ export default function Pomo() {
     })
   }
 
+  console.log(options)
+
   useEffect(() => {
     async function fn() {
       if (params.id) {
@@ -26,8 +28,7 @@ export default function Pomo() {
       console.log(rc)
       setOptions(rawConfigToOptions(rc))
     }}
-
-    fn()
+    fn();
   }, [])
 
 

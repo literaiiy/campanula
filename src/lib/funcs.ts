@@ -114,7 +114,6 @@ export const qDBRtoC = async (rc: string): Promise<string | null> => {
   let res;
   try {
     res = await getQuery(rc)
-    console.log(res)
     if (res.isRc === null) { throw new Error("Not an error, just need to post new code") }
     return res.response;
   } catch(e) {
