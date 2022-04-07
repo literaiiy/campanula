@@ -1,23 +1,7 @@
-import { Helmet } from "react-helmet"
-import "../styles/privacy.scss"
-import { /*queryDB,*/ postPair } from "../lib/funcs";
+import { Helmet } from "react-helmet";
+import "../styles/privacy.scss";
 
 export default function Privacy() {
-
-  // async function handleDBClick() {
-  //   console.log("DB testing...")
-  //   const suckIt = prompt("Query")
-  //   const rawponse = await queryDB("" + suckIt);
-  //   if (!rawponse.ok) { return }
-  //   console.log(rawponse)
-  //   console.log("this may have worked")
-  // }
-
-  const handleDBClick2 = async () => {
-    console.log('DB POST testing (disabled)')
-
-    // await postPair(makeid(4), makeid(32))
-  }
 
   return (
     <>
@@ -44,11 +28,6 @@ export default function Privacy() {
           <p>If you have any further inquiries regarding this privacy policy, contact us via the form located at <a href="https://literaiiy.me">literaiiy.me</a>.</p>
         </div>
       </section>
-
-      {/* <button style={{width: "12rem", height:"6rem", alignSelf:"center", margin:"1rem"}} onClick={handleDBClick}>DB test</button> */}
-      {/* <button style={{width: "12rem", height:"6rem", alignSelf:"center", margin:"1rem"}} onClick={handleDBClick2}>DB test 2</button> */}
-      {/* <button style={{backgroundColor: "red", width: "12rem", height:"6rem", alignSelf:"center", margin:"1rem"}} onClick={handleDBClick3}>Flood</button> */}
-
     </>
   )
 }

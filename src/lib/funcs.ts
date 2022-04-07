@@ -1,5 +1,4 @@
-import { isConstructorDeclaration, validateLocaleAndSetLanguage } from "typescript";
-import { ISettingsObj, IDBResObj, TResClass, themeFonts, DB_BASEURL, defaultOptions } from "./constants";
+import { DB_BASEURL, defaultOptions, ISettingsObj, themeFonts } from "./constants";
 
 // Converts a string in the HH:MM:SS format to an integer amount of seconds
 export const hmsToSec = (str: string): number => {
@@ -166,9 +165,8 @@ export const getQuery = async(str: string) => {
 
 // POSTs a code/raw config pair to the DB
 export const postPair = async (code: string, rawConfig: string) => {
-  let restonse: any; 
   console.log("postPair has been reached")
-  const response = await fetch(`${DB_BASEURL}/pomodb/add`, {
+  await fetch(`${DB_BASEURL}/pomodb/add`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

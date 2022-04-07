@@ -1,4 +1,9 @@
 import { Link } from "react-router-dom"
+import { Canvas, useFrame } from "@react-three/fiber"
+
+import { OrbitControls } from "@react-three/drei"
+import { Suspense } from "react"
+import ThreeJSTomato from "../components/ThreeJSTomato"
 import "../styles/main.scss"
 
 export default function Main() {
@@ -9,7 +14,15 @@ export default function Main() {
           <h1 className='main-headline'>A completely <span className="gradient-customizable">customizable</span> pomodoro experience.</h1>
           <h2 className='main-subheadline'>Welcome to Campanula.</h2>
         </div>
-        <img className='main-tomato' src="tomate.png" alt="Tomato" />
+        <div className="main-tomato">
+          <Canvas>
+            <Suspense fallback={null}>
+              <ThreeJSTomato />
+              <ambientLight intensity={0.3}/>
+              <directionalLight color="white" intensity={1} position={[-2,2,2]} />
+            </Suspense>
+          </Canvas>
+        </div>
       </section>
 
       <hr className='short-hr'/>

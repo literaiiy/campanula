@@ -1,11 +1,11 @@
-import { ShareFill } from "react-bootstrap-icons"
-import { useState } from "react";
-import copy from 'copy-to-clipboard'
-import { Slide, ToastContainer, toast } from 'react-toastify'
+import copy from 'copy-to-clipboard';
+import { useEffect, useState } from "react";
+import { ShareFill } from "react-bootstrap-icons";
+import { Slide, toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import "../../styles/ShareMenu.scss"
-import { usePrevious } from '../../lib/constants'
-import { qDBCtoR, qDBRtoC } from '../../lib/funcs'
+import { usePrevious } from '../../lib/constants';
+import { qDBRtoC } from '../../lib/funcs';
+import "../../styles/ShareMenu.scss";
 
 interface Props {
   rawConfig: string;
@@ -25,14 +25,19 @@ export default function ShareMenu(props: Props): JSX.Element {
       console.warn("Querying database...")
       const res = await qDBRtoC(props.rawConfig)
       console.log(res)
+      setCode(res || "default")
       prevRawConfig = props.rawConfig
-
     }
+    console.log("About to share")
     share(code)
   }
 
+  // useEffect(() => {
+
+  // }, [code])
+
   const share = (code?: string): void => {
-    const sharable = "" + code
+    const sharable = window.location.protocol + "//" + window.location.hostname + "/pomo/" + code
     if (navigator.share) {
       navigator
         .share({

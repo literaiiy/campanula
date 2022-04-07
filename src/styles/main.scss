@@ -7,7 +7,7 @@
   justify-self: center;
   justify-content: center;
   flex-wrap: nowrap;
-  background-image: linear-gradient(to right, rgba(255,255,255,100) 30%, rgba(255,255,255,0));
+  background-image: linear-gradient(to right, rgba(255,255,255,30) 30%, rgba(255, 255, 255, 0));
   & > * {
     grid-column-start: 1;
     grid-row-start: 1;
@@ -30,13 +30,28 @@
   font-weight: 100;
 }
 
+@keyframes tomatoFade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .main-tomato {
   justify-self: end;
   max-height: 50rem;
+  height: 100%;
   max-width: 50rem;
   width: 100vw;
   z-index: -3;
   right: 0;
+  opacity: 0;
+  animation: tomatoFade ease 2s;
+  animation-delay: 0.5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
 }
 
 .gradient-customizable {

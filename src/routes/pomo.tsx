@@ -1,18 +1,15 @@
-import { useParams, useNavigate } from 'react-router-dom';
-import Timer from '../components/pomo/timer/Timer';
+import { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet';
+import { useParams } from 'react-router-dom';
 import Settings from '../components/pomo/Settings';
 import ShareMenu from '../components/pomo/ShareMenu';
-import { Helmet } from 'react-helmet';
-import "../styles/pomo.scss"
-import { useEffect, useState } from 'react';
+import Timer from '../components/pomo/timer/Timer';
 import { defaultOptions } from "../lib/constants";
 import { cAdjust, convertToCSSSafe, optionsToRawConfig, qDBCtoR, rawConfigToOptions } from '../lib/funcs';
-import { usePrevious } from '../lib/constants';
-import { ISettingsObj } from '../lib/constants';
+import "../styles/pomo.scss";
 
 export default function Pomo() {
   const params = useParams();
-  let navigate = useNavigate();
   const [options, setOptions] = useState(defaultOptions);
   
   const setOptionsHandler = (property: string, value: string | number): void => {
