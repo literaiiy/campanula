@@ -18,11 +18,11 @@ export default function Help() {
           <p>Cirillio and savvy followers of the Pomodoro method generally encourage the use of a low-tech solution (Cirillio originally used a kitchen tomato timer while creating this method; hence— pomodoro— the Italian word for tomato), so Campanula intends to make the process of using the method as non-intrusive and non-distracting as possible while allowing creative and functional freedom where it should be allowed.</p>
           <h2>Getting started</h2>
           <p>To get started with creating a timer, you can either click the top right "GET STARTED" button or scroll to the bottom of the homepage and select either "BROWSE TEMPLATES" or "CREATE A TIMER". Clicking one of the former two will allow you to choose from a selection of pre-made templates so you can get started right away or customize a little. Clicking the "CREATE A TIMER" button will take you directly to the default template.</p>
-          <img src="/help/how-to-use-1.jpg" alt="A screenshot of the timer creation page." />
+          <img src="/help/how-to-use-1.webp" alt="A screenshot of the timer creation page." />
           <p>From here, you will be able to customize the length of the work, break, and long break sessions, the amount of pomodoros before a long break, the background and accent colors, and the font.</p>
           <h2>Running the timer</h2>
           <p>Once you have created the timer, you can run it straight away by clicking the play button. The first pomdoro will start to count down, so get working!</p>
-          <img src="/help/how-to-use-2.jpg" alt="A screenshot of the timer running on the third pomodoro." />
+          <img src="/help/how-to-use-2.webp" alt="A screenshot of the timer running on the third pomodoro." />
           <p>After each session's countdown is completed, you will hear a ding signifying the end of the current session and the start of the next one. Half of the current pomodoro (represented as one of the circles above the countdown) will fill up. If the circle is halfway filled, the break session is starting. If the circle is completely filled, the next pomodoro is starting. </p>
           <p>If you want, you can also change any of the settings while the timer is counting down.</p>
           <h2>Sharing your timer</h2>
