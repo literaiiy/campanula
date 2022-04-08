@@ -17,7 +17,10 @@ export default function Nav(): JSX.Element {
           <span className="velvet">U</span>
         </div>
       </Link>
-      <Link className='button' to="/pomo">Get started</Link>
+      <div className='button-row'>
+        <Link className='button-alt' to='/help'>?</Link>
+        <Link className='button' to="/pomo">Get started</Link>
+      </div>
     </nav>
   )
 }

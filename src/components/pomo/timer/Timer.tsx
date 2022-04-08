@@ -90,7 +90,7 @@ export default function Timer(props: Props) {
 
   return (
     <div className='timer'>
-      <div>{part}</div>
+      {/* <div>{part}</div> */}
       <SetCount currentSet={set} currentPart={part} pomodoros={props.conf.pomodoros}/>
       <Countdown cdTime={cdTime}/>
       <StartPause onUpdate={updateYeah} playing={!playing}/>

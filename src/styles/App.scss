@@ -190,6 +190,24 @@ input {
   }
 }
 
+.button-alt {
+  color: u.$cream !important;
+  border: solid 2px u.$cream;
+  line-height: 1.75rem;
+  min-width: 1.75rem;
+  text-align: center;
+  font-weight: 600;
+  padding: 0.5rem;
+  text-transform: uppercase;
+  // font-family: "Azeret Mono", monospace;
+  transition: u.$defTransition;
+  background-color: u.$purple;
+  box-shadow: -0.25rem 0.25rem u.$purple;
+  &:hover {
+    box-shadow: -0.5rem 0.375rem u.$purple;
+  }
+}
+
 .scale-object {
   width: min(80rem, 95%);
   justify-self: center;

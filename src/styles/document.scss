@@ -1,6 +1,8 @@
 @use "utilities/utils" as u;
 
-.privacy-div {
+.content {
+  display: flex;
+  flex-direction: column;
   max-width: min(95vw, 80rem);
   & h1, h2 {
     margin: 1rem 0.5rem 0.25rem 0.5rem;
@@ -8,9 +10,14 @@
   & p {
     margin: 0rem 0.5rem 1rem 0.5rem;
   }
+  & img {
+    max-width: 95vw;
+    margin: auto;
+    padding: 1rem 0;
+  }
 }
 
-.privacy-main {
+.main {
   display: flex;
   flex-direction: column;
   align-items: center;

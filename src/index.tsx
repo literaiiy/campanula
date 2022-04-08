@@ -9,6 +9,7 @@ import Pomo from "./routes/pomo";
 import NotFound from "./routes/404";
 import Main from "./routes/main";
 import Privacy from './routes/privacy';
+import Help from './routes/help';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -22,6 +23,7 @@ ReactDOM.render(
         </Route>
         <Route path="*" element={<NotFound />}></Route>
         <Route path="/privacy" element={<Privacy />}></Route>
+        <Route path="/help" element={<Help />}></Route>
       </Route>
     </Routes>
     </BrowserRouter>

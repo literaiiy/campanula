@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet";
-import "../styles/privacy.scss";
+import "../styles/document.scss";
 
 export default function Privacy() {
 
@@ -8,8 +8,8 @@ export default function Privacy() {
       <Helmet>
         <title>Privacy Policy - Campanula</title>
       </Helmet>
-      <section className='privacy-main'>
-        <div className="privacy-div">
+      <section className='main'>
+        <div className="content">
           <h1>Privacy Policy</h1>
           <p>Last updated February 21, 2022</p>
           <p>Welcome to Campanula's privacy policy. Outlined in this document are the policies and procedures that this website ("Campanula") follows on the disclosure of the user's ("your") personal information while using the Campanula service.</p>
