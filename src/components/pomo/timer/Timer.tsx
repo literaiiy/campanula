@@ -64,22 +64,29 @@ export default function Timer(props: Props) {
     if (prevLBTime !== props.conf.longBreak && part === "longBreak") {
       setCdTime(props.conf.longBreak)
     }
-  }, [prevWTime, prevBTime, prevLBTime, props.conf.work, props.conf.break, props.conf.longBreak])
+  }, [prevWTime, prevBTime, prevLBTime, props.conf.work, props.conf.break, props.conf.longBreak, part])
+  
+  let baseline: number = Date.now() % 1000;
+
+  useEffect(() => {
+    console.log("PLAYITNG THOUCHASD")
+    baseline = Date.now() % 1000;
+  }, [playing])
   
   // The actual countdown
-  useEffect(() => {
-    let interval: NodeJS.Timer;
+    useEffect(() => {
+      if (!cdTime) return;
 
-    if (!cdTime) return;
+      let int: any;
 
-    if (playing) {
-      interval = setInterval(() => {
-        setCdTime(cdTime - 1)
-      }, 1000)
-    }
+      if (playing) {
+        int = setInterval(() => {
+          setCdTime(cdTime - 1);
+        }, 1000 - baseline)
+      }
 
-    return () => clearInterval(interval)
-  }, [cdTime, playing])
+      return () => {clearInterval(int)}
+    }, [cdTime, playing, baseline])
 
   return (
     <div className='timer'>

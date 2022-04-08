@@ -49,30 +49,15 @@ export const formatHMS = (v: string): string => {
 }
 
 // Darken a hex-formatted color string
-export const cAdjust = (color: string, percent: number): string => {
-  let hex = color;
+export const cAdjust = (color: string, amount: number): string => {
+  const clamp = (val: number) => Math.min(Math.max(val, 0), 0xFF)
+  const fill = (str: string) => ('00' + str).slice(-2)
 
-  // strip the leading # if it's there
-  hex = hex.replace(/^\s*#|\s*$/g, "");
-
-  // convert 3 char codes --> 6, e.g. `E0F` --> `EE00FF`
-  if (hex.length === 3) {
-      hex = hex.replace(/(.)/g, "$1$1");
-  }
-
-  let r = parseInt(hex.slice(0, 2), 16);
-  let g = parseInt(hex.slice(2, 4), 16);
-  let b = parseInt(hex.slice(4, 6), 16);
-
-  const calculatedPercent = (100 + percent) / 100;
-
-  r = Math.round(Math.min(255, Math.max(0, r * calculatedPercent)));
-  g = Math.round(Math.min(255, Math.max(0, g * calculatedPercent)));
-  b = Math.round(Math.min(255, Math.max(0, b * calculatedPercent)));
-
-  return `#${r.toString(16).toUpperCase()}${g.toString(16).toUpperCase()}${b
-      .toString(16)
-      .toUpperCase()}`;
+  const num = parseInt(color.slice(1), 16)
+  const red = clamp((num >> 16) + amount)
+  const green = clamp(((num >> 8) & 0x00FF) + amount)
+  const blue = clamp((num & 0x0000FF) + amount)
+  return '#' + fill(red.toString(16)) + fill(green.toString(16)) + fill(blue.toString(16))
 }
 
 // Convert to a CSS-safe font name
@@ -176,35 +161,6 @@ export const postPair = async (code: string, rawConfig: string) => {
   // const res = await response.json();
 }
 
-// Determines whether the specified string is a raw config or code
-// const classifyResponse = (str: string): TResClass => {
-//   if (str.length === 32) {
-//     return "rawConfig";
-//   } else if (str.length === 4) {
-//     return "code";
-//   } else if (str.slice(0, 5) === "ERROR") {
-//     return "error";
-//   }
-//   return null;
-// }
-
-// Generates a VALID 4-digit code
-// export const generateValidCode = async (): Promise<string> => {
-//   let code = "default";
-//   while (1) {
-//     code = generateCode(4)
-//     console.log("Verifying code...")
-//     // const res = await queryDB(code);
-//     console.log("DB query completed.")
-//     //if (res.body.isRc === null) {
-//       console.log("Valid code has been found & verified.")
-//     //  break;
-//     //}
-//   }
-//   return code;
-// }
-
-
 //: generates a 4-digit code
 export const generateCode = (len: number): string => {
   let result = '';
@@ -213,4 +169,43 @@ export const generateCode = (len: number): string => {
     result += chars.charAt(Math.floor(Math.random() * chars.length));
   }
   return result;
+}
+
+export class Thyme {
+  private totalTicks = 0;
+  private timer: any;
+  private startTime: number | undefined;
+  private currentTime: number | undefined;
+  private deltaTime = 0;
+
+  constructor(public callback: (timer: Thyme) => void) {}
+
+  public run = () => {
+    let lastTime = this.currentTime;
+    this.currentTime = Date.now();
+
+    if (!this.startTime) {
+      this.startTime = this.currentTime;
+    }
+    if (lastTime !== undefined) {
+      this.deltaTime = (this.currentTime - lastTime);
+    }
+
+    this.callback(this);
+
+    let nextTick = 1000 - (this.currentTime - (this.startTime + (this.totalTicks * 1000)));
+    console.log(nextTick)
+    this.totalTicks++;
+
+    this.timer = setTimeout(() => {
+      this.run();
+    }, nextTick);
+  }
+
+  public stop = ()=> {
+    if (this.timer !== undefined) {
+      clearTimeout(this.timer);
+      this.timer = undefined;
+    }
+  }
 }

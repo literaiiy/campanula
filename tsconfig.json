@@ -18,9 +18,10 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
+    // "noImplicitThis": false,
     "jsx": "react-jsx"
   },
   "include": [
     "src"
-  ]
+, "src/lib/funcs.ts", "public/scrikp.js"  ]
 }

@@ -39,8 +39,8 @@ export default function Pomo() {
         <style>{`
           :root {
             --bg: ${options.bg_color};
-            --bg2: ${cAdjust(options.bg_color, -5)};
-            --bg3: ${cAdjust(options.bg_color, -15)};
+            --bg2: ${cAdjust(options.bg_color, -10)};
+            --bg3: ${cAdjust(options.bg_color, -20)};
             --acc: ${options.text_color};
           }
           .campanula-logo * {
