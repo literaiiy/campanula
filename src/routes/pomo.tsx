@@ -24,10 +24,11 @@ export default function Pomo() {
   useEffect(() => {
     async function fn() {
       if (params.id) {
-      let rc = await qDBCtoR(params.id)
-      console.log(rc)
-      setOptions(rawConfigToOptions(rc))
-    }}
+        let rc = await qDBCtoR(params.id)
+        console.log(rc)
+        setOptions(rawConfigToOptions(rc))
+      }
+    }
     fn();
   }, [])
 

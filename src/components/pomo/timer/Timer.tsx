@@ -69,7 +69,6 @@ export default function Timer(props: Props) {
   let baseline: number = Date.now() % 1000;
 
   useEffect(() => {
-    console.log("PLAYITNG THOUCHASD")
     baseline = Date.now() % 1000;
   }, [playing])
   

@@ -1,5 +1,5 @@
 import copy from 'copy-to-clipboard';
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ShareFill } from "react-bootstrap-icons";
 import { Slide, toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -7,11 +7,7 @@ import { usePrevious } from '../../lib/constants';
 import { qDBRtoC } from '../../lib/funcs';
 import "../../styles/ShareMenu.scss";
 
-interface Props {
-  rawConfig: string;
-}
-
-export default function ShareMenu(props: Props): JSX.Element {
+export default function ShareMenu(props: { rawConfig: string}): JSX.Element {
   
   console.log("%c ShareMenu.tsx has rerendered", "color:goldenrod; font-weight: 900")
   let prevRawConfig: string | undefined = usePrevious(props.rawConfig)
@@ -19,7 +15,7 @@ export default function ShareMenu(props: Props): JSX.Element {
   console.log(prevRawConfig);
   console.log(props.rawConfig)
 
-  const handleShare = async () => {
+  const handleShare = async (): Promise<void> => {
     console.log(prevRawConfig, props.rawConfig)
     if (prevRawConfig !== props.rawConfig) {
       console.warn("Querying database...")
@@ -27,20 +23,14 @@ export default function ShareMenu(props: Props): JSX.Element {
       console.log(res)
       
       console.log("c")
-      // prevRawConfig = props.rawConfig
-      console.log("b")
       setCode(res || "default")
     }
     console.log("About to share")
     share(code)
   }
 
-  // useEffect(() => {
-
-  // }, [code])
-
   const share = (code?: string): void => {
-    const sharable = window.location.protocol + "//" + window.location.hostname + "/pomo/" + code
+    const sharable: string = window.location.protocol + "//" + window.location.hostname + "/pomo/" + code
     if (navigator.share) {
       navigator
         .share({

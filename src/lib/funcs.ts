@@ -1,4 +1,4 @@
-import { DB_BASEURL, defaultOptions, ISettingsObj, themeFonts } from "./constants";
+import { DB_BASEURL, defaultOptions, ISettingsObj, templates, templatesReversed, themeFonts } from "./constants";
 
 // Converts a string in the HH:MM:SS format to an integer amount of seconds
 export const hmsToSec = (str: string): number => {
@@ -97,6 +97,13 @@ export const rawConfigToOptions = (rawConfig: string | null): ISettingsObj => {
 // or creates a new pair if it doesn't. Returns null if the POST request fails
 export const qDBRtoC = async (rc: string): Promise<string | null> => {
   let res;
+
+  // Check if the RC is a template's RC
+  if (Object.keys(templatesReversed).includes(rc)) {
+    console.log('template reached, skipping DB')
+    return templatesReversed[rc];
+  }
+
   try {
     res = await getQuery(rc)
     if (res.isRc === null) { throw new Error("Not an error, just need to post new code") }
@@ -116,6 +123,13 @@ export const qDBRtoC = async (rc: string): Promise<string | null> => {
 
 // Returns raw config from code. Returns null if no code exists.
 export const qDBCtoR = async (code: string): Promise<string | null> => {
+  
+  // Check if the code is a template's code
+  if (Object.keys(templates).includes(code)) {
+    console.log('2: template reached, skipping DB')
+    return templates[code]
+  }
+  
   try {
     const res = await getQuery(code)
     console.log("queried database (code to raw config)")
@@ -169,43 +183,4 @@ export const generateCode = (len: number): string => {
     result += chars.charAt(Math.floor(Math.random() * chars.length));
   }
   return result;
-}
-
-export class Thyme {
-  private totalTicks = 0;
-  private timer: any;
-  private startTime: number | undefined;
-  private currentTime: number | undefined;
-  private deltaTime = 0;
-
-  constructor(public callback: (timer: Thyme) => void) {}
-
-  public run = () => {
-    let lastTime = this.currentTime;
-    this.currentTime = Date.now();
-
-    if (!this.startTime) {
-      this.startTime = this.currentTime;
-    }
-    if (lastTime !== undefined) {
-      this.deltaTime = (this.currentTime - lastTime);
-    }
-
-    this.callback(this);
-
-    let nextTick = 1000 - (this.currentTime - (this.startTime + (this.totalTicks * 1000)));
-    console.log(nextTick)
-    this.totalTicks++;
-
-    this.timer = setTimeout(() => {
-      this.run();
-    }, nextTick);
-  }
-
-  public stop = ()=> {
-    if (this.timer !== undefined) {
-      clearTimeout(this.timer);
-      this.timer = undefined;
-    }
-  }
 }
