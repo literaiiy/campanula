@@ -70,7 +70,7 @@ app.route("/pomodb/add").post((req, response) => {
 const isRc = (str) => {
   if (str.length === 32) {
     return true;
-  } else if (str.length === 4) {
+  } else if (str.length === 6) {
     return false;
   }
   return null;

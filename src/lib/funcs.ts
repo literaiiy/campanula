@@ -113,7 +113,7 @@ export const qDBRtoC = async (rc: string): Promise<string | null> => {
     return res.response;
   } catch(e) {
     console.error(e)
-    const validCode = generateCode(4)
+    const validCode = generateCode(6)
     try {
       console.log('asdasd')
       postPair(validCode, rc)
