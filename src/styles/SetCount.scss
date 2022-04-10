@@ -7,7 +7,16 @@
 .set-progress-circles {
   display: inline-flex;
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
   flex-direction: row;
   gap: 0.25rem 0.75rem;
+  height: 1.25rem;
+  & > span {
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    & > svg {
+    }
+  }
 }

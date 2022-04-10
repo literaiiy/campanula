@@ -29,13 +29,11 @@ app.route("/pomodb/:str").get(async (req, res) => {
           }
         }
       }
-    ]).toArray()
-    // ^ remove the toArray if possible
+    ])
     console.log(`${Date.now() - START_TIME}ms response time`)
     console.log(rez)
-    // console.log(rez[0][isRc(req.params.str) ? "code" : "rawConfig"])
     res.json({
-      response: rez[0][isRc(req.params.str) ? "code" : "rawConfig"],
+      response: rez[isRc(req.params.str) ? "code" : "rawConfig"],
       isRc: !isRc(req.params.str),
     })
   } catch (e) {
@@ -55,6 +53,7 @@ app.route("/pomodb/:str").get(async (req, res) => {
 app.route("/pomodb/add").post((req, response) => {
   let db_connect = dbo.getDb();
   console.log(req.body)
+
   db_connect.collection("pomos").insertOne(
     { 
       code: req.body[1],
@@ -65,6 +64,7 @@ app.route("/pomodb/add").post((req, response) => {
     //   response.json(res);
     // }
   );
+
 });
 
 const isRc = (str) => {

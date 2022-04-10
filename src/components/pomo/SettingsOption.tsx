@@ -26,13 +26,9 @@ export default function SettingsOption(props: GenericProps) {
   )
 }
 
-export function SetOpHMS(props: Props): JSX.Element {
-  console.log(secToHMS(props.val, true))
-  const [HMSInputValue, setHMSInputValue] = useState(secToHMS(props.val, true) || props.def);
+export function SetOpHMS(props: Props): JSX.Element {  const [HMSInputValue, setHMSInputValue] = useState(secToHMS(props.val, true) || props.def);
 
   useEffect(() => {
-    console.log(HMSInputValue)
-    console.log(secToHMS(props.val, true))
     setHMSInputValue(secToHMS(props.val, true))
   }, [props.val])
 
@@ -70,6 +66,10 @@ export function SetOpHMS(props: Props): JSX.Element {
 export function SetOpInteger(props: Props): JSX.Element {
   const [intInputValue, setIntInputValue] = useState(props.val || props.def);
 
+  useEffect(() => {
+    setIntInputValue(props.val)
+  }, [props.val])
+
   // Handle change in pomodoro input
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const MAX = 30;
@@ -103,6 +103,10 @@ export function SetOpInteger(props: Props): JSX.Element {
 export function SetOpColor(props: Props): JSX.Element {
   const [color, setColor] = useState(props.val || props.def)
 
+  useEffect(() => {
+    setColor(props.val)
+  }, [props.val])
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setColor(e.target.value)
     props.onUpdate(e.target.name, e.target.value)
@@ -128,6 +132,10 @@ export function SetOpColor(props: Props): JSX.Element {
 export function SetOpText(props: Props): JSX.Element {
   const [font, setFont] = useState(props.val || props.def)
 
+  useEffect(() => {
+    setFont(props.val)
+  }, [props.val])
+  
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {
     setFont(e.target.value)
     props.onUpdate(e.target.name, e.target.value)

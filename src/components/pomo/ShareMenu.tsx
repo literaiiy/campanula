@@ -1,33 +1,67 @@
 import copy from 'copy-to-clipboard';
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { ShareFill } from "react-bootstrap-icons";
 import { Slide, toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { usePrevious } from '../../lib/constants';
+import { templates, usePrevious } from '../../lib/constants';
 import { qDBRtoC } from '../../lib/funcs';
 import "../../styles/ShareMenu.scss";
 
-export default function ShareMenu(props: { rawConfig: string}): JSX.Element {
+export default function ShareMenu(props: {rawConfig: string}): JSX.Element {
   
   console.log("%c ShareMenu.tsx has rerendered", "color:goldenrod; font-weight: 900")
   let prevRawConfig: string | undefined = usePrevious(props.rawConfig)
-  const [code, setCode] = useState("default")
-  console.log(prevRawConfig);
+  const [code, setCode] = useState(window.location.pathname.split("/").slice(-1).pop())
+  const [dshare, setDshare] = useState(false);
+  const mountRef = useRef(false)
+  // console.log(prevRawConfig);
   console.log(props.rawConfig)
-
-  const handleShare = async (): Promise<void> => {
+  
+  const handleShare = async () => {
+    
+    // Quit method if the pomodoro count is 31 (signifying that it is a default load)
+    if (props.rawConfig[18] === "v") { return; }
+    
+    if (("" + prevRawConfig)[18] === "v") {
+      prevRawConfig = props.rawConfig
+    }
+    
     console.log(prevRawConfig, props.rawConfig)
     if (prevRawConfig !== props.rawConfig) {
       console.warn("Querying database...")
-      const res = await qDBRtoC(props.rawConfig)
-      console.log(res)
-      
-      console.log("c")
-      setCode(res || "default")
+      let res = await qDBRtoC(props.rawConfig)
+      console.log(res);
+      console.log("SNOWBALL")
+      setCode( res || "default")      
+    } else {
+      // console.log("About to share")
+      // share(code)
+      setDshare(!dshare)
+      console.log("dshare: " + dshare)
     }
-    console.log("About to share")
-    share(code)
+    prevRawConfig = props.rawConfig;
   }
+  
+  useEffect(() => {
+    console.log("new code set: " + code)
+    if (mountRef.current) {
+      console.log("About to share" + code)
+      share(code)
+    }
+    mountRef.current = true;
+  }, [code])
+
+  useEffect(() => {
+    console.log("Non-change useEffect ran")
+    // Quit method if the pomodoro count is 31 (signifying that it is a default load)
+    if (props.rawConfig[18] === "v") { return; }
+    
+    if (mountRef.current) {
+      console.log("code hasn't changed, sharing now")
+      console.log("About to share" + code)
+      share(code)
+    }
+  }, [dshare])
 
   const share = (code?: string): void => {
     const sharable: string = window.location.protocol + "//" + window.location.hostname + "/pomo/" + code
@@ -35,7 +69,7 @@ export default function ShareMenu(props: { rawConfig: string}): JSX.Element {
       navigator
         .share({
           title: "Campanula: a completely customizable pomodoro experience",
-          text: `Try this pomodoro timer! - ${sharable}`,
+          text: `Try this pomodoro timer! - ${code}`,
           url: sharable
         })
         .then(() => {

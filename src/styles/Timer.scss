@@ -15,7 +15,7 @@
   }
   .time {
     line-height: 4.5rem;
-    font-size: 5rem;
+    font-size: min(5rem, 20vw);
     font-weight: 600;
   }
 }

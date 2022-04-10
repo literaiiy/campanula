@@ -1,4 +1,5 @@
 import { DB_BASEURL, defaultOptions, ISettingsObj, templates, templatesReversed, themeFonts } from "./constants";
+import axios from "axios";
 
 // Converts a string in the HH:MM:SS format to an integer amount of seconds
 export const hmsToSec = (str: string): number => {
@@ -106,13 +107,16 @@ export const qDBRtoC = async (rc: string): Promise<string | null> => {
 
   try {
     res = await getQuery(rc)
-    if (res.isRc === null) { throw new Error("Not an error, just need to post new code") }
+    if (res.isRc === null) { 
+      throw new Error("Not an error, just need to post new code")
+    }
     return res.response;
   } catch(e) {
     console.error(e)
     const validCode = generateCode(4)
     try {
-      await postPair(validCode, rc)
+      console.log('asdasd')
+      postPair(validCode, rc)
       return validCode;
     } catch (e) {
       console.error(e)
@@ -142,37 +146,28 @@ export const qDBCtoR = async (code: string): Promise<string | null> => {
 
 // Makes the actual GET request
 export const getQuery = async(str: string) => {
-  const response = await fetch(`${DB_BASEURL}/pomodb/${str}`, { 
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-
-  const res = await response.json()
-
-  console.log(res)
-
-  return res;
-
-  // return {
-  //   "ok": res.ok,
-  //   "body": res.ok ? res.body : null
-  // }
+  try {
+    const res = await axios.get(`${DB_BASEURL}/pomodb/${str}`)
+    console.log(res.data)
+    // const res = await response.json()
+    return res.data;
+  } catch(e) {
+    console.error(e)
+    return null;
+  }
 }
 
 // POSTs a code/raw config pair to the DB
-export const postPair = async (code: string, rawConfig: string) => {
+export const postPair = (code: string, rawConfig: string) => {
   console.log("postPair has been reached")
-  await fetch(`${DB_BASEURL}/pomodb/add`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify([rawConfig, code])
+  axios.post(`${DB_BASEURL}/pomodb/add`,
+    [rawConfig, code]
+  ).then((res) => {
+    console.log(res)
+  }).catch((e) => {
+    console.error(e)
   })
-
-  // const res = await response.json();
+  console.log("pair post attempt finished")
 }
 
 //: generates a 4-digit code

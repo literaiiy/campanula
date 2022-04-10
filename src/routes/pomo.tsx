@@ -4,13 +4,13 @@ import { useParams } from 'react-router-dom';
 import Settings from '../components/pomo/Settings';
 import ShareMenu from '../components/pomo/ShareMenu';
 import Timer from '../components/pomo/timer/Timer';
-import { defaultOptions } from "../lib/constants";
+import { defaultOptions, nullOptions } from "../lib/constants";
 import { cAdjust, convertToCSSSafe, optionsToRawConfig, qDBCtoR, rawConfigToOptions } from '../lib/funcs';
 import "../styles/pomo.scss";
 
 export default function Pomo() {
   const params = useParams();
-  const [options, setOptions] = useState(defaultOptions);
+  const [options, setOptions] = useState(nullOptions);
   
   const setOptionsHandler = (property: string, value: string | number): void => {
     setOptions({
@@ -18,9 +18,6 @@ export default function Pomo() {
       [property]: value,
     })
   }
-
-  console.log(options)
-
   useEffect(() => {
     async function fn() {
       if (params.id) {
@@ -32,7 +29,13 @@ export default function Pomo() {
     fn();
   }, [])
 
-
+  // if (options.pomodoros === 31) {
+  //   return (
+  //     <>
+  //       "React sucks cock"
+  //     </>
+  //     )
+  // }
   return (
     <>
       <Helmet>
@@ -69,7 +72,6 @@ export default function Pomo() {
         `}</style>
       </Helmet>
       <section className="pomo-main">
-         {/*<div><b>Code</b>: <span className="monospace">{params.id}, <div style={{wordBreak: "break-all"}}>{JSON.stringify(options)}</div></span></div> */} 
         <Timer conf={options} />
         <Settings onUpdate={setOptionsHandler} defaultOptions={options}/>
         <hr className='short-hr'/>

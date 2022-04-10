@@ -34,6 +34,16 @@ export const defaultOptions: ISettingsObj = {
   font: "Readex Pro",
 }
 
+export const nullOptions: ISettingsObj = {
+  work: 1500,
+  break: 300,
+  longBreak: 900,
+  pomodoros: 31,
+  bg_color: "#FFFFFF",
+  text_color: "#1c1c20",
+  font: "Readex Pro",
+}
+
 export const themeFonts: Array<string> = [
   'Readex Pro',
   'Manrope',
