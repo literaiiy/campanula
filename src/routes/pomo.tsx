@@ -45,6 +45,7 @@ export default function Pomo() {
     fn()
   }, [])
 
+  if (options.pomodoros === 31) return <></> 
   if (isNaN(options.pomodoros)) return <NotFound />
   
   // console.log(shiteRender.current)
