@@ -1,4 +1,3 @@
-import { useEffect, useState, useRef } from "react";
 import { secToHMS } from "../../../lib/funcs";
 interface Props {
   cdTime: number;

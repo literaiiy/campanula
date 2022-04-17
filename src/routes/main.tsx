@@ -1,12 +1,10 @@
 import { Link } from "react-router-dom"
-import { Canvas, useFrame } from "@react-three/fiber"
-
-import { OrbitControls } from "@react-three/drei"
+import { Canvas } from "@react-three/fiber"
 import { Suspense } from "react"
 import ThreeJSTomato from "../components/ThreeJSTomato"
 import "../styles/main.scss"
 
-export default function Main() {
+export default function Main(): JSX.Element {
   return (
     <>
       <section className='main-top'>

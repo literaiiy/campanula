@@ -13,7 +13,7 @@ interface Props {
 export default function Timer(props: Props) {
   console.log("%c Timer.tsx has rerendered", "color:red; font-weight: 900")
 
-  const [playing, changePlaying] = useState(false)
+  const [playing, changePlaying] = useState<boolean>(false)
   const [set, setSet] = useState<number>(1)
   const [part, setPart] = useState<TParts>("work")
   const [cdTime, setCdTime] = useState<number>(props.conf.work);
@@ -98,7 +98,7 @@ export default function Timer(props: Props) {
 }
 
 // usePrevious hook
-function usePrevious(value: any) {
+function usePrevious(value: any): any {
   const ref = useRef();
   useEffect(() => {
     ref.current = value;

@@ -9,11 +9,28 @@ interface Props {
   longBreak: number,
 }
 
-const TEAL_CUTOFF = 3.5;
-const PURPLE_CUTOFF = 5;
+interface IColors {
+  bgColor: string,
+  color: string
+}
+
+const TEAL_CUTOFF: number = 3.5;
+const PURPLE_CUTOFF: number = 5;
 
 export default function PomoTemplate(props: Props): JSX.Element {
-  let colorScheme = determineColor()
+  const determineColor = (): IColors => {
+    let wbRatio: number = props.work / props.break;
+    if (wbRatio <= TEAL_CUTOFF) { 
+      return {bgColor: "teal", color: "black"}
+    }
+    else if (wbRatio <= PURPLE_CUTOFF) {
+      return {bgColor: "purple", color: "cream"}
+    }
+    return {bgColor: "velvet", color: "cream"}
+  }
+
+  const colorScheme: IColors = determineColor();
+
   return (
     <li className={`pomo-template bg${colorScheme.bgColor} ${colorScheme.color}`}>
       <Link to={props.slug}>
@@ -28,10 +45,4 @@ export default function PomoTemplate(props: Props): JSX.Element {
     </li>
   )
   
-  function determineColor() {
-    let wbRatio = props.work / props.break;
-    if (wbRatio <= TEAL_CUTOFF) { return {bgColor: "teal", color: "black"}}
-    else if (wbRatio <= PURPLE_CUTOFF) { return {bgColor: "purple", color: "cream"}}
-    else { return {bgColor: "velvet", color: "cream"}}
-  }
 }

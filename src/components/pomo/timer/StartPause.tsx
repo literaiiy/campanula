@@ -9,7 +9,7 @@ interface Props {
 
 export default function StartPause(props: Props): JSX.Element {
   
-  const handleUpdate = () => {
+  const handleUpdate = (): void => {
     props.onUpdate(!props.playing);
   } 
 

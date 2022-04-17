@@ -17,7 +17,7 @@ interface GenericProps {
   readonly val?: any;
 }
 
-export default function SettingsOption(props: GenericProps) {
+export default function SettingsOption(props: GenericProps): JSX.Element {
   return (
     <li id={props.id + "-container"} className='option-container'>
       <label htmlFor={props.id}>{props.label}</label>
@@ -26,19 +26,20 @@ export default function SettingsOption(props: GenericProps) {
   )
 }
 
-export function SetOpHMS(props: Props): JSX.Element {  const [HMSInputValue, setHMSInputValue] = useState(secToHMS(props.val, true) || props.def);
+export function SetOpHMS(props: Props): JSX.Element {
+  const [HMSInputValue, setHMSInputValue] = useState<any>(secToHMS(props.val, true) || props.def);
 
   useEffect(() => {
     setHMSInputValue(secToHMS(props.val, true))
   }, [props.val])
 
   // Handle change in the work/break/long break inputs
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const formattedHMS = formatHMS(e.target.value);
     setHMSInputValue(formattedHMS);
   }
 
-  const handleBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleBlur = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const formattedHMS = forceHMSFormat(e.target.value);
     setHMSInputValue(formattedHMS);
     props.onUpdate(e.target.name, hmsToSec(formattedHMS))
@@ -71,14 +72,14 @@ export function SetOpInteger(props: Props): JSX.Element {
   }, [props.val])
 
   // Handle change in pomodoro input
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const MAX = 30;
     const MIN = 1;
     const formattedPomo = formatPomoCount(e.target.value, MIN, MAX)
     setIntInputValue(formattedPomo)
   }
 
-  const handleBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleBlur = (e: React.ChangeEvent<HTMLInputElement>): void => {
     props.onUpdate(e.target.name, e.target.valueAsNumber || 4)
   }
 
@@ -166,7 +167,7 @@ export function SetOpText(props: Props): JSX.Element {
 }
 
 
-function formatPomoCount(v: string, MIN: number, MAX: number) {
+function formatPomoCount(v: string, MIN: number, MAX: number): string {
   if (!v) return v;
 
   if (MIN <= +v && +v <= MAX) { return ("" + v) }
@@ -175,6 +176,6 @@ function formatPomoCount(v: string, MIN: number, MAX: number) {
   else { return ("") }
 }
 
-function toKebabCase(str: string) {
+function toKebabCase(str: string): string {
   return str.replace(/\s+/g, '-').toLowerCase();
 }

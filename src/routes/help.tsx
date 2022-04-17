@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet";
 import "../styles/document.scss"
 
-export default function Help() {
+export default function Help(): JSX.Element {
 
   return (
     <>

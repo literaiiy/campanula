@@ -1,9 +1,9 @@
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import PomoTemplate from '../components/pomos/PomoTemplate';
 import { Helmet } from 'react-helmet';
 import "../styles/pomos.scss"
 
-export default function Pomos() {
+export default function Pomos(): JSX.Element {
   return (
     <>
       <Helmet>

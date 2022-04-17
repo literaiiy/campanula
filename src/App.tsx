@@ -1,4 +1,3 @@
-import React from 'react';
 import './styles/App.scss';
 import './styles/normalize.min.scss';
 import { Outlet } from 'react-router-dom';
@@ -6,7 +5,7 @@ import Nav from './components/Nav';
 import Footer from './components/footer';
 import { Helmet } from 'react-helmet';
 
-function App() {
+function App(): JSX.Element {
   return (
     <>
       <Helmet>

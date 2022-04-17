@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 
 export interface ISettingsObj {
   work: number;
@@ -17,6 +17,11 @@ export interface IDBResObj {
     isRc: boolean | null;
     // code: string;
   };
+}
+
+export interface DBQueryRes {
+  response: string;
+  isRc: boolean;
 }
 
 export type TResClass = "code" | "rawConfig" | "dne" | "error" | null
@@ -81,7 +86,7 @@ export const themeFonts: Array<string> = [
 
 export const DB_BASEURL: string = "http://localhost:5000"
 
-export function usePrevious(value: any) {
+export function usePrevious(value: any): any {
   const ref = useRef();
   useEffect(() => {
     ref.current = value;
@@ -90,11 +95,11 @@ export function usePrevious(value: any) {
 }
 
 export const templates: any = {
-  "default": "0015000003000009004FFFFFF1c1c200",
-  "hard-worker": "0036000006000018004FFFFFF1c1c200",
-  "lenient": "0018000006000012004FFFFFF1c1c200",
-  "workhorse": "0021000003000009003FFFFFF1c1c200",
-  "5217": "0031200010200010204FFFFFF1c1c200",
+  "default":        "0015000003000009004FFFFFF1c1c200",
+  "hard-worker":    "0036000006000018004FFFFFF1c1c200",
+  "lenient":        "0018000006000012004FFFFFF1c1c200",
+  "workhorse":      "0021000003000009003FFFFFF1c1c200",
+  "5217":           "0031200010200010204FFFFFF1c1c200",
   "3-hour-special": "0018000003600009005FFFFFF1c1c200",
 }
 

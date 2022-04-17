@@ -1,12 +1,10 @@
-import { useIsomorphicLayoutEffect } from '@react-three/fiber/dist/declarations/src/core/utils';
 import { useEffect, useState, useRef } from 'react';
 import { Helmet } from 'react-helmet';
-import { useLocation } from 'react-router';
 import { useParams } from 'react-router-dom';
 import Settings from '../components/pomo/Settings';
 import ShareMenu from '../components/pomo/ShareMenu';
 import Timer from '../components/pomo/timer/Timer';
-import { defaultOptions, nullerOptions, nullOptions } from "../lib/constants";
+import { nullerOptions, nullOptions } from "../lib/constants";
 import { cAdjust, convertToCSSSafe, optionsToRawConfig, qDBCtoR, rawConfigToOptions } from '../lib/funcs';
 import "../styles/pomo.scss";
 import NotFound from './404';
@@ -15,10 +13,7 @@ export default function Pomo() {
   console.log("%c pomo.tsx has rerendered", "color:darkgreen; font-weight: 900")
   const params = useParams();
   const [options, setOptions] = useState(nullOptions);
-  // const [should404, setShould404] = useState(false);
-  let mountCount = 0
   const shiteRender = useRef(true);
-  let location = useLocation()
   
   const setOptionsHandler = (property: string, value: string | number): void => {
     setOptions({
@@ -47,10 +42,6 @@ export default function Pomo() {
 
   if (options.pomodoros === 31) return <></> 
   if (isNaN(options.pomodoros)) return <NotFound />
-  
-  // console.log(shiteRender.current)
-  // if (shiteRender.current) 
-  // shiteRender.current = false;
 
   return (
     <>

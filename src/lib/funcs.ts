@@ -1,4 +1,4 @@
-import { DB_BASEURL, defaultOptions, ISettingsObj, nullerOptions, templates, templatesReversed, themeFonts } from "./constants";
+import { DBQueryRes, DB_BASEURL, defaultOptions, ISettingsObj, templates, templatesReversed, themeFonts } from "./constants";
 import axios from "axios";
 
 // Converts a string in the HH:MM:SS format to an integer amount of seconds
@@ -146,7 +146,7 @@ export const qDBCtoR = async (code: string): Promise<string | null> => {
 }
 
 // Makes the actual GET request
-export const getQuery = async(str: string) => {
+export const getQuery = async (str: string): Promise<DBQueryRes | null> => {
   try {
     const res = await axios.get(`${DB_BASEURL}/pomodb/${str}`)
     console.log(res.data)
@@ -159,7 +159,7 @@ export const getQuery = async(str: string) => {
 }
 
 // POSTs a code/raw config pair to the DB
-export const postPair = (code: string, rawConfig: string) => {
+export const postPair = (code: string, rawConfig: string): void => {
   console.log("postPair has been reached")
   axios.post(`${DB_BASEURL}/pomodb/add`,
     [rawConfig, code]

@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet";
 import "../styles/document.scss";
 
-export default function Privacy() {
+export default function Privacy(): JSX.Element {
 
   return (
     <>

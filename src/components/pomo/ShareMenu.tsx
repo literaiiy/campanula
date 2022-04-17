@@ -1,42 +1,40 @@
-import copy from 'copy-to-clipboard';
 import { useEffect, useState, useRef } from "react";
 import { ShareFill } from "react-bootstrap-icons";
 import { Slide, toast, ToastContainer } from 'react-toastify';
+import { usePrevious } from '../../lib/constants';
+import { qDBRtoC } from '../../lib/funcs';
+import copy from 'copy-to-clipboard';
 import 'react-toastify/dist/ReactToastify.css';
-import { nullerOptions, nullOptions, templates, usePrevious } from '../../lib/constants';
-import { optionsToRawConfig, qDBRtoC } from '../../lib/funcs';
 import "../../styles/ShareMenu.scss";
 
 export default function ShareMenu(props: {rawConfig: string}): JSX.Element {
   
   console.log("%c ShareMenu.tsx has rerendered", "color:goldenrod; font-weight: 900")
   let prevRawConfig: string | undefined = usePrevious(props.rawConfig)
-  const [code, setCode] = useState(window.location.pathname.split("/").slice(-1).pop())
-  const [dshare, setDshare] = useState(false);
-  const mountRef = useRef(false)
+  const [code, setCode] = useState<string | undefined>(window.location.pathname.split("/").slice(-1).pop())
+  const [dshare, setDshare] = useState<boolean>(false);
+  const mountRef = useRef<boolean>(false)
   // console.log(prevRawConfig);
   console.log(props.rawConfig)
   
-  const handleShare = async () => {
+  const handleShare = async (): Promise<void> => {
     
     // Quit function if the pomodoro count is 31 (signifying that it is a default load)
     if (props.rawConfig[18] === "v") { return; }
     
     if (("" + prevRawConfig)[18] === "v") {
-      prevRawConfig = props.rawConfig
+      prevRawConfig = props.rawConfig;
     }
     
     console.log(prevRawConfig, props.rawConfig)
     if (prevRawConfig !== props.rawConfig) {
       console.warn("Querying database...")
-      let res = await qDBRtoC(props.rawConfig)
+      let res: React.SetStateAction<string | undefined> | null = await qDBRtoC(props.rawConfig);
       console.log(res);
       console.log("SNOWBALL")
-      setCode( res || "default")
-      share(code)
+      setCode( res || "default");
+      share(code);
     } else {
-    // console.log("About to share")
-      // share(code)
       setDshare(!dshare)
       console.log("dshare: " + dshare)
     }

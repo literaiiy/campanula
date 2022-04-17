@@ -1,7 +1,7 @@
 import '../styles/404.scss'
 import '../styles/App.scss'
 
-export default function NotFound() {
+export default function NotFound(): JSX.Element {
   return (
     <section className='main-404'>
       <h1 className='h1-404'>404</h1>
