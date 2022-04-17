@@ -29,11 +29,15 @@ app.route("/pomodb/:str").get(async (req, res) => {
           }
         }
       }
-    ])
+    ]).toArray()
     console.log(`${Date.now() - START_TIME}ms response time`)
     console.log(rez)
+
+    // if (rez[18] === 'v') {
+    // }
+
     res.json({
-      response: rez[isRc(req.params.str) ? "code" : "rawConfig"],
+      response: rez[0][isRc(req.params.str) ? "code" : "rawConfig"],
       isRc: !isRc(req.params.str),
     })
   } catch (e) {
@@ -46,6 +50,7 @@ app.route("/pomodb/:str").get(async (req, res) => {
         isRc: null,
       })
     }
+    res.status(404).send("invalid code")
   }
 });
 

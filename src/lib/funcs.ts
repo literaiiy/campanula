@@ -1,4 +1,4 @@
-import { DB_BASEURL, defaultOptions, ISettingsObj, templates, templatesReversed, themeFonts } from "./constants";
+import { DB_BASEURL, defaultOptions, ISettingsObj, nullerOptions, templates, templatesReversed, themeFonts } from "./constants";
 import axios from "axios";
 
 // Converts a string in the HH:MM:SS format to an integer amount of seconds
@@ -139,8 +139,9 @@ export const qDBCtoR = async (code: string): Promise<string | null> => {
     console.log("queried database (code to raw config)")
     return res.response
   } catch (e) {
+    console.error("Error with DB query")
     console.error(e)
-    return null;
+    return "noal";
   }
 }
 

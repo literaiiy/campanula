@@ -17,10 +17,9 @@ ReactDOM.render(
     <Routes>
       <Route path="/" element={<App />}>
         <Route path="/" element={<Main />}></Route>
-        <Route path="/pomo">
           <Route path="/pomo" element={<Pomos />}></Route>
-          <Route path=":id" element={<Pomo />}></Route>
-        </Route>
+          <Route path="/pomo/:id" element={<Pomo />}></Route>
+          <Route path="/pomo/*" element={<NotFound />}></Route>
         <Route path="*" element={<NotFound />}></Route>
         <Route path="/privacy" element={<Privacy />}></Route>
         <Route path="/help" element={<Help />}></Route>

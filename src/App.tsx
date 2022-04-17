@@ -12,7 +12,7 @@ function App() {
       <Helmet>
         <title>Campanula: A completely customizable pomodoro experience</title>
         <meta charSet="utf-8" />
-        <link rel="icon" href="/public/favicon.ico" />
+        <link rel="shortcut icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#1c1c20" />
         <meta

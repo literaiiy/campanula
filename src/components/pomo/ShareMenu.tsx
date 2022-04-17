@@ -3,8 +3,8 @@ import { useEffect, useState, useRef } from "react";
 import { ShareFill } from "react-bootstrap-icons";
 import { Slide, toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { templates, usePrevious } from '../../lib/constants';
-import { qDBRtoC } from '../../lib/funcs';
+import { nullerOptions, nullOptions, templates, usePrevious } from '../../lib/constants';
+import { optionsToRawConfig, qDBRtoC } from '../../lib/funcs';
 import "../../styles/ShareMenu.scss";
 
 export default function ShareMenu(props: {rawConfig: string}): JSX.Element {
@@ -19,7 +19,7 @@ export default function ShareMenu(props: {rawConfig: string}): JSX.Element {
   
   const handleShare = async () => {
     
-    // Quit method if the pomodoro count is 31 (signifying that it is a default load)
+    // Quit function if the pomodoro count is 31 (signifying that it is a default load)
     if (props.rawConfig[18] === "v") { return; }
     
     if (("" + prevRawConfig)[18] === "v") {
@@ -32,9 +32,10 @@ export default function ShareMenu(props: {rawConfig: string}): JSX.Element {
       let res = await qDBRtoC(props.rawConfig)
       console.log(res);
       console.log("SNOWBALL")
-      setCode( res || "default")      
+      setCode( res || "default")
+      share(code)
     } else {
-      // console.log("About to share")
+    // console.log("About to share")
       // share(code)
       setDshare(!dshare)
       console.log("dshare: " + dshare)
@@ -44,7 +45,9 @@ export default function ShareMenu(props: {rawConfig: string}): JSX.Element {
   
   useEffect(() => {
     console.log("new code set: " + code)
-    if (mountRef.current) {
+    console.log({prevRawConfig})
+    console.log(props.rawConfig)
+    if (mountRef.current && prevRawConfig /* !== optionsToRawConfig(nullOptions)(  undefined*/) {
       console.log("About to share" + code)
       share(code)
     }
@@ -54,7 +57,7 @@ export default function ShareMenu(props: {rawConfig: string}): JSX.Element {
   useEffect(() => {
     console.log("Non-change useEffect ran")
     // Quit method if the pomodoro count is 31 (signifying that it is a default load)
-    if (props.rawConfig[18] === "v") { return; }
+    if (props.rawConfig[18] === "v" || !prevRawConfig) { return; }
     
     if (mountRef.current) {
       console.log("code hasn't changed, sharing now")
