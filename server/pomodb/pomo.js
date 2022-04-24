@@ -49,8 +49,9 @@ app.route("/pomodb/:str").get(async (req, res) => {
         response: req.params.str,
         isRc: null,
       })
+    } else {
+      res.status(404).send("invalid code")
     }
-    res.status(404).send("invalid code")
   }
 });
 

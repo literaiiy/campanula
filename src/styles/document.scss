@@ -3,6 +3,7 @@
 .content {
   display: flex;
   flex-direction: column;
+  padding-bottom: 4rem;
   max-width: min(95vw, 80rem);
   & h1, h2 {
     margin: 1rem 0.5rem 0.25rem 0.5rem;
