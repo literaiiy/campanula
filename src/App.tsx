@@ -19,12 +19,6 @@ function App(): JSX.Element {
         <meta property="og:title" content="Campanula" />
         <meta property="og:description" content="Campanula" />
 
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={window.location.href} />
-        <meta property="og:title" content="Campanula: A completely customizable pomodoro experience" />
-        <meta property="og:description" content="Campanula serves to make using pomodoro method as easy, sleek, fast, and customizable." />
-        <meta property="og:image" content={window.location.origin + "/og.png"} />
-
         <link rel="canonical"/>
         <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/public/logo192.png" />
