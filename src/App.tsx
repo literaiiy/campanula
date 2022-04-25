@@ -4,22 +4,29 @@ import { Outlet } from 'react-router-dom';
 import Nav from './components/Nav';
 import Footer from './components/footer';
 import { Helmet } from 'react-helmet';
+import { META_DESC } from './lib/constants';
 
 function App(): JSX.Element {
   return (
     <>
       <Helmet>
         <title>Campanula: A completely customizable pomodoro experience</title>
+
         <meta charSet="utf-8" />
-        <link rel="shortcut icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#1c1c20" />
-        <meta
-          name="description"
-          content="Campanula"
-        />
+        <meta name="description" content={META_DESC}/>
         <meta property="og:title" content="Campanula" />
         <meta property="og:description" content="Campanula" />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={window.location.href} />
+        <meta property="og:title" content="Campanula: A completely customizable pomodoro experience" />
+        <meta property="og:description" content="Campanula serves to make using pomodoro method as easy, sleek, fast, and customizable." />
+        <meta property="og:image" content={window.location.origin + "/og.png"} />
+
+        <link rel="canonical"/>
+        <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/public/logo192.png" />
         <link rel="manifest" href="/public/manifest.json" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />

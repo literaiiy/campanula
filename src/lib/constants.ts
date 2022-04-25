@@ -1,5 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 
+export const META_DESC = "Campanula serves to make using pomodoro method as easy, sleek, fast, and customizable."
+
 export interface ISettingsObj {
   work: number;
   break: number;
@@ -27,7 +29,6 @@ export interface DBQueryRes {
 export type TResClass = "code" | "rawConfig" | "dne" | "error" | null
 
 export type TParts = "work" | "break" | "longBreak";
-
 
 export const defaultOptions: ISettingsObj = {
   work: 1500,
