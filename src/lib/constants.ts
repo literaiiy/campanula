@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 
-export const META_DESC = "Campanula serves to make using pomodoro method as easy, sleek, fast, and customizable."
+export const META_DESC = "Campanula is a completely customizable pomodoro timer application that is easy-to-use, fast, and sleek— ready for any work or study session."
 
 export interface ISettingsObj {
   work: number;
