@@ -14,7 +14,6 @@ export default function ShareMenu(props: {rawConfig: string}): JSX.Element {
   const [code, setCode] = useState<string | undefined>(window.location.pathname.split("/").slice(-1).pop())
   const [dshare, setDshare] = useState<boolean>(false);
   const mountRef = useRef<boolean>(false)
-  // console.log(prevRawConfig);
   console.log(props.rawConfig)
   
   const handleShare = async (): Promise<void> => {
@@ -45,7 +44,7 @@ export default function ShareMenu(props: {rawConfig: string}): JSX.Element {
     console.log("new code set: " + code)
     console.log({prevRawConfig})
     console.log(props.rawConfig)
-    if (mountRef.current && prevRawConfig /* !== optionsToRawConfig(nullOptions)(  undefined*/) {
+    if (mountRef.current && prevRawConfig) {
       console.log("About to share" + code)
       share(code)
     }
