@@ -12,7 +12,7 @@ export default function ShareMenu(props: {rawConfig: string}): JSX.Element {
   console.log("%c ShareMenu.tsx has rerendered", "color:goldenrod; font-weight: 900")
   let prevRawConfig: string | undefined = usePrevious(props.rawConfig)
   const [code, setCode] = useState<string | undefined>(window.location.pathname.split("/").slice(-1).pop())
-  const [dshare, setDshare] = useState<boolean>(false);
+  const [shouldShare, setShouldShare] = useState<boolean>(false);
   const mountRef = useRef<boolean>(false)
   console.log(props.rawConfig)
   
@@ -32,10 +32,11 @@ export default function ShareMenu(props: {rawConfig: string}): JSX.Element {
       console.log(res);
       console.log("SNOWBALL")
       setCode( res || "default");
-      share(code);
+      // console.log({code})
+      if (!prevRawConfig) share(code);
     } else {
-      setDshare(!dshare)
-      console.log("dshare: " + dshare)
+      setShouldShare(!shouldShare)
+      console.log("Should share?: " + shouldShare)
     }
     prevRawConfig = props.rawConfig;
   }
@@ -43,7 +44,7 @@ export default function ShareMenu(props: {rawConfig: string}): JSX.Element {
   useEffect(() => {
     console.log("new code set: " + code)
     console.log({prevRawConfig})
-    console.log(props.rawConfig)
+    console.log(`props.rawConfig ${props.rawConfig}`)
     if (mountRef.current && prevRawConfig) {
       console.log("About to share" + code)
       share(code)
@@ -58,13 +59,13 @@ export default function ShareMenu(props: {rawConfig: string}): JSX.Element {
     
     if (mountRef.current) {
       console.log("code hasn't changed, sharing now")
-      console.log("About to share" + code)
       share(code)
     }
-  }, [dshare])
+  }, [shouldShare])
 
   const share = (code?: string): void => {
     const sharable: string = window.location.protocol + "//" + window.location.hostname + "/pomo/" + code
+    console.log("Inside the share function, going to share")
     if (navigator.share) {
       navigator
         .share({
@@ -80,7 +81,7 @@ export default function ShareMenu(props: {rawConfig: string}): JSX.Element {
         })
     } else {
       copy(sharable)
-      toast("Link copied!", {
+      toast(`Link copied! ${sharable}`, {
         autoClose: 1500,
         hideProgressBar: true,
         closeOnClick: true,
@@ -96,7 +97,7 @@ export default function ShareMenu(props: {rawConfig: string}): JSX.Element {
       <button className='share-button button' onClick={handleShare}>
         <ShareFill/>
         <ToastContainer
-          limit={1}
+          limit={5}
           transition={Slide}
           position={toast.POSITION.BOTTOM_RIGHT}
           autoClose={1500}
