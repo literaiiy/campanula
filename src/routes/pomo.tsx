@@ -10,7 +10,7 @@ import "../styles/pomo.scss";
 import NotFound from './404';
 
 export default function Pomo() {
-  console.log("%c pomo.tsx has rerendered", "color:darkgreen; font-weight: 900")
+  // console.log("%c pomo.tsx has rerendered", "color:darkgreen; font-weight: 900")
   const params = useParams();
   const [options, setOptions] = useState(nullOptions);
   const shiteRender = useRef(true);
@@ -24,16 +24,16 @@ export default function Pomo() {
   
   // On first load, query DB for raw config from code
   useEffect(() => {
-    console.warn("First load useEffect run")
+    // console.warn("First load useEffect run")
     const fn = async () => {
-      console.log(" my balls")
+      // console.log(" my balls")
       if (params.id) {
-        console.log("my balls3")
+        // console.log("my balls3")
         const rc = await qDBCtoR(params.id)
-        console.log(rc)
+        // console.log(rc)
         setOptions(rawConfigToOptions(rc) || nullerOptions)
         
-        console.log(options)
+        // console.log(options)
         shiteRender.current = false;
       }
     };

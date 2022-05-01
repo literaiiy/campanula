@@ -9,9 +9,9 @@ interface Props {
 }
 
 export default function Settings(props: Props): JSX.Element {
-  console.log("%c Settings.tsx has rerendered", "color:navy; font-weight: 900")
+  // console.log("%c Settings.tsx has rerendered", "color:navy; font-weight: 900")
 
-  console.log(props.defaultOptions)
+  // console.log(props.defaultOptions)
 
   const liftState = (opt: string, value: string | number): void => {
     props.onUpdate(opt, value)

@@ -11,7 +11,7 @@ interface Props {
 }
 
 export default function Timer(props: Props) {
-  console.log("%c Timer.tsx has rerendered", "color:red; font-weight: 900")
+  // console.log("%c Timer.tsx has rerendered", "color:red; font-weight: 900")
 
   const [playing, changePlaying] = useState<boolean>(false)
   const [set, setSet] = useState<number>(1)

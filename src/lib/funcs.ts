@@ -101,7 +101,7 @@ export const qDBRtoC = async (rc: string): Promise<string | null> => {
 
   // Check if the RC is a template's RC
   if (Object.keys(templatesReversed).includes(rc)) {
-    console.log('template reached, skipping DB')
+    // console.log('template reached, skipping DB')
     return templatesReversed[rc];
   }
 
@@ -112,14 +112,14 @@ export const qDBRtoC = async (rc: string): Promise<string | null> => {
     }
     return res.response;
   } catch(e) {
-    console.error(e)
+      // console.error(e)
     const validCode = generateCode(6)
     try {
-      console.log('asdasd')
+      // console.log('asdasd')
       postPair(validCode, rc)
       return validCode;
     } catch (e) {
-      console.error(e)
+      // console.error(e)
     }
     return null;
   }
@@ -130,17 +130,17 @@ export const qDBCtoR = async (code: string): Promise<string | null> => {
   
   // Check if the code is a template's code
   if (Object.keys(templates).includes(code)) {
-    console.log('2: template reached, skipping DB')
+    // console.log('2: template reached, skipping DB')
     return templates[code]
   }
   
   try {
     const res = await getQuery(code)
-    console.log("queried database (code to raw config)")
+    // console.log("queried database (code to raw config)")
     return res.response
   } catch (e) {
-    console.error("Error with DB query")
-    console.error(e)
+    // console.error("Error with DB query")
+    // console.error(e)
     return "noal";
   }
 }
@@ -149,26 +149,26 @@ export const qDBCtoR = async (code: string): Promise<string | null> => {
 export const getQuery = async (str: string): Promise<DBQueryRes | null> => {
   try {
     const res = await axios.get(`${DB_BASEURL}/pomodb/${str}`)
-    console.log(res.data)
+    // console.log(res.data)
     // const res = await response.json()
     return res.data;
   } catch(e) {
-    console.error(e)
+    // console.error(e)
     return null;
   }
 }
 
 // POSTs a code/raw config pair to the DB
 export const postPair = (code: string, rawConfig: string): void => {
-  console.log("postPair has been reached")
+  // console.log("postPair has been reached")
   axios.post(`${DB_BASEURL}/pomodb/add`,
     [rawConfig, code]
   ).then((res) => {
-    console.log(res)
+    // console.log(res)
   }).catch((e) => {
-    console.error(e)
+    // console.error(e)
   })
-  console.log("pair post attempt finished")
+  // console.log("pair post attempt finished")
 }
 
 //: generates a 4-digit code

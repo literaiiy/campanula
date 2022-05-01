@@ -12,6 +12,8 @@ export default function Footer(): JSX.Element {
         Powered by <a href="https://vercel.com/">Vercel</a>.
       </p>
       <p>
+        <span>v0.01-beta</span>
+        {" | "}
         <Link to="/help">Guide</Link>
         {" | "}
         <Link to="/privacy">Privacy Policy</Link>

@@ -14,7 +14,7 @@ export default function ShareMenu(props: {rawConfig: string}): JSX.Element {
   const [code, setCode] = useState<string | undefined>(window.location.pathname.split("/").slice(-1).pop())
   const [shouldShare, setShouldShare] = useState<boolean>(false);
   const mountRef = useRef<boolean>(false)
-  console.log(props.rawConfig)
+  // console.log(props.rawConfig)
   
   const handleShare = async (): Promise<void> => {
     
@@ -25,63 +25,63 @@ export default function ShareMenu(props: {rawConfig: string}): JSX.Element {
       prevRawConfig = props.rawConfig;
     }
     
-    console.log(prevRawConfig, props.rawConfig)
+    // //(prevRawConfig, props.rawConfig)
     if (prevRawConfig !== props.rawConfig) {
-      console.warn("Querying database...")
+      // console.warn("Querying database...")
       let res: React.SetStateAction<string | undefined> | null = await qDBRtoC(props.rawConfig);
-      console.log(res);
-      console.log("SNOWBALL")
+      // console.log(res);
+      // console.log("SNOWBALL")
       setCode( res || "default");
       // console.log({code})
       if (!prevRawConfig) share(code);
     } else {
       setShouldShare(!shouldShare)
-      console.log("Should share?: " + shouldShare)
+      // console.log("Should share?: " + shouldShare)
     }
     prevRawConfig = props.rawConfig;
   }
   
   useEffect(() => {
-    console.log("new code set: " + code)
-    console.log({prevRawConfig})
-    console.log(`props.rawConfig ${props.rawConfig}`)
+    // console.log("new code set: " + code)
+    // console.log({prevRawConfig})
+    // console.log(`props.rawConfig ${props.rawConfig}`)
     if (mountRef.current && prevRawConfig) {
-      console.log("About to share" + code)
+      // console.log("About to share" + code)
       share(code)
     }
     mountRef.current = true;
   }, [code])
 
   useEffect(() => {
-    console.log("Non-change useEffect ran")
+    // console.log("Non-change useEffect ran")
     // Quit method if the pomodoro count is 31 (signifying that it is a default load)
     if (props.rawConfig[18] === "v" || !prevRawConfig) { return; }
     
     if (mountRef.current) {
-      console.log("code hasn't changed, sharing now")
+      // console.log("code hasn't changed, sharing now")
       share(code)
     }
   }, [shouldShare])
 
   const share = (code?: string): void => {
     const sharable: string = window.location.protocol + "//" + window.location.hostname + "/pomo/" + code
-    console.log("Inside the share function, going to share")
+    // console.log("Inside the share function, going to share")
     if (navigator.share) {
       navigator
         .share({
           title: "Campanula: a completely customizable pomodoro experience",
-          text: `Try this pomodoro timer! - ${code}`,
+          text: `Try this pomodoro timer!`,
           url: sharable
         })
         .then(() => {
-          console.log("shared")
+          // console.log("shared")
         })
         .catch((e) => {
-          console.error(e);
+          // console.error(e);
         })
     } else {
       copy(sharable)
-      toast(`Link copied! ${sharable}`, {
+      toast(`Link copied!`, {
         autoClose: 1500,
         hideProgressBar: true,
         closeOnClick: true,
