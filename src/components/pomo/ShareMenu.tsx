@@ -2,14 +2,14 @@ import { useEffect, useState, useRef } from "react";
 import { ShareFill } from "react-bootstrap-icons";
 import { Slide, toast, ToastContainer } from 'react-toastify';
 import { usePrevious } from '../../lib/constants';
-import { qDBRtoC } from '../../lib/funcs';
+import { isShareLimited, qDBRtoC, sessionStorageShare } from '../../lib/funcs';
 import copy from 'copy-to-clipboard';
 import 'react-toastify/dist/ReactToastify.css';
 import "../../styles/ShareMenu.scss";
 
 export default function ShareMenu(props: {rawConfig: string}): JSX.Element {
   
-  console.log("%c ShareMenu.tsx has rerendered", "color:goldenrod; font-weight: 900")
+  // console.log("%c ShareMenu.tsx has rerendered", "color:goldenrod; font-weight: 900")
   let prevRawConfig: string | undefined = usePrevious(props.rawConfig)
   const [code, setCode] = useState<string | undefined>(window.location.pathname.split("/").slice(-1).pop())
   const [shouldShare, setShouldShare] = useState<boolean>(false);
@@ -25,10 +25,24 @@ export default function ShareMenu(props: {rawConfig: string}): JSX.Element {
       prevRawConfig = props.rawConfig;
     }
     
-    // //(prevRawConfig, props.rawConfig)
     if (prevRawConfig !== props.rawConfig) {
       // console.warn("Querying database...")
-      let res: React.SetStateAction<string | undefined> | null = await qDBRtoC(props.rawConfig);
+      let res: React.SetStateAction<string | undefined> | null
+      
+      if (isShareLimited()) {
+        toast(`You've shared too many times in the past hour. Try again later.`, {
+          autoClose: 2500,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        })
+      } else {
+        sessionStorageShare();
+        res = await qDBRtoC(props.rawConfig);
+      }
+
       // console.log(res);
       // console.log("SNOWBALL")
       setCode( res || "default");

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 
 export const META_DESC = "Campanula is a completely customizable pomodoro timer application that is easy-to-use, fast, and sleek— ready for any work or study session."
 
@@ -19,6 +19,11 @@ export interface IDBResObj {
     isRc: boolean | null;
     // code: string;
   };
+}
+
+export interface ISessionStorage {
+  initialLoad: number;
+  sharesSinceLoad: number;
 }
 
 export interface DBQueryRes {

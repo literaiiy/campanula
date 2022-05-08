@@ -180,3 +180,31 @@ export const generateCode = (len: number): string => {
   }
   return result;
 }
+
+// Increases the `sessionStorage` `sharesSinceLoad` counter
+export const sessionStorageShare = (): void => {
+  if (window.sessionStorage.length === 0) {
+    window.sessionStorage.setItem("intialLoad", "" + new Date().getTime())
+    window.sessionStorage.setItem("sharesSinceLoad", "0")
+  }
+  window.sessionStorage.setItem("sharesSinceLoad", "" + (+window.sessionStorage.getItem("sharesSinceLoad") + 1))
+  // console.log(window.sessionStorage);
+}
+
+// Checks to see if the user has overrun the share rate limit
+export const isShareLimited = (): boolean => {
+  const RATE_LIMIT: number = 60; // rate limit in shares/hour
+
+  if (window.sessionStorage.length === 0) {
+    return false;
+  }
+
+  const timeSinceLoad: number = new Date().getTime() - +window.sessionStorage.getItem("intialLoad");
+  const fullHours: number = Math.floor(timeSinceLoad / 3600000);
+  // console.log(fullHours);
+
+  if (+window.sessionStorage.getItem("sharesSinceLoad") >= (fullHours + 1) * RATE_LIMIT) {
+    return true;
+  }
+  return false;
+}
